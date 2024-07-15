@@ -46,6 +46,7 @@ create table Inscricao (
     cpf_id varchar(18) not null,
     vaga_id bigint not null,
     resultado int default 0,
+    qualificacao VARCHAR(256),
     PRIMARY KEY (cpf_id, vaga_id),
     foreign key (cpf_id) references Profissional(cpf),
     foreign key (vaga_id) references Vaga(id_vaga)
@@ -61,4 +62,4 @@ INSERT INTO Vaga (salario, descricao, data_limite, empresa_id) VALUES (3500.00, 
 
 INSERT INTO Profissional (cpf, data_nasc, sexo, telefone, id_usuario) VALUES ('123.456.789-00', '1980-05-15', 'Masculino', '(11) 91234-5678', 2);
 
-INSERT INTO Inscricao (cpf_id, vaga_id) VALUES ('123.456.789-00', 1);
+INSERT INTO Inscricao (cpf_id, vaga_id, qualificacao) VALUES ('123.456.789-00', 1, 'caminhopdf');

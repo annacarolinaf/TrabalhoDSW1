@@ -8,15 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Empresa;
 
-public class EditoraDAO extends GenericDAO {
+public class EmpresaDAO extends GenericDAO {
 
-    public List<Editora> getAll() {
+    public List<Empresa> getAll() {
 
-        List<Editora> listaEditoras = new ArrayList<>();
+        List<Empresa> listaEmpresas = new ArrayList<>();
 
-        String sql = "SELECT * from Editora";
+        String sql = "SELECT * from Empresa";
 
         try {
             Connection conn = this.getConnection();
@@ -27,8 +27,8 @@ public class EditoraDAO extends GenericDAO {
                 Long id = resultSet.getLong("id");
                 String cnpj = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
-                Editora editora = new Editora(id, cnpj, nome);
-                listaEditoras.add(editora);
+                Empresa Empresa = new Empresa(id, cnpj, nome);
+                listaEmpresas.add(Empresa);
             }
 
             resultSet.close();
@@ -37,13 +37,13 @@ public class EditoraDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaEditoras;
+        return listaEmpresas;
     }
 
-    public Editora get(Long id) {
-        Editora editora = null;
+    public Empresa get(Long id) {
+        Empresa Empresa = null;
         
-        String sql = "SELECT * from Editora where id = ?";
+        String sql = "SELECT * from Empresa where id = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -54,7 +54,7 @@ public class EditoraDAO extends GenericDAO {
             if (resultSet.next()) {
                 String cnpj = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
-                editora = new Editora(id, cnpj, nome);
+                Empresa = new Empresa(id, cnpj, nome);
             }
 
             resultSet.close();
@@ -63,6 +63,6 @@ public class EditoraDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return editora;
+        return Empresa;
     }
 }
