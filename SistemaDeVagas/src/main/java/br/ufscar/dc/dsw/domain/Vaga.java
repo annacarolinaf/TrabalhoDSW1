@@ -8,7 +8,7 @@ public class Vaga {
     private String data_limite;
     private Empresa empresa;
 
-    public Vaga(Long vaga) {
+    public Vaga(Long id_vaga) {
         this.id_vaga = id_vaga;
     }
 
