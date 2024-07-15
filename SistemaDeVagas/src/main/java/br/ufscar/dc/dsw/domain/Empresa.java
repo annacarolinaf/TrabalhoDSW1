@@ -2,49 +2,42 @@ package br.ufscar.dc.dsw.domain;
 
 public class Empresa {
 
-    create table Empresa( 
-    id_empresa bigint not null auto_increment, 
-    cnpj varchar(18) not null unique,
-    nome varchar(256) not null,
-    email varchar(256) not null unique,
-    senha varchar(256) not null,
-    cidade varchar(256) not null,
-    descrição varchar(500) not null,
-    primary key (id_empresa)
-);
-
     private Long id_empresa;
     private String cnpj;
     private String nome;
+    private String email;
+    private String senha;
+    private String cidade;
+    private String descricao;
 
-    public Empresa(Long id) {
-        this.id = id;
+    public Empresa(Long id_empresa) {
+        this.id_empresa = id_empresa;
     }
 
-    public Empresa(String CNPJ, String nome) {
-        this.CNPJ = CNPJ;
+    public Empresa(String cnpj, String nome) {
+        this.cnpj = cnpj;
         this.nome = nome;
     }
 
-    public Empresa(Long id, String CNPJ, String nome) {
-        this(CNPJ, nome);
-        this.id = id;
+    public Empresa(Long id_empresa, String cnpj, String nome) {
+        this(cnpj, nome);
+        this.id_empresa = id_empresa;
     }
 
     public Long getId() {
-        return id;
+        return id_empresa;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long id_empresa) {
+        this.id_empresa = id_empresa;
     }
 
     public String getCNPJ() {
-        return CNPJ;
+        return cnpj;
     }
 
-    public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setCNPJ(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getNome() {
