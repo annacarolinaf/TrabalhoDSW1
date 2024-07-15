@@ -1,21 +1,32 @@
 package br.ufscar.dc.dsw.domain;
 
-public class Editora {
+public class Empresa {
+
+    create table Empresa( 
+    id_empresa bigint not null auto_increment, 
+    cnpj varchar(18) not null unique,
+    nome varchar(256) not null,
+    email varchar(256) not null unique,
+    senha varchar(256) not null,
+    cidade varchar(256) not null,
+    descrição varchar(500) not null,
+    primary key (id_empresa)
+);
 
     private Long id;
     private String CNPJ;
     private String nome;
 
-    public Editora(Long id) {
+    public Empresa(Long id) {
         this.id = id;
     }
 
-    public Editora(String CNPJ, String nome) {
+    public Empresa(String CNPJ, String nome) {
         this.CNPJ = CNPJ;
         this.nome = nome;
     }
 
-    public Editora(Long id, String CNPJ, String nome) {
+    public Empresa(Long id, String CNPJ, String nome) {
         this(CNPJ, nome);
         this.id = id;
     }
