@@ -26,7 +26,7 @@ public class Vaga {
     }
 
     public Long getId_vaga() {
-        return id;
+        return id_vaga;
     }
 
     public void setId_vaga(Long id_vaga) {
@@ -61,7 +61,7 @@ public class Vaga {
         return empresa;
     }
 
-    public void setEmpresa(Empresaa empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 }
