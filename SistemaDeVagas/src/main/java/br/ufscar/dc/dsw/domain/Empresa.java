@@ -13,8 +13,8 @@ public class Empresa {
     primary key (id_empresa)
 );
 
-    private Long id;
-    private String CNPJ;
+    private Long id_empresa;
+    private String cnpj;
     private String nome;
 
     public Empresa(Long id) {
