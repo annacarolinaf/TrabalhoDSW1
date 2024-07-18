@@ -27,7 +27,7 @@ public class EmpresaDAO extends GenericDAO {
                 Long id = resultSet.getLong("id");
                 String cnpj = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
-                Empresa Empresa = new Empresa(id, cnpj, nome);
+                Empresa Empresa = new Empresa(cnpj);
                 listaEmpresas.add(Empresa);
             }
 
