@@ -43,11 +43,11 @@ public class Empresa {
         this.descricao = descricao;
     }
 
-    public Usuario getEditora() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setEditora(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 }
