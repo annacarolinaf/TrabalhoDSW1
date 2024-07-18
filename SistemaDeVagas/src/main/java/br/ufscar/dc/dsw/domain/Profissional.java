@@ -21,7 +21,7 @@ public class Profissional {
         this.usuario = usuario;
     }
 
-    public String getCpf(){
+    public String getCPF(){
         return cpf;
     }
 

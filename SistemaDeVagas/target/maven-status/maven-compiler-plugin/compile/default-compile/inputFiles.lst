@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/UsuarioDAO.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/controller/EmpresaController.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/util/Erro.java
@@ -12,3 +13,18 @@
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Usuario.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Profissional.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/EmpresaDAO.java
+=======
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/controller/LivroController.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Inscricao.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/GenericDAO.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/controller/IndexController.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/UsuarioDAO.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/controller/ProfissionalController.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/VagaDAO.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Empresa.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/EmpresaDAO.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/controller/EmpresaController.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Usuario.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Profissional.java
+/home/karys/dsw1_tp1/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Vaga.java
+>>>>>>> b5e9e6ea23a21f5d208c426cf984ecdf903d11f0
