@@ -23,15 +23,9 @@ public class EmpresaDAO extends GenericDAO {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String cnpj = resultSet.getString("cnpj");
-<<<<<<< HEAD
-                String nome = resultSet.getString("nome");
-                Empresa Empresa = new Empresa(cnpj);
-                listaEmpresas.add(Empresa);
-=======
                 String cidade = resultSet.getString("cidade");
                 String descricao = resultSet.getString("descricao");
                 Empresa = new Empresa(cnpj, cidade, descricao, usuario);
->>>>>>> f5ecce8609eeb589d373d67c8ca9cd7cc2b0d74e
             }
 
             resultSet.close();
