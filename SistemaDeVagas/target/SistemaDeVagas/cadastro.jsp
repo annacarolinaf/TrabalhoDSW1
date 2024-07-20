@@ -19,7 +19,7 @@
                 </ul>
             </div>
         </c:if>
-        <form method="post" action="indexCadastro.jsp">
+        <form method="post" action="Cadastro.jsp">
             <table>
                 <tr>
                     <td colspan="2"> 

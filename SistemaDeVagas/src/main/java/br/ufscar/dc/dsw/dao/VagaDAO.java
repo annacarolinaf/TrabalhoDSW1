@@ -140,7 +140,7 @@ public class VagaDAO extends GenericDAO {
                 String data_limite = resultSet.getString("data_limite");
                 String empresaID = resultSet.getString("empresa_id");
 
-               // Empresa empresa = new EmpresaDAO().getCNPJ(empresaID);
+               // Empresa empresa = new EmpresaDAO().get(empresaID);
 
                 //vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa);
             }

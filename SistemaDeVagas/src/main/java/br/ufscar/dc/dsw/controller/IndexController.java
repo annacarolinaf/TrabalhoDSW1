@@ -55,7 +55,7 @@ public class IndexController extends HttpServlet {
 			}
 		}
 		else if (request.getParameter("bCadastro") != null) {
-			response.sendRedirect("formularioProfissional.jsp");
+			response.sendRedirect("cadastro.jsp");
 			return;
 		}
 

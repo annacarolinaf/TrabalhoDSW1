@@ -6,11 +6,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Cadastro de Profissional</title>
         <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Login</h1>
+        <h1>Cadastro de Profissional</h1>
         <c:if test="${mensagens.existeErros}">
             <div id="erro">
                 <ul>
@@ -20,7 +20,7 @@
                 </ul>
             </div>
         </c:if>
-        <form method="post" action="indexCadastro.jsp">
+        <form method="post" action="Cadastro.jsp">
             <table>
                 <tr>
                     <th>E-mail: </th>
@@ -53,7 +53,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"> 
-                        <input type="submit" name="bProfissional" value="Entrar"/>
+                        <input type="submit" name="bFormularioProfissional" value="Entrar"/>
                     </td>
                 </tr>
                 

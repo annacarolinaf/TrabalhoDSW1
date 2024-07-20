@@ -6,11 +6,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro de Profissional</title>
+        <title>Cadastro de Empresa</title>
         <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Cadastro de Profissional</h1>
+        <h1>Cadastro de Empresa</h1>
         <c:if test="${mensagens.existeErros}">
             <div id="erro">
                 <ul>
@@ -36,24 +36,20 @@
                     <td><input type="text" name="nome" /></td>
                 </tr>
                 <tr>
-                    <th>CPF: </th>
-                    <td><input type="text" name="cpf" /></td>
+                    <th>CNPJ: </th>
+                    <td><input type="text" name="cnpj" /></td>
                 </tr>
                 <tr>
-                    <th>Telefone: </th>
-                    <td><input type="text" name="telefone" /></td>
+                    <th>Cidade: </th>
+                    <td><input type="text" name="cidade" /></td>
                 </tr>
                 <tr>
-                    <th>Data de nascimento: </th>
-                    <td><input type="text" name="data_nasc" /></td>
-                </tr>
-                <tr>
-                    <th>Sexo: </th>
-                    <td><input type="text" name="sexo" /></td>
+                    <th>Descrição: </th>
+                    <td><input type="text" name="descricao" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"> 
-                        <input type="submit" name="bFormularioProfissional" value="Entrar"/>
+                        <input type="submit" name="bFormularioEmpresa" value="Entrar"/>
                     </td>
                 </tr>
                 
