@@ -37,7 +37,7 @@ public class CadastroController extends HttpServlet {
 
 			String email = request.getParameter("email");
 			String senha = request.getParameter("senha");
-            String nome = request.getParameter("senha");
+            String nome = request.getParameter("nome");
             String cpf = request.getParameter("cpf");
             String data_nasc = request.getParameter("data_nasc");
             String sexo = request.getParameter("sexo");
@@ -65,12 +65,12 @@ public class CadastroController extends HttpServlet {
 				erros.add("Telefone não informado!");
 			}
 
-            
 			if (!erros.isExisteErros()) {
 				UsuarioDAO dao_usuario = new UsuarioDAO();
 
                 Usuario usuario = new Usuario(nome, email, senha, "Profissional");
                 dao_usuario.insert(usuario);
+				usuario = dao_usuario.getbyEmail(email);
 
                 ProfissionalDAO dao_profissional = new ProfissionalDAO();
                 Profissional profissional = new Profissional (cpf, data_nasc, sexo, telefone, usuario);
@@ -78,6 +78,7 @@ public class CadastroController extends HttpServlet {
 
                 request.getSession().setAttribute("usuarioLogado", usuario);
                 response.sendRedirect("profissional/");
+				return;
 			}
             
 		}
@@ -86,8 +87,8 @@ public class CadastroController extends HttpServlet {
 			response.sendRedirect("cadastro.jsp");
 			return;
 		}
-		request.getSession().invalidate();
 
+		request.getSession().invalidate();
 		request.setAttribute("mensagens", erros);
 
 		String URL = "/login.jsp";

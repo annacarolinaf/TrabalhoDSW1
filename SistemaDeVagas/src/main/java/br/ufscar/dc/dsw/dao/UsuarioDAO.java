@@ -88,6 +88,7 @@ public class UsuarioDAO extends GenericDAO {
     public Usuario getbyID(Long id) {
         Usuario usuario = null;
         String sql = "SELECT * from Usuario WHERE id = ?";
+    
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);

@@ -34,7 +34,7 @@ create table Vaga(
 
 create table Profissional(
     cpf varchar(18) not null unique,
-    data_nasc date not null,
+    data_nasc varchar(256) not null,
     sexo varchar(256) not null,
     telefone varchar(500) not null,
     id_usuario bigint not null,
