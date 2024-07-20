@@ -25,11 +25,11 @@ public class Vaga {
         this.id_vaga = id_vaga;
     }
 
-    public Long getId_vaga() {
+    public Long getID() {
         return id_vaga;
     }
 
-    public void setId_vaga(Long id_vaga) {
+    public void setID(Long id_vaga) {
         this.id_vaga = id_vaga;
     }
 
