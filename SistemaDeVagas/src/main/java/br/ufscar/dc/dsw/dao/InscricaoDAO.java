@@ -83,4 +83,61 @@ public class InscricaoDAO extends GenericDAO{
         }
         return listaInscricao;
     }
+
+    public void insert(Inscricao inscricao) {    
+        String sql = "INSERT INTO Inscricao (cpf_id, vaga_id, resultado, qualificacao) VALUES (?, ?, ?, ?)";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);;    
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, inscricao.getProfissional().getCPF());
+            statement.setLong(2, inscricao.getVaga().getID());
+            statement.setInt(3, inscricao.getResultado());
+            statement.setString(4, inscricao.getQualificacao());
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(Inscricao inscricao){
+        String sql = "DELETE FROM Inscricao WHERE cpf_id = ? and vaga_id";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, inscricao.getProfissional().getCPF());
+            statement.setLong(2, inscricao.getVaga().getID());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void update(Inscricao inscricao) {
+        String sql = "UPDATE Inscricao SET resultado = ?, qualificacao = ? WHERE cpf_id = ? and vaga_id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setInt(1, inscricao.getResultado());
+            statement.setString(2, inscricao.getQualificacao());
+            statement.setString(3, inscricao.getProfissional().getCPF());
+            statement.setLong(4, inscricao.getVaga().getID());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
