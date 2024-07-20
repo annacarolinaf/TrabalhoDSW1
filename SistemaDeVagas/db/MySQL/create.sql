@@ -53,8 +53,8 @@ create table Inscricao (
 );
 
 
-INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Empresa Exemplo', 'contato@empresaexemplo.com', 'senha123', 'Empresa');
-INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Profissional Exemplo', 'contato@profissionalexemplo.com', 'senhaSegura456', 'Profissional');
+INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Empresa Exemplo', 'empresa', 'empresa', 'Empresa');
+INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Profissional Exemplo', 'profissional', 'profissional', 'Profissional');
 
 INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('12.345.678/0001-90', 'São Paulo', 'Uma empresa de exemplo para testes.', 1);
 

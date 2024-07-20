@@ -23,9 +23,9 @@
         <form method="post" action="index.jsp">
             <table>
                 <tr>
-                    <th>Login: </th>
-                    <td><input type="text" name="login"
-                               value="${param.login}"/></td>
+                    <th>E-mail: </th>
+                    <td><input type="text" name="email"
+                               value="${param.email}"/></td>
                 </tr>
                 <tr>
                     <th>Senha: </th>
@@ -34,6 +34,9 @@
                 <tr>
                     <td colspan="2"> 
                         <input type="submit" name="bOK" value="Entrar"/>
+                    </td>
+                    <td colspan="2"> 
+                        <input type="submit" name="bCadastro" value="Ainda não possui cadastro?"/>
                     </td>
                 </tr>
                 

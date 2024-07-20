@@ -24,17 +24,17 @@ public class IndexController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Erro erros = new Erro();
 		if (request.getParameter("bOK") != null) {
-			String login = request.getParameter("login");
+			String email = request.getParameter("email");
 			String senha = request.getParameter("senha");
-			if (login == null || login.isEmpty()) {
-				erros.add("Login não informado!");
+			if (email == null || email.isEmpty()) {
+				erros.add("E-mail não informado!");
 			}
 			if (senha == null || senha.isEmpty()) {
 				erros.add("Senha não informada!");
 			}
 			if (!erros.isExisteErros()) {
 				UsuarioDAO dao = new UsuarioDAO();
-				Usuario usuario = dao.getbyLogin(login);
+				Usuario usuario = dao.getbyEmail(email);
 				if (usuario != null) {
 					if (usuario.getSenha().equals(senha)) {
 						request.getSession().setAttribute("usuarioLogado", usuario);
@@ -47,11 +47,18 @@ public class IndexController extends HttpServlet {
 					} else {
 						erros.add("Senha inválida!");
 					}
-				} else {
+				} 
+
+				else {
 					erros.add("Usuário não encontrado!");
 				}
 			}
 		}
+		else if (request.getParameter("bCadastro") != null) {
+			response.sendRedirect("formularioProfissional.jsp");
+			return;
+		}
+
 		request.getSession().invalidate();
 		request.setAttribute("mensagens", erros);
 		String URL = "/login.jsp";

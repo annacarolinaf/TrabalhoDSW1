@@ -32,8 +32,9 @@ public class CadastroController extends HttpServlet {
 			throws ServletException, IOException {
 
 		Erro erros = new Erro();
-
+                
 		if (request.getParameter("bProfissional") != null) {
+
 			String email = request.getParameter("email");
 			String senha = request.getParameter("senha");
             String nome = request.getParameter("senha");
@@ -67,19 +68,20 @@ public class CadastroController extends HttpServlet {
             
 			if (!erros.isExisteErros()) {
 				UsuarioDAO dao_usuario = new UsuarioDAO();
-                ProfissionalDAO dao_profissional = new ProfissionalDAO();
 
                 Usuario usuario = new Usuario(nome, email, senha, "Profissional");
-                Profissional profissional = new Profissional (cpf, data_nasc, sexo, telefone, usuario);
-
                 dao_usuario.insert(usuario);
+
+                ProfissionalDAO dao_profissional = new ProfissionalDAO();
+                Profissional profissional = new Profissional (cpf, data_nasc, sexo, telefone, usuario);
                 dao_profissional.insert(profissional);
 
                 request.getSession().setAttribute("usuarioLogado", usuario);
                 response.sendRedirect("profissional/");
 			}
+            
 		}
-        
+
 		else if (request.getParameter("bCadastro") != null) {
 			response.sendRedirect("cadastro.jsp");
 			return;
