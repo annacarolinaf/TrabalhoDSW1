@@ -25,7 +25,7 @@ create table Empresa(
 create table Vaga( 
     id_vaga bigint not null auto_increment,
     salario float not null,
-    descricao varchar(500) not null,
+    descricao_vaga varchar(500) not null,
     data_limite date not null, 
     empresa_id varchar(18) not null, 
     primary key (id_vaga),
@@ -58,8 +58,10 @@ INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Profissional Exemplo', 
 
 INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('12.345.678/0001-90', 'São Paulo', 'Uma empresa de exemplo para testes.', 1);
 
-INSERT INTO Vaga (salario, descricao, data_limite, empresa_id) VALUES (3500.00, 'Desenvolvedor de Software', '2024-12-31', '12.345.678/0001-90');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolvedor de Software', '2024-12-31', '12.345.678/0001-90');
 
 INSERT INTO Profissional (cpf, data_nasc, sexo, telefone, id_usuario) VALUES ('123.456.789-00', '1980-05-15', 'Masculino', '(11) 91234-5678', 2);
 
 INSERT INTO Inscricao (cpf_id, vaga_id, qualificacao) VALUES ('123.456.789-00', 1, 'caminhopdf');
+
+/*SELECT * FROM Inscricao i, Empresa e, Vaga v, Profissional p, Usuario u  WHERE e.cnpj = v.empresa_id AND i.vaga_id = v.id_vaga AND p.cpf = i.cpf_id AND u.papel = 'profissional';*/

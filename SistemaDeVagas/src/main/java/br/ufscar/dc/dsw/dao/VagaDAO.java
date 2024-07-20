@@ -8,24 +8,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Editora;
-import br.ufscar.dc.dsw.domain.Livro;
+import br.ufscar.dc.dsw.domain.Empresa;
+import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.domain.Usuario;
 
-public class LivroDAO extends GenericDAO {
+public class VagaDAO extends GenericDAO {
 
-    public void insert(Livro livro) {
+    public void insert(Vaga vaga) {
 
-        String sql = "INSERT INTO Livro (titulo, autor, ano, preco, editora_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Vaga (salario, descricao, data_limite, empresa_id)  VALUES (?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, livro.getTitulo());
-            statement.setString(2, livro.getAutor());
-            statement.setInt(3, livro.getAno());
-            statement.setFloat(4, livro.getPreco());
-            statement.setLong(5, livro.getEditora().getId());
+            statement.setFloat(1, vaga.getSalario()); //salario
+            statement.setString(2, vaga.getDescricao()); //descricao
+            statement.setString(3, vaga.getData_limite()); //data_limite
+            statement.setString(5, vaga.getEmpresa().getCNPJ()); //empresa_id
             statement.executeUpdate();
 
             statement.close();
@@ -35,11 +35,11 @@ public class LivroDAO extends GenericDAO {
         }
     }
 
-    public List<Livro> getAll() {
+    public List<Vaga> getAll() {
 
-        List<Livro> listaLivros = new ArrayList<>();
+        List<Vaga> listaVagas = new ArrayList<>();
 
-        String sql = "SELECT * from Livro l, Editora e where l.EDITORA_ID = e.ID order by l.id";
+        String sql = "SELECT * FROM Inscricao i, Empresa e, Vaga v, Profissional p, Usuario u  WHERE e.cnpj = v.empresa_id AND i.vaga_id = v.id_vaga AND p.cpf = i.cpf_id order by v.id_vaga";
 
         try {
             Connection conn = this.getConnection();
@@ -47,17 +47,31 @@ public class LivroDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
-                String titulo = resultSet.getString("titulo");
-                String autor = resultSet.getString("autor");
-                int ano = resultSet.getInt("ano");
-                float preco = resultSet.getFloat("preco");
-                Long editora_id = resultSet.getLong(6);
-                String cnpj = resultSet.getString("cnpj");
-                String nome = resultSet.getString("nome");
-                Editora editora = new Editora(editora_id, cnpj, nome);
-                Livro livro = new Livro(id, titulo, autor, ano, preco, editora);
-                listaLivros.add(livro);
+                
+                //retornos da tabela Usuario
+                String nome_u = resultSet.getString("nome"); //vem da tabela usuário
+                String e_mail = resultSet.getString("email"); 
+                String senha = resultSet.getString("senha");
+                String papel = resultSet.getString("papel");
+                String id_usario = resultSet.getString("id"); //id do usuário
+                
+                //retornos da tabela Vaga
+                Long id_vaga = resultSet.getLong("id_vaga"); //id_vaga
+                Float salario = resultSet.getFloat("salario"); //salario
+                String descricao_vaga = resultSet.getString("descricao_vaga"); //descricao
+                int data_limite = resultSet.getString("data_limite"); // data_limite
+                
+                //retornos da tabela Empresa
+                String cnpj = resultSet.getString("cnpj");  //empresa_id 
+                String descricao = resultSet.getString("descricao");
+                String cidade = resultSet.getString("cidade");
+
+                //Criação dos novos objetos para a leitura
+                Usuario usuario = new Usuario(id_usuario, nome, e_mail, senha, papel);
+                Empresa empresa = new Empresa(cnpj, cidade, descricao, usuario);
+                Vaga vaga = new Vaga(id_vaga, salario, descricao, data_limite, , empresa);
+
+                listaVagas.add(vaga);
             }
 
             resultSet.close();
@@ -66,17 +80,17 @@ public class LivroDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaLivros;
+        return listaVagas;
     }
 
-    public void delete(Livro livro) {
-        String sql = "DELETE FROM Livro where id = ?";
+    public void delete(Vaga vaga) {
+        String sql = "DELETE FROM Vaga where id_vaga = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, livro.getId());
+            statement.setLong(1, vaga.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -86,20 +100,19 @@ public class LivroDAO extends GenericDAO {
         }
     }
 
-    public void update(Livro livro) {
-        String sql = "UPDATE Livro SET titulo = ?, autor = ?, ano = ?, preco = ?";
-        sql += ", editora_id = ? WHERE id = ?";
+    public void update(Vaga vaga) {
+        String sql = "UPDATE Vaga SET salario = ?, descricao_vaga = ?, data_limite = ?";
+        sql += ", empresa_id = ? WHERE id_vaga = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, livro.getTitulo());
-            statement.setString(2, livro.getAutor());
-            statement.setInt(3, livro.getAno());
-            statement.setFloat(4, livro.getPreco());
-            statement.setFloat(5, livro.getEditora().getId());
-            statement.setLong(6, livro.getId());
+            statement.setFloat(1, vaga.getSalario());//salario
+            statement.setString(2, vaga.getDescricao());//descricao
+            statement.setString(3, vaga.getData_limite());//data_limite
+            statement.setString(4, vaga.getEmpresa().getCNPJ());//empresa_id = cnpj
+            statement.setLong(5, vaga.getId_vaga()); //id da vaga
             statement.executeUpdate();
 
             statement.close();
@@ -109,10 +122,10 @@ public class LivroDAO extends GenericDAO {
         }
     }
 
-    public Livro get(Long id) {
-        Livro livro = null;
+    public Vaga get(Long id) {
+        Vaga vaga = null;
 
-        String sql = "SELECT * from Livro l, Editora e where l.id = ? and l.EDITORA_ID = e.ID";
+        String sql = "SELECT * from Vaga v, Empresa e where v.id_vaga = ? and v.empresa_id = e.cnpj";
 
         try {
             Connection conn = this.getConnection();
@@ -121,15 +134,15 @@ public class LivroDAO extends GenericDAO {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                String titulo = resultSet.getString("titulo");
-                String autor = resultSet.getString("autor");
-                int ano = resultSet.getInt("ano");
-                float preco = resultSet.getFloat("preco");
 
-                Long editoraID = resultSet.getLong("editora_id");
-                Editora editora = new EditoraDAO().get(editoraID);
+                Float salario = resultSet.getFlloat("salario");
+                String descricao_vaga = resultSet.getString("descricao_vaga");
+                String data_limite = resultSet.getString("data_limite");
+                String empresaID = resultSet.getString("empresa_id");
 
-                livro = new Livro(id, titulo, autor, ano, preco, editora);
+                Empresa empresa = new EmpresaDAO().get(empresaID);
+
+                vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa);
             }
 
             resultSet.close();
@@ -138,6 +151,6 @@ public class LivroDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return livro;
+        return vaga;
     }
 }
