@@ -10,21 +10,27 @@ import br.ufscar.dc.dsw.domain.Usuario;
 
 public class EmpresaDAO extends GenericDAO {
 
-    public Empresa get(Usuario usuario) {
+    public Empresa get(String cnpj) {
         Empresa Empresa = null;
         
-        String sql = "SELECT * from Empresa where id_usuario = ?";
+        String sql = "SELECT * FROM Empresa e, Usuario u WHERE e.cnpj = ? AND e.id_usuario = u.id";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            
-            statement.setLong(1, usuario.getId());
+
+            statement.setString(1, cnpj);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                String cnpj = resultSet.getString("cnpj");
                 String cidade = resultSet.getString("cidade");
                 String descricao = resultSet.getString("descricao");
+                Long id = resultSet.getLong("id");
+                String nome = resultSet.getString("nome");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String papel = resultSet.getString("papel");
+
+                Usuario usuario = new Usuario(id, nome, email, senha, papel);
                 Empresa = new Empresa(cnpj, cidade, descricao, usuario);
             }
 

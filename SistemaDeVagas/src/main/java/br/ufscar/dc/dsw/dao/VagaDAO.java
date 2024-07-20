@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Empresa;
-import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
 
 public class VagaDAO extends GenericDAO {
 
@@ -140,9 +140,9 @@ public class VagaDAO extends GenericDAO {
                 String data_limite = resultSet.getString("data_limite");
                 String empresaID = resultSet.getString("empresa_id");
 
-               // Empresa empresa = new EmpresaDAO().get(empresaID);
+                Empresa empresa = new EmpresaDAO().get(empresaID);
 
-                //vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa);
+                vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa);
             }
 
             resultSet.close();
