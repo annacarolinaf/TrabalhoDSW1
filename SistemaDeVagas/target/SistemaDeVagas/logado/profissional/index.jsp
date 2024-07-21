@@ -63,4 +63,8 @@
 	</body>
 </fmt:bundle>
 
+<<<<<<< HEAD
 </html>
+=======
+</html> 
+>>>>>>> b75495c92551cee54a0481798c35f99fedf237e7

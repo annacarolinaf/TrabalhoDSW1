@@ -12,7 +12,11 @@ pageEncoding="UTF-8"%>
 <div align="center">
     <h1>Lista de vagas</h1>
     <h2>
+<<<<<<< HEAD
         <a href="${pageContext.request.contextPath}/login.jsp">Ir para log-in</a> &nbsp;&nbsp;&nbsp; 
+=======
+        <a href="/${requestScope.contextPath}">Ir para log-in</a> &nbsp;&nbsp;&nbsp; 
+>>>>>>> b75495c92551cee54a0481798c35f99fedf237e7
     </h2> 
     <h2>Pesquisar por cidade:</h2>
     <input type="text" name="filtro" id="filtro" placeholder="Procure uma cidade" >
