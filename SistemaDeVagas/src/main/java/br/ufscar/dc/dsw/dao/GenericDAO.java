@@ -34,6 +34,6 @@ abstract public class GenericDAO {
     	
     	String url = "jdbc:mysql://localhost:3306/Sistema";
     	
-    	return DriverManager.getConnection(url, "root", "03032001");
+    	return DriverManager.getConnection(url, "root", "1234");
     }
 }

@@ -36,9 +36,8 @@
                         <input type="submit" name="bOK" value="Entrar"/>
                     </td>
                     <td colspan="2"> 
-                        <a href="cadastro">Ainda não possui cadastro?</a>
+                        <input type="submit" name="bCadastro" value="Ainda não possui cadastro?"/>
                     </td>
-
                 </tr>
                 
             </table>
