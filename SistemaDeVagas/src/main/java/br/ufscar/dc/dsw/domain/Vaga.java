@@ -24,12 +24,12 @@ public class Vaga {
         this(salario, descricao, data_limite, empresa);
         this.id_vaga = id_vaga;
     }
-
-    public Long getID() {
+    //Por que faz diferença colocar o nome do get igual da variável?
+    public Long getId_vaga() {
         return id_vaga;
     }
 
-    public void setID(Long id_vaga) {
+    public void setId_vaga(Long id_vaga) {
         this.id_vaga = id_vaga;
     }
 

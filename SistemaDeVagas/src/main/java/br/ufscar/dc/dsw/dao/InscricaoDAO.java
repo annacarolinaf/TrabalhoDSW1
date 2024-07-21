@@ -91,7 +91,7 @@ public class InscricaoDAO extends GenericDAO{
             PreparedStatement statement = conn.prepareStatement(sql);;    
             statement = conn.prepareStatement(sql);
             statement.setString(1, inscricao.getProfissional().getCPF());
-            statement.setLong(2, inscricao.getVaga().getID());
+            statement.setLong(2, inscricao.getVaga().getId_vaga());
             statement.setInt(3, inscricao.getResultado());
             statement.setString(4, inscricao.getQualificacao());
             statement.executeUpdate();
@@ -110,7 +110,7 @@ public class InscricaoDAO extends GenericDAO{
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, inscricao.getProfissional().getCPF());
-            statement.setLong(2, inscricao.getVaga().getID());
+            statement.setLong(2, inscricao.getVaga().getId_vaga());
             statement.executeUpdate();
 
             statement.close();
@@ -131,7 +131,7 @@ public class InscricaoDAO extends GenericDAO{
             statement.setInt(1, inscricao.getResultado());
             statement.setString(2, inscricao.getQualificacao());
             statement.setString(3, inscricao.getProfissional().getCPF());
-            statement.setLong(4, inscricao.getVaga().getID());
+            statement.setLong(4, inscricao.getVaga().getId_vaga());
             statement.executeUpdate();
 
             statement.close();

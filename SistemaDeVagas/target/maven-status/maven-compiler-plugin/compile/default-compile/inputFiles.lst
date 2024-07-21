@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/UsuarioDAO.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/controller/CadastroController.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/controller/EmpresaController.java
@@ -16,21 +15,3 @@
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/InscricaoDAO.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/EmpresaDAO.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/VagaDAO.java
-=======
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\domain\Inscricao.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\controller\ProfissionalController.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\dao\UsuarioDAO.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\domain\Empresa.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\controller\CadastroController.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\dao\ProfissionalDAO.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\domain\Profissional.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\domain\Usuario.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\dao\GenericDAO.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\dao\VagaDAO.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\domain\Vaga.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\dao\EmpresaDAO.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\controller\EmpresaController.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\dao\InscricaoDAO.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\util\Erro.java
-C:\Users\Acer\Federal\QuintoPeriodo\Web1\TrabalhoDSW1\SistemaDeVagas\src\main\java\br\ufscar\dc\dsw\controller\IndexController.java
->>>>>>> b75495c92551cee54a0481798c35f99fedf237e7

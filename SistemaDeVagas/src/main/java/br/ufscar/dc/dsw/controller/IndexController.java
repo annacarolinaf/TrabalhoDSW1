@@ -19,8 +19,15 @@ public class IndexController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        String action = request.getServletPath();
+
+        if ("/pesquisaCidade".equals(action)) {
+            pesquisaCidade(request, response);
+        } else {
+            doGet(request, response);
+        }
     }
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,9 +39,21 @@ public class IndexController extends HttpServlet {
 		VagaDAO dao = new VagaDAO();
 		List<Vaga> listaVagas = dao.getAll();
         request.setAttribute("listaVagas", listaVagas);
-
+        
 		String URL = "lista.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(URL);
 		rd.forward(request, response);
     }
+
+    private void pesquisaCidade(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String filtro = request.getParameter("filtro");
+
+		VagaDAO dao = new VagaDAO();
+		List<Vaga> listaVagas = dao.getPorCidade(filtro);
+		request.setAttribute("listaVagas", listaVagas);
+
+		RequestDispatcher rd = request.getRequestDispatcher("lista.jsp"); 
+		rd.forward(request, response);
+	}
+    
 }

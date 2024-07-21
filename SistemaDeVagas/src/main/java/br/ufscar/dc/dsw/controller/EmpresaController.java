@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
 
-@WebServlet(urlPatterns = "/empresa/*")
+@WebServlet(urlPatterns = {"/empresa", "/empresa/index.jsp"})
 public class EmpresaController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -37,8 +37,9 @@ public class EmpresaController extends HttpServlet {
 			List<Vaga> listaVagas = new VagaDAO().getAllVagasEmpresa(usuario);
        		request.setAttribute("listaVagas", listaVagas);
 	   
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/lista.jsp");
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/index.jsp");
             dispatcher.forward(request, response);
+
     	} else {
     		erros.add("Acesso não autorizado!");
     		erros.add("Apenas Papel [Empresa] tem acesso a essa página");
