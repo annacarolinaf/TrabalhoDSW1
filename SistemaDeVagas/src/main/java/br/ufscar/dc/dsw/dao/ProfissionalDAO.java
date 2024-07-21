@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
@@ -50,6 +47,40 @@ public class ProfissionalDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Profissional get(String cpf) {
+        Profissional profissional = null;
+        
+        String sql = "SELECT * FROM Profissional p, Usuario u WHERE e.cpf = ? AND p.id_usuario = u.id";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, cpf);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String data_nasc = resultSet.getString("data_nasc");
+                String sexo = resultSet.getString("sexo");
+                String telefone = resultSet.getString("telefone");
+                Long id = resultSet.getLong("id");
+                String nome = resultSet.getString("nome");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String papel = resultSet.getString("papel");
+
+                Usuario usuario = new Usuario(id, nome, email, senha, papel);
+                profissional = new Profissional(cpf, data_nasc, sexo, telefone, usuario);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return profissional;
     }
 
 

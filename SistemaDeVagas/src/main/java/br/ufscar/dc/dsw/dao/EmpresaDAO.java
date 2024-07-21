@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Usuario;
@@ -13,7 +16,7 @@ public class EmpresaDAO extends GenericDAO {
     public Empresa get(String cnpj) {
         Empresa Empresa = null;
         
-        String sql = "SELECT * FROM Empresa e, Usuario u WHERE e.cnpj = ? AND e.id_usuario = u.id";
+        String sql = "SELECT * FROM Empresa e WHERE e.cnpj = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -24,13 +27,10 @@ public class EmpresaDAO extends GenericDAO {
             if (resultSet.next()) {
                 String cidade = resultSet.getString("cidade");
                 String descricao = resultSet.getString("descricao");
-                Long id = resultSet.getLong("id");
-                String nome = resultSet.getString("nome");
-                String email = resultSet.getString("email");
-                String senha = resultSet.getString("senha");
-                String papel = resultSet.getString("papel");
+                Long id_usuario = resultSet.getLong("id_usuario");
 
-                Usuario usuario = new Usuario(id, nome, email, senha, papel);
+                Usuario usuario = new UsuarioDAO().getbyID(id_usuario);
+
                 Empresa = new Empresa(cnpj, cidade, descricao, usuario);
             }
 
@@ -42,6 +42,36 @@ public class EmpresaDAO extends GenericDAO {
         }
         return Empresa;
     }
+
+    public List<Empresa> getAll() {   
+        List<Empresa> listaEmpresas = new ArrayList<>();
+        String sql = "SELECT * from Empresa";
+        try {
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String cnpj = resultSet.getString("cnpj");
+                String cidade = resultSet.getString("cidade");
+                String descricao = resultSet.getString("descricao");
+                Long id_usuario = resultSet.getLong("id_usuario");
+
+                Usuario usuario = new UsuarioDAO().getbyID(id_usuario);
+
+                Empresa empresa = new Empresa(cnpj, cidade, descricao, usuario);
+            
+                listaEmpresas.add(empresa);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
+        return listaEmpresas;
+    }
+    
 
     public void insert(Empresa empresa) {    
         String sql = "INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES (?, ?, ?, ?)";
