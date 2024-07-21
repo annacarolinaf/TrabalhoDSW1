@@ -25,7 +25,8 @@ public class IndexController extends HttpServlet {
 
         if ("/pesquisaCidade".equals(action)) {
             pesquisaCidade(request, response);
-        } else {
+        } 
+        else {
             doGet(request, response);
         }
     }
