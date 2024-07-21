@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ page isELIgnored="false" %>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+            <table border="1">
+                <caption>
+                    Edição
+                </caption>
+                <form action="/edicao" method="post">
+                    <tr>
+                        <td><label for="email">E-mail</label></td>
+                        <td><input type="text" id="email" name="email" size="45" required
+                                value="${empresa.usuario.email}" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="nome">Nome</label></td>
+                        <td><input type="text" id="nome" name="nome" size="45" required
+                                value="${empresa.usuario.nome}" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="cnpj">CNPJ</label></td>
+                        <td><input type="text" id="cnpj" name="cnpj" size="45" required value="${empresa.cnpj}" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="cidade">Cidade</label></td>
+                        <td><input type="text" id="cidade" name="cidade" size="45" required value="${empresa.cidade}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="descricao">Descrição</label></td>
+                        <td><input type="text" id="descricao" name="descricao" size="5" value="${empresa.descricao}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" value="Salva" /></td>
+                    </tr>
+                </form>
+            </table>

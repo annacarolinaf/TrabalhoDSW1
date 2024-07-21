@@ -91,24 +91,29 @@ public class EmpresaDAO extends GenericDAO {
         }
     }
 
-    public void delete(Empresa empresa){
-        String sql = "DELETE FROM Empresa WHERE id_usuario = ?";
-
+    public void delete(Long id){
+        String sql_empresa = "DELETE FROM Empresa WHERE id_usuario = ?";
+        String sql_usuario = "DELETE FROM Usuario WHERE id = ?";
+    
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-
-            statement.setLong(1, empresa.getUsuario().getId());
+            PreparedStatement statement = conn.prepareStatement(sql_empresa);
+    
+            statement.setLong(1, id);
             statement.executeUpdate();
+    
+            PreparedStatement statement_usuario = conn.prepareStatement(sql_usuario);
+    
+            statement_usuario.setLong(1, id);
+            statement_usuario.executeUpdate();
 
             statement.close();
             conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
+    
     public void update(Empresa empresa) {
         String sql = "UPDATE Empresa SET cnpj = ?, cidade = ?, descricao = ?";
         sql += " WHERE id_usuario = ?";

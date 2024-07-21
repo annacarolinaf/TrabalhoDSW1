@@ -5,15 +5,13 @@
             <html>
 
             <head>
-                <title>Candidate-se agora!</title>
+                <title>Página da Empresa</title>
             </head>
 
             <body>
 
 
-                <h1>Página da Empresa</h1>
-                <p>Olá ${sessionScope.usuarioLogado.nome}</p>
-
+                <h1>Olá ${sessionScope.usuarioLogado.nome}</h1>
 
                 <div align="center">
                     <table border="1">
@@ -39,8 +37,21 @@
 
                 <ul>
                     <li>
-                        <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
+                        <a href="${pageContext.request.contextPath}/logout.jsp">Adicionar vaga</a>
                     </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/empresa/edicao?id=${sessionScope.usuarioLogado.id}">Atualizar dados</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/empresa/remocao?id=${sessionScope.usuarioLogado.id}"
+                        onclick="return confirm('Tem certeza de que deseja excluir este item?');">
+                        Deletar conta
+                     </a>                     
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
+                    </li>   
+
                 </ul>
 
             </body>
