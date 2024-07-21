@@ -36,8 +36,8 @@ public class EmpresaController extends HttpServlet {
     	} else if (usuario.getPapel().equals("Empresa")) {
 			List<Vaga> listaVagas = new VagaDAO().getAllVagasEmpresa(usuario);
        		request.setAttribute("listaVagas", listaVagas);
-
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/index.jsp");
+	   
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/lista.jsp");
             dispatcher.forward(request, response);
     	} else {
     		erros.add("Acesso não autorizado!");

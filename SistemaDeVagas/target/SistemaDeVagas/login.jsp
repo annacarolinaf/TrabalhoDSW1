@@ -20,7 +20,7 @@
                 </ul>
             </div>
         </c:if>
-        <form method="post" action="index.jsp">
+        <form method="post" action="login">
             <table>
                 <tr>
                     <th>E-mail: </th>

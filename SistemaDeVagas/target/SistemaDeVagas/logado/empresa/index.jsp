@@ -23,10 +23,10 @@
 
                 <c:forEach var="vaga" items="${requestScope.listaVagas}">
                     <tr>
-                        <td><c:out value="${vaga.descricao}" /></td>
-						<td><c:out value="${vaga.salario}" /></td>
-						<td><c:out value="${vaga.data_limite}" /></td>
-						<td><c:out value="${vaga.id}" /></td>
+                        <td>${vaga.id}</td>
+                        <td>${vaga.descricao}</td>
+                        <td>${vaga.salario}</td>
+                        <td>${vaga.data_limite}</td>
                     </tr>
                 </c:forEach>
             </table>

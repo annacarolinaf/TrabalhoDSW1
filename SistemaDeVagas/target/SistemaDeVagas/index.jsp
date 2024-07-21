@@ -11,6 +11,9 @@ pageEncoding="UTF-8"%>
 
 <div align="center">
     <h1>Lista de vagas</h1>
+    <h2>
+        <a href="${pageContext.request.contextPath}/login.jsp">Ir para log-in</a> &nbsp;&nbsp;&nbsp; 
+    </h2> 
     <h2>Pesquisar por cidade:</h2>
     <input type="text" name="filtro" id="filtro" placeholder="Procure uma cidade" >
     <input type="button" value="Buscar">
@@ -28,11 +31,11 @@ pageEncoding="UTF-8"%>
         </tr>
         <c:forEach var="vaga" items="${requestScope.listaVagas}">
             <tr>
-                <td>${vaga.empresa.nome}</td>
+                <td>${vaga.empresa.usuario.nome}</td>
                 <td>${vaga.descricao}</td>
                 <td>${vaga.salario}</td>
                 <td>${vaga.data_limite}</td>
-                <!--<td><a href="/${requestScope.contextPath}/integrantes/edicao?idintegrante=${vaga.id_vaga}">Se inscrever</a> -->
+                
                     <td><a href="/">Se inscrever</a></td>
                     &nbsp;&nbsp;&nbsp;&nbsp; </td>
             </tr>

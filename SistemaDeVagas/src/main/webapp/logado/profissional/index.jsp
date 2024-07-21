@@ -55,13 +55,6 @@
 						<td>${livro.autor}</td>
 						<td>${livro.ano}</td>
 						<td>${livro.preco}</td>
-						<td><a href="/${sessionScope.contextPath}/livros/edicao?id=${livro.id}">
-								<fmt:message key="books.update" />
-						</a> &nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="/${sessionScope.contextPath}/livros/remocao?id=${livro.id}"
-							onclick="return confirm('<fmt:message key="confirm.link" />');">
-								<fmt:message key="books.delete" />
-						</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -70,4 +63,4 @@
 	</body>
 </fmt:bundle>
 
-</html> 
+</html>
