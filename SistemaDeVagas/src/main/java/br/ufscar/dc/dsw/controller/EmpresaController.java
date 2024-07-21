@@ -81,6 +81,10 @@ public class EmpresaController extends HttpServlet {
 
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
+		request.setAttribute("empresa", empresa);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/formulario.jsp");
 		dispatcher.forward(request, response);
 	}

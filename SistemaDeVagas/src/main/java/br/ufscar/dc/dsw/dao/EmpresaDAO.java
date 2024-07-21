@@ -106,7 +106,7 @@ public class EmpresaDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);;    
             statement = conn.prepareStatement(sql);
-            statement.setString(1, empresa.getCNPJ());
+            statement.setString(1, empresa.getCnpj());
             statement.setString(2, empresa.getCidade());
             statement.setString(3, empresa.getDescricao());
             statement.setLong(4, empresa.getUsuario().getId());
@@ -131,18 +131,18 @@ public class EmpresaDAO extends GenericDAO {
 
             PreparedStatement statement = conn.prepareStatement(sql_inscricao);
     
-            statement.setString(1, empresa.getCNPJ());
+            statement.setString(1, empresa.getCnpj());
             statement.executeUpdate();
 
             statement = conn.prepareStatement(sql_vagas);
     
-            statement.setString(1, empresa.getCNPJ());
+            statement.setString(1, empresa.getCnpj());
             statement.executeUpdate();
     
 
             statement = conn.prepareStatement(sql_empresa);
     
-            statement.setString(1, empresa.getCNPJ());
+            statement.setString(1, empresa.getCnpj());
             statement.executeUpdate();
     
             statement = conn.prepareStatement(sql_usuario);
@@ -165,7 +165,7 @@ public class EmpresaDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, empresa.getCNPJ());
+            statement.setString(1, empresa.getCnpj());
             statement.setString(2, empresa.getCidade());
             statement.setString(3, empresa.getDescricao());
             statement.setLong(4, empresa.getUsuario().getId());
