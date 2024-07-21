@@ -13,6 +13,33 @@ import br.ufscar.dc.dsw.domain.Usuario;
 
 public class EmpresaDAO extends GenericDAO {
 
+    public Empresa getByIdUsuario(Usuario usuario){
+        Empresa Empresa = null;
+        
+        String sql = "SELECT * FROM Empresa e WHERE e.id_usuario = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, usuario.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String cidade = resultSet.getString("cidade");
+                String descricao = resultSet.getString("descricao");
+                String cnpj = resultSet.getString("cnpj");
+
+                Empresa = new Empresa(cnpj, cidade, descricao, usuario);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Empresa;
+    }
     public Empresa get(String cnpj) {
         Empresa Empresa = null;
         
@@ -91,21 +118,37 @@ public class EmpresaDAO extends GenericDAO {
         }
     }
 
-    public void delete(Long id){
-        String sql_empresa = "DELETE FROM Empresa WHERE id_usuario = ?";
+    public void delete(Empresa empresa){
+        String sql_inscricao = "DELETE FROM Inscricao WHERE vaga_id IN (SELECT id_vaga FROM Vaga WHERE empresa_id = ?);";
+        String sql_vagas = "DELETE FROM Vaga WHERE empresa_id = ?;";
+        String sql_empresa = "DELETE FROM Empresa WHERE cnpj = ?";
         String sql_usuario = "DELETE FROM Usuario WHERE id = ?";
-    
+
+        Long id = empresa.getUsuario().getId();
+
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql_empresa);
+
+            PreparedStatement statement = conn.prepareStatement(sql_inscricao);
+    
+            statement.setString(1, empresa.getCNPJ());
+            statement.executeUpdate();
+
+            statement = conn.prepareStatement(sql_vagas);
+    
+            statement.setString(1, empresa.getCNPJ());
+            statement.executeUpdate();
+    
+
+            statement = conn.prepareStatement(sql_empresa);
+    
+            statement.setString(1, empresa.getCNPJ());
+            statement.executeUpdate();
+    
+            statement = conn.prepareStatement(sql_usuario);
     
             statement.setLong(1, id);
             statement.executeUpdate();
-    
-            PreparedStatement statement_usuario = conn.prepareStatement(sql_usuario);
-    
-            statement_usuario.setLong(1, id);
-            statement_usuario.executeUpdate();
 
             statement.close();
             conn.close();

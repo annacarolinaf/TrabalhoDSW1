@@ -51,8 +51,7 @@
                     <li>
                         <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
                     </li>   
-
-                </ul>
+                </ul>
 
             </body>
 

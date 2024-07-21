@@ -3,13 +3,6 @@ package br.ufscar.dc.dsw.controller;
 import java.io.IOException;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.domain.Empresa;
-import br.ufscar.dc.dsw.domain.Vaga;
-
-import br.ufscar.dc.dsw.dao.EmpresaDAO;
-import br.ufscar.dc.dsw.dao.VagaDAO;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ufscar.dc.dsw.dao.EmpresaDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.dao.VagaDAO;
+import br.ufscar.dc.dsw.domain.Empresa;
+import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(urlPatterns = { "/empresa/*" })
@@ -82,21 +81,17 @@ public class EmpresaController extends HttpServlet {
 
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * Long id = Long.parseLong(request.getParameter("id"));
-		 * Usuario usuario = dao.get(id);
-		 * request.setAttribute("livro", livro);
-		 * request.setAttribute("editoras", getEditoras());
-		 */
-		RequestDispatcher dispatcher = request.getRequestDispatcher("logado/empresa/formulario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/formulario.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void remove(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
-		dao.delete(id);
-		response.sendRedirect("logout.jsp");
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
+		new EmpresaDAO().delete(empresa);
+		response.sendRedirect(request.getContextPath());
 	}
 
 }
