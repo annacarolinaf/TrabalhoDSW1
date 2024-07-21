@@ -25,7 +25,7 @@ public class VagaDAO extends GenericDAO {
             statement.setFloat(1, vaga.getSalario()); //salario
             statement.setString(2, vaga.getDescricao()); //descricao
             statement.setString(3, vaga.getData_limite()); //data_limite
-            statement.setString(5, vaga.getEmpresa().getCNPJ()); //empresa_id
+            statement.setString(5, vaga.getEmpresa().getCnpj()); //empresa_id
             statement.executeUpdate();
 
             statement.close();
@@ -96,7 +96,7 @@ public class VagaDAO extends GenericDAO {
             statement.setFloat(1, vaga.getSalario());//salario
             statement.setString(2, vaga.getDescricao());//descricao
             statement.setString(3, vaga.getData_limite());//data_limite
-            statement.setString(4, vaga.getEmpresa().getCNPJ());//empresa_id = cnpj
+            statement.setString(4, vaga.getEmpresa().getCnpj());//empresa_id = cnpj
             statement.setLong(5, vaga.getId_vaga()); //id da vaga
             statement.executeUpdate();
 

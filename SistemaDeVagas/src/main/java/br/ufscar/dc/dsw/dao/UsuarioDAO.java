@@ -77,6 +77,7 @@ public class UsuarioDAO extends GenericDAO {
             statement.setString(2, usuario.getEmail());
             statement.setString(3, usuario.getSenha());
             statement.setString(4, usuario.getPapel());
+            statement.setLong(5, usuario.getId());
             statement.executeUpdate();
             statement.close();
             conn.close();

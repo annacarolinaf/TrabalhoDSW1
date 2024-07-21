@@ -58,7 +58,7 @@ public class InscricaoDAO extends GenericDAO{
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, empresa.getCNPJ());
+            statement.setString(1, empresa.getCnpj());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Long vaga_id = resultSet.getLong("vaga_id");

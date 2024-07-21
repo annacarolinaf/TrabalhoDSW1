@@ -22,7 +22,6 @@ import br.ufscar.dc.dsw.util.Erro;
 public class EmpresaController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private EmpresaDAO dao;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,6 +53,9 @@ public class EmpresaController extends HttpServlet {
 					case "/remocao":
 						remove(request, response);
 						break;
+					case "/atualiza":
+						atualiza(request, response);
+						break;
 					default:
 						listaVagas(request, response, usuario);
 						break;
@@ -81,6 +83,10 @@ public class EmpresaController extends HttpServlet {
 
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
+		request.setAttribute("empresa", empresa);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/formulario.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -92,6 +98,27 @@ public class EmpresaController extends HttpServlet {
 		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
 		new EmpresaDAO().delete(empresa);
 		response.sendRedirect(request.getContextPath());
+	}
+
+	private void atualiza(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+		Long id = Long.parseLong(request.getParameter("id"));
+		String email = request.getParameter("email");
+		String nome = request.getParameter("nome");
+		String senha = request.getParameter("senha");
+		String cnpj = request.getParameter("cnpj");
+		String cidade = request.getParameter("cidade");
+		String descricao = request.getParameter("descricao");
+
+		Usuario usuario = new Usuario(id, nome, email, senha, "Empresa");
+		Empresa empresa = new Empresa(cnpj, cidade, descricao, usuario);
+
+		new UsuarioDAO().update(usuario);
+		new EmpresaDAO().update(empresa);
+
+		response.sendRedirect(request.getContextPath() + "/empresa");
 	}
 
 }
