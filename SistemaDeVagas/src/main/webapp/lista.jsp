@@ -31,6 +31,7 @@ pageEncoding="UTF-8"%>
         </tr>
         <c:forEach var="vaga" items="${requestScope.listaVagas}">
             <tr>
+                <td>${vaga.empresa.usuario.nome}</td>
                 <td>${vaga.descricao}</td>
                 <td>${vaga.salario}</td>
                 <td>${vaga.data_limite}</td>
