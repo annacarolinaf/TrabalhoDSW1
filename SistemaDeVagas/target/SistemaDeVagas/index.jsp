@@ -11,6 +11,9 @@ pageEncoding="UTF-8"%>
 
 <div align="center">
     <h1>Lista de vagas</h1>
+    <h2>
+        <a href="/${requestScope.contextPath}">Ir para log-in</a> &nbsp;&nbsp;&nbsp; 
+    </h2> 
     <h2>Pesquisar por cidade:</h2>
     <input type="text" name="filtro" id="filtro" placeholder="Procure uma cidade" >
     <input type="button" value="Buscar">

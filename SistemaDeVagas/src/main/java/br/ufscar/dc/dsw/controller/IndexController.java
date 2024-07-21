@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.dao.VagaDAO;
+import java.util.List;
+
 import br.ufscar.dc.dsw.util.Erro;
 
-@WebServlet(name = "Index", urlPatterns = { "/login.jsp", "/logout.jsp" })
+@WebServlet(name = "Index", urlPatterns = { "/index.jsp", "/logout.jsp" })
 public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -61,7 +65,12 @@ public class IndexController extends HttpServlet {
 
 		request.getSession().invalidate();
 		request.setAttribute("mensagens", erros);
-		String URL = "login.jsp";
+
+		VagaDAO dao = new VagaDAO();
+		List<Vaga> listaVagas = dao.getAll();
+        request.setAttribute("listaVagas", listaVagas);
+
+		String URL = "lista.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(URL);
 		rd.forward(request, response);
 	}
