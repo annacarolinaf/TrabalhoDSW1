@@ -55,15 +55,22 @@ create table Inscricao (
 
 INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Empresa Exemplo', 'empresa', 'empresa', 'Empresa');
 INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Profissional Exemplo', 'profissional', 'profissional', 'Profissional');
-INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Empresa Exemplo 2', 'empresa2', 'empresa2', 'Empresa');
+INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Petrobrás', 'petro', 'petro', 'Empresa');
+INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Vale', 'vale', 'vale', 'Empresa');
+INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Tractian', 'tra', 'tra', 'Empresa');
 
-INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('12.345.678/0001-90', 'Campinas', 'Uma empresa de exemplo para testes.', 1);
-INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('12.345.678/0001-10', 'São Paulo', 'Uma empresa de exemplo para testes. 2', 3);
+INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('12.345.678/0001-90', 'São Paulo', 'Uma empresa de exemplo para testes.', 1);
+INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('10.987.654/3210-00', 'Registro', 'Uma grande empresa educando gerações', 3);
+INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('65.123.456/3200-01', 'Campinas', 'Vale do Silício Brasileira', 4);
+INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('77.555.444/6667-04', 'Carolina do Norte', 'A incrível', 5);
 
 INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolvedor de Software', '2024-12-31', '12.345.678/0001-90');
-INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolver de Front-end', '2024-12-31', '12.345.678/0001-90');
-INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolver de Sistema', '2024-12-31', '12.345.678/0001-90');
-INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolver de Sistema', '2024-12-31', '12.345.678/0001-10');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolver de Site', '2024-12-31', '12.345.678/0001-90');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3900.00, 'Desenvolver de Sistema', '2024-12-31', '12.345.678/0001-90');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (2000.00, 'Gamer', '2024-09-10', '10.987.654/3210-00');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (7500.00, 'Cientista de Dados', '2024-11-01', '10.987.654/3210-00');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (9000.00, 'Geólogo', '2024-08-08', '65.123.456/3200-01');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (15000.60, 'Engenheiro de Sistemas', '2024-07-21', '77.555.444/6667-04');
 
 INSERT INTO Profissional (cpf, data_nasc, sexo, telefone, id_usuario) VALUES ('123.456.789-00', '1980-05-15', 'Masculino', '(11) 91234-5678', 2);
 

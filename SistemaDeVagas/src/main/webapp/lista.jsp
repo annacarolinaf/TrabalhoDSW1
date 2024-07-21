@@ -47,6 +47,9 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <form method="post" action="showAll">
+                        <button type="submit"> Mostrar todos </button>
+                    </form>
                 </div>
             </body>
 

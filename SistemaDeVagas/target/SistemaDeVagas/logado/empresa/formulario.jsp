@@ -3,9 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <table border="1">
+<<<<<<< HEAD
     <caption>Edição</caption> 
     <form action="${pageContext.request.contextPath}/empresa/atualiza" method="post">
         <input type="hidden" name="id" value="${empresa.usuario.id}"/>
+=======
+    <caption>Edição</caption>
+    <form action="/edicao" method="post">
+>>>>>>> 2389bbd839d4d417130d344bcb07bd135c3b782e
         <tr>
             <td><label for="email">E-mail</label></td>
             <td>
@@ -21,6 +26,7 @@
             </td>
         </tr>
         <tr>
+<<<<<<< HEAD
             <td><label for="Senha">Senha</label></td>
             <td>
                 <input type="text" id="senha" name="senha" size="45" required 
@@ -28,6 +34,8 @@
             </td>
         </tr>
         <tr>
+=======
+>>>>>>> 2389bbd839d4d417130d344bcb07bd135c3b782e
             <td><label for="cnpj">CNPJ</label></td>
             <td>
                 <input type="text" id="cnpj" name="cnpj" size="45" required 
@@ -52,4 +60,8 @@
             <td colspan="2" align="center"><input type="submit" value="Salva" /></td>
         </tr>
     </form>
+<<<<<<< HEAD
 </table>
+=======
+</table>
+>>>>>>> 2389bbd839d4d417130d344bcb07bd135c3b782e

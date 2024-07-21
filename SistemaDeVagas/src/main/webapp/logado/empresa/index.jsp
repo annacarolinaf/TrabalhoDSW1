@@ -37,7 +37,7 @@
 
                 <ul>
                     <li>
-                        <a href="${pageContext.request.contextPath}/logout.jsp">Adicionar vaga</a>
+                        <a href="${pageContext.request.contextPath}/logado/empresa/cadastroVaga.jsp">Adicionar vaga</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/empresa/edicao?id=${sessionScope.usuarioLogado.id}">Atualizar dados</a>
