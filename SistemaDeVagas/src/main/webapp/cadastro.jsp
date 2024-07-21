@@ -19,16 +19,14 @@
                 </ul>
             </div>
         </c:if>
-        <form method="post" action="Cadastro.jsp">
+        <form method="post" action="cadastro.jsp"> 
             <table>
-                <tr>
-                    <td colspan="2"> 
-                        <input type="submit" name="bEmpresa" value="Cadastro de Empresa"/>
-                    </td>
-                    <td colspan="2"> 
-                        <input type="submit" name="bProfissional" value="Cadastro de Profissional"/>
-                    </td>
-                </tr>
+                <li>
+                    <a href="${pageContext.request.contextPath}/formularioEmpresa.jsp">Cadastro de Empresa</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/formularioProfissional.jsp">Cadastro de Profissional</a>
+                </li>
             </table>
         </form>
     </body>

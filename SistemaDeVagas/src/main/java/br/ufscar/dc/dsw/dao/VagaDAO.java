@@ -53,7 +53,7 @@ public class VagaDAO extends GenericDAO {
                 String e_mail = resultSet.getString("email"); 
                 String senha = resultSet.getString("senha");
                 String papel = resultSet.getString("papel");
-                Long id_usario = resultSet.getLong("id"); //id do usuário
+                Long id_usuario = resultSet.getLong("id"); //id do usuário
                 
                 //retornos da tabela Vaga
                 Long id_vaga = resultSet.getLong("id_vaga"); //id_vaga
@@ -67,7 +67,7 @@ public class VagaDAO extends GenericDAO {
                 String cidade = resultSet.getString("cidade");
 
                 //Criação dos novos objetos para a leitura
-                Usuario usuario = new Usuario(e_mail, nome_u, senha, papel);
+                Usuario usuario = new Usuario(id_usuario, e_mail, nome_u, senha, papel);
                 Empresa empresa = new Empresa(cnpj, cidade, descricao, usuario);
                 Vaga vaga = new Vaga(id_vaga, salario, descricao_vaga, data_limite, empresa);
 
@@ -152,5 +152,42 @@ public class VagaDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
         return vaga;
+    }
+
+    public List<Vaga> getAllVagasEmpresa(Usuario usuario) {
+
+        List<Vaga> listaVagas = new ArrayList<>();
+
+        String sql = "SELECT * from Vaga v, Empresa e, Usuario u where e.id_usuario = ? and v.empresa_id = e.cnpj and u.id = e.id_usuario";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, usuario.getId());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+
+                Long id = resultSet.getLong("id_vaga");
+                Float salario = resultSet.getFloat("salario");
+                String descricao_vaga = resultSet.getString("descricao_vaga");
+                String data_limite = resultSet.getString("data_limite");
+                String empresa_id = resultSet.getString("empresa_id");
+
+                Empresa empresa = new EmpresaDAO().get(empresa_id);
+                
+
+                Vaga vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa);
+
+                listaVagas.add(vaga);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaVagas;
     }
 }

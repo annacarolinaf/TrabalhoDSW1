@@ -59,6 +59,8 @@ INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Profissional Exemplo', 
 INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('12.345.678/0001-90', 'São Paulo', 'Uma empresa de exemplo para testes.', 1);
 
 INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolvedor de Software', '2024-12-31', '12.345.678/0001-90');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolver de Site', '2024-12-31', '12.345.678/0001-90');
+INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id) VALUES (3500.00, 'Desenvolver de Sistema', '2024-12-31', '12.345.678/0001-90');
 
 INSERT INTO Profissional (cpf, data_nasc, sexo, telefone, id_usuario) VALUES ('123.456.789-00', '1980-05-15', 'Masculino', '(11) 91234-5678', 2);
 

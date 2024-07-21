@@ -20,7 +20,7 @@ import br.ufscar.dc.dsw.domain.Empresa;
 
 import br.ufscar.dc.dsw.util.Erro;
 
-@WebServlet(name = "Cadastro", urlPatterns = { "/Cadastro.jsp"})
+@WebServlet(name = "Cadastro", urlPatterns = { "/cadastro/*"})
 public class CadastroController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -28,18 +28,7 @@ public class CadastroController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("bProfissional") != null){
-			response.sendRedirect("formularioProfissional.jsp");
-			return;
-		}
-
-		if (request.getParameter("bEmpresa") != null){
-			response.sendRedirect("formularioEmpresa.jsp");
-			return;
-		}
-		
-		else
-			doGet(request, response);
+		doGet(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

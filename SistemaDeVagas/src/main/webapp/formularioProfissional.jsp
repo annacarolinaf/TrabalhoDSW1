@@ -20,7 +20,7 @@
                 </ul>
             </div>
         </c:if>
-        <form method="post" action="Cadastro.jsp">
+        <form method="post" action="cadastro">
             <table>
                 <tr>
                     <th>E-mail: </th>
@@ -53,7 +53,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"> 
-                        <input type="submit" name="bFormularioProfissional" value="Entrar"/>
+                        <input type="submit" name="bFormularioProfissional" value="Enviar"/>
                     </td>
                 </tr>
                 

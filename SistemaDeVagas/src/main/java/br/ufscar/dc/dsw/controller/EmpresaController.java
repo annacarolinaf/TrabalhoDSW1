@@ -1,6 +1,12 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.dao.VagaDAO;
+
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +34,9 @@ public class EmpresaController extends HttpServlet {
     	if (usuario == null) {
     		response.sendRedirect(request.getContextPath());
     	} else if (usuario.getPapel().equals("Empresa")) {
+			List<Vaga> listaVagas = new VagaDAO().getAllVagasEmpresa(usuario);
+       		request.setAttribute("listaVagas", listaVagas);
+
     		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/index.jsp");
             dispatcher.forward(request, response);
     	} else {

@@ -11,5 +11,6 @@
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/GenericDAO.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Usuario.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/domain/Profissional.java
+/home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/InscricaoDAO.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/EmpresaDAO.java
 /home/anna/TrabalhoDSW1/SistemaDeVagas/src/main/java/br/ufscar/dc/dsw/dao/VagaDAO.java
