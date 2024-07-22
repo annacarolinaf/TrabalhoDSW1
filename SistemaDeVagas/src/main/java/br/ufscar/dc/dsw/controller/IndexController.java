@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import br.ufscar.dc.dsw.dao.VagaDAO;
 import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.util.Erro;
@@ -20,43 +21,56 @@ public class IndexController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String action = request.getServletPath();
 
-        if ("/pesquisaCidade".equals(action)) {
-            pesquisaCidade(request, response);
-        } 
-        else {
-            doGet(request, response);
+        if (action == null)
+            action = "";
+
+        try {
+            switch (action) {
+                case "/pesquisaCidade":
+                    pesquisaCidade(request, response);
+                    break;
+                default:
+                    doGet(request, response);
+                    break;
+            }
+        } catch (RuntimeException | IOException | ServletException e) {
+            throw new ServletException(e);
         }
+
     }
-    
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Erro erros = new Erro();
 
-		request.getSession().invalidate();
-		request.setAttribute("mensagens", erros);
+        request.getSession().invalidate();
+        request.setAttribute("mensagens", erros);
 
-		VagaDAO dao = new VagaDAO();
-		List<Vaga> listaVagas = dao.getAll();
+        VagaDAO dao = new VagaDAO();
+        List<Vaga> listaVagas = dao.getAll();
         request.setAttribute("listaVagas", listaVagas);
-        
-		String URL = "lista.jsp";
-		RequestDispatcher rd = request.getRequestDispatcher(URL);
-		rd.forward(request, response);
+
+        String URL = "lista.jsp";
+        RequestDispatcher rd = request.getRequestDispatcher(URL);
+        rd.forward(request, response);
     }
 
-    private void pesquisaCidade(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String filtro = request.getParameter("filtro");
+    private void pesquisaCidade(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String filtro = request.getParameter("filtro");
 
-		VagaDAO dao = new VagaDAO();
-		List<Vaga> listaVagas = dao.getPorCidade(filtro);
-		request.setAttribute("listaVagas", listaVagas);
+        VagaDAO dao = new VagaDAO();
+        List<Vaga> listaVagas = dao.getPorCidade(filtro);
+        request.setAttribute("listaVagas", listaVagas);
 
-		RequestDispatcher rd = request.getRequestDispatcher("lista.jsp"); 
-		rd.forward(request, response);
-	}
-    
+        RequestDispatcher rd = request.getRequestDispatcher("lista.jsp");
+        rd.forward(request, response);
+    }
+
+
 }

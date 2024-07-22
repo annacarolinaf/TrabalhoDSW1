@@ -40,8 +40,11 @@ public class LoginController extends HttpServlet {
 						request.getSession().setAttribute("usuarioLogado", usuario);
 						if (usuario.getPapel().equals("Empresa")) {
 							response.sendRedirect("empresa/");
-						} else {
+						} else if (usuario.getPapel().equals("Profissional")){
 							response.sendRedirect("profissional/");
+						}
+						else {
+							response.sendRedirect("admin/");
 						}
 						return;
 					} else {

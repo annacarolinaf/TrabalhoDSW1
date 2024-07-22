@@ -35,10 +35,11 @@
                     <td colspan="2"> 
                         <input type="submit" name="bOK" value="Entrar"/>
                     </td>
+                </tr>
+                <tr>
                     <td colspan="2"> 
                         <a href="cadastro">Ainda não possui cadastro?</a>
                     </td>
-
                 </tr>
                 
             </table>

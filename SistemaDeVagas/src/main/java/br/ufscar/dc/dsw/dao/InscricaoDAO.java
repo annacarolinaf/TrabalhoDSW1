@@ -25,7 +25,7 @@ public class InscricaoDAO extends GenericDAO{
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, profissional.getCPF());
+            statement.setString(1, profissional.getCpf());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Long vaga_id = resultSet.getLong("vaga_id");
@@ -90,7 +90,7 @@ public class InscricaoDAO extends GenericDAO{
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);;    
             statement = conn.prepareStatement(sql);
-            statement.setString(1, inscricao.getProfissional().getCPF());
+            statement.setString(1, inscricao.getProfissional().getCpf());
             statement.setLong(2, inscricao.getVaga().getId_vaga());
             statement.setInt(3, inscricao.getResultado());
             statement.setString(4, inscricao.getQualificacao());
@@ -109,7 +109,7 @@ public class InscricaoDAO extends GenericDAO{
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, inscricao.getProfissional().getCPF());
+            statement.setString(1, inscricao.getProfissional().getCpf());
             statement.setLong(2, inscricao.getVaga().getId_vaga());
             statement.executeUpdate();
 
@@ -130,7 +130,7 @@ public class InscricaoDAO extends GenericDAO{
 
             statement.setInt(1, inscricao.getResultado());
             statement.setString(2, inscricao.getQualificacao());
-            statement.setString(3, inscricao.getProfissional().getCPF());
+            statement.setString(3, inscricao.getProfissional().getCpf());
             statement.setLong(4, inscricao.getVaga().getId_vaga());
             statement.executeUpdate();
 

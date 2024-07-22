@@ -37,14 +37,14 @@
 
                 <ul>
                     <li>
-                        <a href="${pageContext.request.contextPath}/logado/empresa/cadastrovaga.jsp">Adicionar vaga</a>
+                        <a href="${pageContext.request.contextPath}/logado/empresa/cadastroVaga.jsp">Adicionar vaga</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/empresa/edicao?id=${sessionScope.usuarioLogado.id}">Atualizar dados</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/empresa/remocao?id=${sessionScope.usuarioLogado.id}"
-                        onclick="return confirm('Tem certeza de que deseja excluir este item?');">
+                        onclick="return confirm('Tem certeza de que deseja excluir sua conta?');">
                         Deletar conta
                      </a>                     
                     </li>

@@ -42,7 +42,7 @@
                                 <td>${vaga.data_limite}</td>
                                 <td>${vaga.empresa.cidade}</td>
 
-                                <td><a href="/">Se inscrever</a></td>
+                                <td><a href="login.jsp">Inscreva-se</a></td>
                                 &nbsp;&nbsp;&nbsp;&nbsp; </td>
                             </tr>
                         </c:forEach>

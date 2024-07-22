@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <table border="1">
-    <caption>Edição</caption> 
+    <caption>Atualizar dados</caption> 
     <form action="${pageContext.request.contextPath}/empresa/atualiza" method="post">
         <input type="hidden" name="id" value="${empresa.usuario.id}"/>
         <tr>

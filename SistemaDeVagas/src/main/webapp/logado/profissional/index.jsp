@@ -1,66 +1,72 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<html>
-<fmt:bundle basename="message">
-<!-- Lista de vagas dps de estar logado -->
-<head>
-<title><fmt:message key="page.title" /></title>
-	</head>
+<!-- Lista de vagas sem estar logado-->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ page isELIgnored="false" %>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+            <html>
 
-	<body>
-		<div align="center">
-			<h1>
-				<fmt:message key="books.welcome" />
-			</h1>
-			<h2>
-				<a href="/${sessionScope.contextPath}/editoras">
-					<fmt:message key="publishers.entity" />
-				</a>
-				&nbsp;&nbsp;&nbsp;
-				<a href="/${sessionScope.contextPath}/usuarios"> 
-					<fmt:message key="users.entity" />
-				</a> 
-				&nbsp;&nbsp;&nbsp;
-			    <a href="${pageContext.request.contextPath}/logout.jsp">
-					<fmt:message key="exit.link" />
-				</a>
-				<br/>
-				<br/>
-				<a href="/${sessionScope.contextPath}/livros/cadastro">
-					<fmt:message key="books.create" />
-				</a>
-			</h2>
-			<h3><fmt:message key="books.list" /></h3>
-			<br/>
-		</div>
-		<div align="center">
-			<table border="1">
-				<tr>
-					<th><fmt:message key="book.ID" /></th>
-					<th><fmt:message key="book.title" /></th>
-					<th><fmt:message key="book.publisher" /></th>
-					<th><fmt:message key="book.author" /></th>
-					<th><fmt:message key="book.year" /></th>
-					<th><fmt:message key="book.price" /></th>
-					<th><fmt:message key="actions.link" /></th>
-				</tr>
-				<c:forEach var="livro" items="${requestScope.listaLivros}">
-					<tr>
-						<td>${livro.id}</td>
-						<td>${livro.titulo}</td>
-						<td>${livro.editora.nome}</td>
-						<td>${livro.autor}</td>
-						<td>${livro.ano}</td>
-						<td>${livro.preco}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
+            <head>
+                <title>Página do Profissional</title>
+            </head>
 
-	</body>
-</fmt:bundle>
+            <body>
+                <h1>Olá ${sessionScope.usuarioLogado.nome}</h1>
 
-</html>
+					<div align="center">
+						<h1>Lista de vagas</h1>
+						<form method="post" action="${pageContext.request.contextPath}/profissional/pesquisaCidade">
+							<h2>Pesquisar por cidade:</h2>
+							<input type="text" name="filtro" id="filtro" placeholder="Procure uma cidade">
+							<button type="submit"> Buscar </button>
+						</form>
+					</div>
+	
+					<div align="center">
+						<table border="1">
+							<caption>Vagas em aberto</caption>
+							<tr>
+								<th>Empresa</th>
+								<th>Descrição de Vaga</th>
+								<th>Salário</th>
+								<th>Data limite</th>
+								<th>Cidade</th>
+								<th>Ação</th>
+							</tr>
+							<c:forEach var="vaga" items="${requestScope.listaVagas}">
+								<tr>
+									<td>${vaga.empresa.usuario.nome}</td>
+									<td>${vaga.descricao}</td>
+									<td>${vaga.salario}</td>
+									<td>${vaga.data_limite}</td>
+									<td>${vaga.empresa.cidade}</td>
+	
+									<td><a href="login.jsp">Inscreva-se</a></td>
+									&nbsp;&nbsp;&nbsp;&nbsp; </td>
+								</tr>
+							</c:forEach>
+						</table>
+						<form method="post" action="showAll">
+							<button type="submit"> Mostrar todos </button>
+						</form>
+					</div>
+
+                <ul>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/logado/empresa/cadastroVaga.jsp">Vagas inscritas</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/profissional/edicao?id=${sessionScope.usuarioLogado.id}">Atualizar dados</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/profissional/remocao?id=${sessionScope.usuarioLogado.id}"
+                        onclick="return confirm('Tem certeza de que deseja excluir sua conta?');">
+                        Deletar conta
+                     </a>                     
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
+                    </li>   
+                </ul>
+
+            </body>
+
+            </html>

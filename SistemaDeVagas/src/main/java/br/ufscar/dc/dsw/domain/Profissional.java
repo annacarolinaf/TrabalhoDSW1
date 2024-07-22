@@ -21,11 +21,11 @@ public class Profissional {
         this.usuario = usuario;
     }
 
-    public String getCPF(){
+    public String getCpf(){
         return cpf;
     }
 
-    public void setCPF(String cpf){
+    public void setCpf(String cpf){
         this.cpf = cpf;
     }
 
