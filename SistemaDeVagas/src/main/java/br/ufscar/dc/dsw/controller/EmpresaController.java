@@ -98,11 +98,12 @@ public class EmpresaController extends HttpServlet {
 		Float salario_vaga = Float.parseFloat(request.getParameter("salario_vaga"));
 		String descricao_vaga = request.getParameter("descricao_vaga");
 		String  data_limite = request.getParameter("data_limite");
+		String status_vaga = request.getParameter("status_vaga");
 		
 		Usuario usuario = new UsuarioDAO().getbyID(id);
 		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
 		
-		Vaga vaga = new Vaga(salario_vaga, descricao_vaga, data_limite, empresa);
+		Vaga vaga = new Vaga(salario_vaga, descricao_vaga, data_limite, empresa, status_vaga);
 
 		new VagaDAO().insert(vaga);
 

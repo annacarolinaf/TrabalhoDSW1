@@ -52,10 +52,11 @@ public class VagaDAO extends GenericDAO {
                 String descricao_vaga = resultSet.getString("descricao_vaga");
                 String data_limite = resultSet.getString("data_limite");
                 String empresa_id = resultSet.getString("empresa_id");
+                String status_vaga = resultSet.getString("status_vaga");
 
                 Empresa empresa = new EmpresaDAO().get(empresa_id);
 
-                Vaga vaga = new Vaga(id_vaga, salario, descricao_vaga, data_limite, empresa);
+                Vaga vaga = new Vaga(id_vaga, salario, descricao_vaga, data_limite, empresa, status_vaga);
 
                 listaVagas.add(vaga);
             }
@@ -87,7 +88,7 @@ public class VagaDAO extends GenericDAO {
     }
 
     public void update(Vaga vaga) {
-        String sql = "UPDATE Vaga SET salario = ?, descricao_vaga = ?, data_limite = ?";
+        String sql = "UPDATE Vaga SET salario = ?, descricao_vaga = ?, data_limite = ?, status_vaga = ?";
         sql += ", empresa_id = ? WHERE id_vaga = ?";
 
         try {
@@ -99,6 +100,7 @@ public class VagaDAO extends GenericDAO {
             statement.setString(3, vaga.getData_limite());//data_limite
             statement.setString(4, vaga.getEmpresa().getCnpj());//empresa_id = cnpj
             statement.setLong(5, vaga.getId_vaga()); //id da vaga
+            statement.setString(6, vaga.getStatus_vaga());
             statement.executeUpdate();
 
             statement.close();
@@ -125,10 +127,11 @@ public class VagaDAO extends GenericDAO {
                 String descricao_vaga = resultSet.getString("descricao_vaga");
                 String data_limite = resultSet.getString("data_limite");
                 String empresaID = resultSet.getString("empresa_id");
+                String status_vaga = resultSet.getString("status_vaga");
 
                 Empresa empresa = new EmpresaDAO().get(empresaID);
 
-                vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa);
+                vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa, status_vaga);
             }
 
             resultSet.close();
@@ -159,11 +162,12 @@ public class VagaDAO extends GenericDAO {
                 String descricao_vaga = resultSet.getString("descricao_vaga");
                 String data_limite = resultSet.getString("data_limite");
                 String empresa_id = resultSet.getString("empresa_id");
+                String status_vaga = resultSet.getString("status_vaga");
 
                 Empresa empresa = new EmpresaDAO().get(empresa_id);
                 
 
-                Vaga vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa);
+                Vaga vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa, status_vaga);
 
                 listaVagas.add(vaga);
             }
@@ -192,11 +196,12 @@ public class VagaDAO extends GenericDAO {
                 String descricao_vaga = resultSet.getString("descricao_vaga");
                 String data_limite = resultSet.getString("data_limite");
                 String empresa_id = resultSet.getString("empresa_id");
+                String status_vaga = resultSet.getString("status_vaga");
 
                 EmpresaDAO empresaDAO = new EmpresaDAO();
                 Empresa empresa = empresaDAO.get(empresa_id);
 
-                Vaga vaga = new Vaga(salario, descricao_vaga, data_limite, empresa);
+                Vaga vaga = new Vaga(salario, descricao_vaga, data_limite, empresa, status_vaga);
                 listaVagas.add(vaga);
             }
 

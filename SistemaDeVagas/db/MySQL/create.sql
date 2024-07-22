@@ -28,6 +28,7 @@ create table Vaga(
     descricao_vaga varchar(500) not null,
     data_limite date not null, 
     empresa_id varchar(18) not null, 
+    status_vaga varchar(18) default 'ABERTA',
     primary key (id_vaga),
     foreign key (empresa_id) references Empresa(cnpj)
 );

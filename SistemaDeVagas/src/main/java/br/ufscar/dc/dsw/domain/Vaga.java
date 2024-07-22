@@ -7,21 +7,23 @@ public class Vaga {
     private String descricao;
     private String data_limite;
     private Empresa empresa;
+    private String status_vaga;
 
     public Vaga(Long id_vaga) {
         this.id_vaga = id_vaga;
     }
 
 
-    public Vaga( float salario, String descricao, String data_limite, Empresa empresa) {
+    public Vaga( float salario, String descricao, String data_limite, Empresa empresa, String status_vaga) {
         this.salario = salario;
         this.descricao = descricao;
         this.data_limite = data_limite;
         this.empresa = empresa;
+        this.status_vaga = status_vaga;
     }
     
-    public Vaga( Long id_vaga,  float salario, String descricao, String data_limite, Empresa empresa) {
-        this(salario, descricao, data_limite, empresa);
+    public Vaga( Long id_vaga,  float salario, String descricao, String data_limite, Empresa empresa, String status_vaga) {
+        this(salario, descricao, data_limite, empresa, status_vaga);
         this.id_vaga = id_vaga;
     }
     //Por que faz diferença colocar o nome do get igual da variável?
@@ -63,5 +65,13 @@ public class Vaga {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public String getStatus_vaga() {
+        return status_vaga;
+    }
+
+    public void setStatus_vaga(String status_vaga) {
+        this.status_vaga = status_vaga;
     }
 }

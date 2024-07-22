@@ -28,7 +28,7 @@
                                 <td>${vaga.descricao}</td>
                                 <td>${vaga.salario}</td>
                                 <td>${vaga.data_limite}</td>
-                                <td></td>
+                                <td>${vaga.status_vaga}</td>
                             </tr>
                         </c:forEach>
                     </table>

@@ -32,6 +32,7 @@
                             <th>Salário</th>
                             <th>Data limite</th>
                             <th>Cidade</th>
+                            <th>Status</th>
                             <th>Ação</th>
                         </tr>
                         <c:forEach var="vaga" items="${requestScope.listaVagas}">
@@ -41,6 +42,7 @@
                                 <td>${vaga.salario}</td>
                                 <td>${vaga.data_limite}</td>
                                 <td>${vaga.empresa.cidade}</td>
+                                <td>${vaga.status_vaga}</td>
 
                                 <td><a href="login.jsp">Inscreva-se</a></td>
                                 &nbsp;&nbsp;&nbsp;&nbsp; </td>

@@ -107,11 +107,11 @@ public class ProfissionalController extends HttpServlet {
 		Profissional profissional = dao.getByIdUsuario(usuario);
 
 		List<Vaga> listaVagasInscritas = dao.getVagasInscritas(profissional.getCpf());
-		List<Inscricao> listaInscricaos = dao.getListaInscricoes(profissional.getCpf());
+		List<Inscricao> listaInscricoes = dao.getListaInscricoes(profissional.getCpf());
 
 		request.setAttribute("listaVagasInscritas", listaVagasInscritas);
 		request.setAttribute("profissional", profissional);
-		request.setAttribute("listaInscricaos", listaInscricaos);
+		request.setAttribute("listaInscricoes", listaInscricoes);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/vagasInscritas.jsp");
 		dispatcher.forward(request, response);
 	}
