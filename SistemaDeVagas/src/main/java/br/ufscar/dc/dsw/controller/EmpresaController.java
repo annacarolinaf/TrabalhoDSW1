@@ -47,6 +47,12 @@ public class EmpresaController extends HttpServlet {
 
 			try {
 				switch (action) {
+					case "/cadastroVaga":
+						apresentarFormVaga(request, response);
+						break;
+					case "/insereVaga":
+						cadastraVaga(request, response);
+						break;
 					case "/edicao":
 						apresentaFormEdicao(request, response);
 						break;
@@ -71,6 +77,36 @@ public class EmpresaController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/noAuth.jsp");
 			rd.forward(request, response);
 		}
+	}
+
+	private void apresentarFormVaga(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
+		request.setAttribute("empresa", empresa);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/cadastroVaga.jsp");
+        dispatcher.forward(request, response);
+    }
+
+	private void cadastraVaga(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+		Long id = Long.parseLong(request.getParameter("id"));
+		//System.out.println("Id do usuário: " + id);
+		Float salario_vaga = Float.parseFloat(request.getParameter("salario_vaga"));
+		String descricao_vaga = request.getParameter("descricao_vaga");
+		String  data_limite = request.getParameter("data_limite");
+		
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
+		
+		Vaga vaga = new Vaga(salario_vaga, descricao_vaga, data_limite, empresa);
+
+		new VagaDAO().insert(vaga);
+
+		response.sendRedirect(request.getContextPath() + "/empresa");
 	}
 
 	private void listaVagas(HttpServletRequest request, HttpServletResponse response, Usuario usuario)

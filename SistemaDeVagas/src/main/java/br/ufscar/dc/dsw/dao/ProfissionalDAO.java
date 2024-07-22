@@ -4,9 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.domain.Inscricao;
+
 
 public class ProfissionalDAO extends GenericDAO {
 
@@ -170,6 +175,64 @@ public class ProfissionalDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Vaga> getVagasInscritas(String cpf_id) {
+
+        List<Vaga> listaVagasInscritas = new ArrayList<>();
+
+        String sql = "SELECT * FROM Inscricao WHERE cpf_id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, cpf_id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                long id_vaga = resultSet.getLong("vaga_id");
+
+                Vaga vaga = new VagaDAO().get(id_vaga);
+
+                listaVagasInscritas.add(vaga);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaVagasInscritas;
+    }
+
+    public List<Inscricao> getListaInscricoes(String cpf_id) {
+
+        List<Inscricao> listaInscricoes = new ArrayList<>();
+
+        String sql = "SELECT * FROM Inscricao WHERE cpf_id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, cpf_id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Long id_inscricao = resultSet.getLong("id_inscricao");
+
+                Inscricao inscricao = new InscricaoDAO().getbyID(id_inscricao);
+
+                listaInscricoes.add(inscricao);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaInscricoes;
     }
 
 }

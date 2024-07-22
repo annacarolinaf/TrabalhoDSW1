@@ -19,7 +19,6 @@ import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.Vaga;
-import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(urlPatterns = "/profissional/*")
@@ -69,8 +68,11 @@ public class ProfissionalController extends HttpServlet {
 					case "/inscricao":
 						inscricao(request, response);
 						break;
+					case "/apresentaVagasInscritas":
+						apresentaVagasInscritas(request, response);
+						break;
 					default:
-						listaVagas(request, response, usuario);
+						listaVagas(request, response);
 						break;
 				}
 			} catch (RuntimeException | IOException | ServletException e) {
@@ -86,12 +88,31 @@ public class ProfissionalController extends HttpServlet {
 		}
 	}
 
-	private void listaVagas(HttpServletRequest request, HttpServletResponse response, Usuario usuario)
+	private void listaVagas(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/index.jsp");
 		VagaDAO dao = new VagaDAO();
 		List<Vaga> listaVagas = dao.getAll();
 		request.setAttribute("listaVagas", listaVagas);
+		dispatcher.forward(request, response);
+	}
+
+	private void apresentaVagasInscritas(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		ProfissionalDAO dao = new ProfissionalDAO();
+
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Profissional profissional = dao.getByIdUsuario(usuario);
+
+		List<Vaga> listaVagasInscritas = dao.getVagasInscritas(profissional.getCpf());
+		List<Inscricao> listaInscricaos = dao.getListaInscricoes(profissional.getCpf());
+
+		request.setAttribute("listaVagasInscritas", listaVagasInscritas);
+		request.setAttribute("profissional", profissional);
+		request.setAttribute("listaInscricaos", listaInscricaos);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/vagasInscritas.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -109,6 +130,7 @@ public class ProfissionalController extends HttpServlet {
 
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		Long id = Long.parseLong(request.getParameter("id"));
 		Usuario usuario = new UsuarioDAO().getbyID(id);
 		Profissional profissional = new ProfissionalDAO().getByIdUsuario(usuario);

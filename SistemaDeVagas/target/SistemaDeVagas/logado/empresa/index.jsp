@@ -9,7 +9,7 @@
             </head>
 
             <body>
-                
+
                 <h1>Olá ${sessionScope.usuarioLogado.nome}</h1>
 
                 <div align="center">
@@ -36,21 +36,25 @@
 
                 <ul>
                     <li>
-                        <a href="${pageContext.request.contextPath}/logado/empresa/cadastroVaga.jsp">Adicionar vaga</a>
+                        <a
+                            href="${pageContext.request.contextPath}/empresa/cadastroVaga?id=${sessionScope.usuarioLogado.id}">Adicionar
+                            vaga</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/empresa/edicao?id=${sessionScope.usuarioLogado.id}">Atualizar dados</a>
+                        <a href="${pageContext.request.contextPath}/empresa/edicao?id=${sessionScope.usuarioLogado.id}">Atualizar
+                            dados</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/empresa/remocao?id=${sessionScope.usuarioLogado.id}"
-                        onclick="return confirm('Tem certeza de que deseja excluir sua conta?');">
-                        Deletar conta
-                     </a>                     
+                            onclick="return confirm('Tem certeza de que deseja excluir sua conta?');">
+                            Deletar conta
+                        </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
-                    </li>   
-                </ul>
+                    </li>
+                               
+                </ul>
 
             </body>
 

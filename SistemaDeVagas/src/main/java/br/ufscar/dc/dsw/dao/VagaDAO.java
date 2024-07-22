@@ -16,7 +16,7 @@ public class VagaDAO extends GenericDAO {
 
     public void insert(Vaga vaga) {
 
-        String sql = "INSERT INTO Vaga (salario, descricao, data_limite, empresa_id)  VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Vaga (salario, descricao_vaga, data_limite, empresa_id)  VALUES (?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -25,7 +25,7 @@ public class VagaDAO extends GenericDAO {
             statement.setFloat(1, vaga.getSalario()); //salario
             statement.setString(2, vaga.getDescricao()); //descricao
             statement.setString(3, vaga.getData_limite()); //data_limite
-            statement.setString(5, vaga.getEmpresa().getCnpj()); //empresa_id
+            statement.setString(4, vaga.getEmpresa().getCnpj()); //empresa_id
             statement.executeUpdate();
 
             statement.close();
