@@ -9,8 +9,7 @@
             </head>
 
             <body>
-
-
+                
                 <h1>Olá ${sessionScope.usuarioLogado.nome}</h1>
 
                 <div align="center">

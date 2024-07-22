@@ -24,6 +24,7 @@
 						<table border="1">
 							<caption>Vagas em aberto</caption>
 							<tr>
+								<th>ID</th>
 								<th>Empresa</th>
 								<th>Descrição de Vaga</th>
 								<th>Salário</th>
@@ -33,13 +34,15 @@
 							</tr>
 							<c:forEach var="vaga" items="${requestScope.listaVagas}">
 								<tr>
+									<td>${vaga.id_vaga}</td> 
 									<td>${vaga.empresa.usuario.nome}</td>
 									<td>${vaga.descricao}</td>
 									<td>${vaga.salario}</td>
 									<td>${vaga.data_limite}</td>
 									<td>${vaga.empresa.cidade}</td>
-	
-									<td><a href="login.jsp">Inscreva-se</a></td>
+									<td><a href="${pageContext.request.contextPath}/profissional/inscricaoForm?id=${sessionScope.usuarioLogado.id}&id_vaga=${vaga.id_vaga}">
+										Inscreva-se</a></td>
+									
 									&nbsp;&nbsp;&nbsp;&nbsp; </td>
 								</tr>
 							</c:forEach>

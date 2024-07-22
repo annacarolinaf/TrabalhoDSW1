@@ -43,11 +43,12 @@ create table Profissional(
 );
 
 create table Inscricao (
+    id_inscricao bigint not null auto_increment,
     cpf_id varchar(18) not null,
     vaga_id bigint not null,
     resultado int default 0,
     qualificacao VARCHAR(256),
-    PRIMARY KEY (cpf_id, vaga_id),
+    PRIMARY KEY (id_inscricao),
     foreign key (cpf_id) references Profissional(cpf),
     foreign key (vaga_id) references Vaga(id_vaga)
 );
@@ -58,6 +59,7 @@ INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Profissional Exemplo', 
 INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Petrobrás', 'petro', 'petro', 'Empresa');
 INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Vale', 'vale', 'vale', 'Empresa');
 INSERT INTO Usuario (nome, email, senha, papel) VALUES ('Tractian', 'tra', 'tra', 'Empresa');
+INSERT INTO Usuario (nome, email, senha, papel) VALUES ('admin', 'admin', 'admin', 'Admin');
 
 INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('12.345.678/0001-90', 'São Paulo', 'Uma empresa de exemplo para testes.', 1);
 INSERT INTO Empresa (cnpj, cidade, descricao, id_usuario) VALUES ('10.987.654/3210-00', 'Registro', 'Uma grande empresa educando gerações', 3);

@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.dao.ProfissionalDAO;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.dao.VagaDAO;
+import br.ufscar.dc.dsw.dao.InscricaoDAO;
+
+import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(urlPatterns = "/profissional/*")
@@ -59,6 +63,12 @@ public class ProfissionalController extends HttpServlet {
 					case "/pesquisaCidade":
 						pesquisaCidade(request, response);
 						break;
+					case "/inscricaoForm":
+						apresentaFormInscricao(request, response);
+						break;
+					case "/inscricao":
+						inscricao(request, response);
+						break;
 					default:
 						listaVagas(request, response, usuario);
 						break;
@@ -96,7 +106,7 @@ public class ProfissionalController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/index.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
@@ -136,6 +146,52 @@ public class ProfissionalController extends HttpServlet {
 		Profissional profissional = new ProfissionalDAO().getByIdUsuario(usuario);
 		new ProfissionalDAO().delete(profissional);
 		response.sendRedirect(request.getContextPath());
+	}
+
+	private void apresentaFormInscricao(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Long id_vaga = Long.parseLong(request.getParameter("id_vaga"));
+
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Profissional profissional = new ProfissionalDAO().getByIdUsuario(usuario);
+		Vaga vaga = new VagaDAO().get(id_vaga);
+
+		request.setAttribute("profissional", profissional);
+		request.setAttribute("vaga", vaga);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/formularioInscricao.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void inscricao(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+
+		Long id = Long.parseLong(request.getParameter("id"));
+		Long id_vaga = Long.parseLong(request.getParameter("id_vaga"));
+
+		String cpf = request.getParameter("cpf");
+
+		// String qualificaco = request.getParameter("qualificaco");
+
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Profissional profissional = new ProfissionalDAO().getByIdUsuario(usuario);
+		Vaga vaga = new VagaDAO().get(id_vaga);
+
+		// Verifica se já existe uma inscrição para este profissional e vaga
+		Inscricao inscricaoExistente = new InscricaoDAO().getbyIDVagaIDCpf(cpf, id_vaga);
+
+		if (inscricaoExistente != null) {
+			// Inscrição já existe, redireciona para uma página de erro ou exibe mensagem
+			response.sendRedirect(request.getContextPath() + "/profissional");
+		} else {
+			// Inscrição não existe, prossegue com a inserção
+			Inscricao inscricao = new Inscricao(profissional, vaga, 0, "Sem");
+
+			new InscricaoDAO().insert(inscricao);
+
+			response.sendRedirect(request.getContextPath() + "/profissional");
+		}
 	}
 
 }

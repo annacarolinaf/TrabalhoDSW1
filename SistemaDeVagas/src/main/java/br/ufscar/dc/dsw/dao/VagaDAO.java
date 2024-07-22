@@ -47,6 +47,7 @@ public class VagaDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
+                long id_vaga = resultSet.getLong("id_vaga");
                 float salario = resultSet.getFloat("salario");
                 String descricao_vaga = resultSet.getString("descricao_vaga");
                 String data_limite = resultSet.getString("data_limite");
@@ -54,7 +55,7 @@ public class VagaDAO extends GenericDAO {
 
                 Empresa empresa = new EmpresaDAO().get(empresa_id);
 
-                Vaga vaga = new Vaga(salario, descricao_vaga, data_limite, empresa);
+                Vaga vaga = new Vaga(id_vaga, salario, descricao_vaga, data_limite, empresa);
 
                 listaVagas.add(vaga);
             }
