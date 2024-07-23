@@ -161,6 +161,25 @@ public class VagaDAO extends GenericDAO {
                 String empresaID = resultSet.getString("empresa_id");
                 String status_vaga = resultSet.getString("status_vaga");
 
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                
+                try {
+                    LocalDate inputDate = LocalDate.parse(data_limite, formatter);
+                    
+                    LocalDate currentDate = LocalDate.now();
+                
+                    if (inputDate.isBefore(currentDate)) {
+                        status_vaga = "ENCERRADA";
+                    } else if (inputDate.isAfter(currentDate)) {
+                        status_vaga = "ABERTA";
+                    } else {
+                        status_vaga = "ENCERRADA";
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato de data inválido: " + e.getMessage());
+                }
+
                 Empresa empresa = new EmpresaDAO().get(empresaID);
 
                 vaga = new Vaga(id, salario, descricao_vaga, data_limite, empresa, status_vaga);

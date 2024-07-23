@@ -47,7 +47,7 @@ create table Inscricao (
     id_inscricao bigint not null auto_increment,
     cpf_id varchar(18) not null,
     vaga_id bigint not null,
-    resultado int default 0,
+    resultado int default 2,
     qualificacao VARCHAR(256),
     PRIMARY KEY (id_inscricao),
     foreign key (cpf_id) references Profissional(cpf),

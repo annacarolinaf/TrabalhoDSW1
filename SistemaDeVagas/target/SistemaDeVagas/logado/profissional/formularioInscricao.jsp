@@ -5,7 +5,7 @@
 
 <table border="1">
     <caption>Inscreva-se</caption> 
-    <form action="${pageContext.request.contextPath}/profissional/inscricao" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/profissional/inscricao" method="post">
         <input type="hidden" name="id" value="${profissional.usuario.id}"/>
         <input type="hidden" name="id_vaga" value="${vaga.id_vaga}"/>
         <tr>

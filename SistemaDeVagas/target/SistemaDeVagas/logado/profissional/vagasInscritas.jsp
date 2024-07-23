@@ -39,7 +39,19 @@
                     <td>${vaga.data_limite}</td>
                     <td>${vaga.empresa.cidade}</td>
                     <td>${vaga.status_vaga}</td>
-                    <td>${inscricao.resultado}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${inscricao.resultado == 0}">
+                                NÃO SELECIONADO
+                            </c:when>
+                            <c:when test="${inscricao.resultado == 1}">
+                                ENTREVISTA
+                            </c:when>
+                            <c:otherwise>
+                                ANÁLISE
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
