@@ -1,39 +1,44 @@
 <!-- Lista de vagas sem estar logado-->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ page isELIgnored="false" %>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-            <html>
-
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<html>
+<fmt:bundle basename="message">
             <head>
-                <title>Sistema De Vagas</title>
+                <title><fmt:message key="page.title" /></title>
             </head>
 
             <body>
-                <h1>Candidate-se agora!</h1>
+                <h1>
+                    <fmt:message key="apply.now" />
+                </h1>
 
                 <div align="center">
-                    <h1>Lista de vagas</h1>
+                    <h1>
+                        <fmt:message key="list.of.vacancies" />
+                    </h1>
                     <h2>
                         <a href="${pageContext.request.contextPath}/login.jsp">Login</a> &nbsp;&nbsp;&nbsp;
                     </h2>
                     <form method="post" action="pesquisaCidade">
-                        <h2>Pesquisar por cidade:</h2>
-                        <input type="text" name="filtro" id="filtro" placeholder="Procure uma cidade">
+                        <h2><fmt:message key="search.by.city" /></h2>
+                        <input type="text" name="filtro" id="filtro" placeholder=<fmt:message key="search.for.a.city" />>
                         <button type="submit"> Buscar </button>
                     </form>
                 </div>
 
                 <div align="center">
                     <table border="1">
-                        <caption>Vagas em aberto</caption>
+                        <caption><fmt:message key="open.vacancies" /></caption>
                         <tr>
-                            <th>Empresa</th>
-                            <th>Descrição de Vaga</th>
-                            <th>Salário</th>
-                            <th>Data limite</th>
-                            <th>Cidade</th>
-                            <th>Status</th>
-                            <th>Ação</th>
+                            <th><fmt:message key="company" /></th>
+                            <th><fmt:message key="job.description" /></th>
+                            <th><fmt:message key="wage" /></th>
+                            <th><fmt:message key="deadline" /></th>
+                            <th><fmt:message key="city" /></th>
+                            <th><fmt:message key="status" /></th>
+                            <th><fmt:message key="action" /></th>
                         </tr>
                         <c:forEach var="vaga" items="${requestScope.listaVagas}">
                             <c:if test="${vaga.status_vaga == 'ABERTA'}">
@@ -44,15 +49,17 @@
                                     <td>${vaga.data_limite}</td>
                                     <td>${vaga.empresa.cidade}</td>
                                     <td>${vaga.status_vaga}</td>
-                                    <td><a href="login.jsp">Inscreva-se</a></td>
+                                    <td><a href="login.jsp"><fmt:message key="sign.up" /></a></td>
                                 </tr>
                             </c:if>
                         </c:forEach>
                     </table>
                     <form method="post" action="showAll">
-                        <button type="submit"> Mostrar todos </button>
+                        <button type="submit"> <fmt:message key="show.all" /> </button>
                     </form>
                 </div>
             </body>
+            
+</fmt:bundle>
 
             </html>
