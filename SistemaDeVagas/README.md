@@ -26,14 +26,13 @@ Modelo-Visão-Controlador<br /><br />
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (25%), Karys (25%), Matheus (25%) e Nataly(25%) <br/>
-
-
+Fizemos um CRUD de editora na qual cada editora pode editar seus dados, deletar sua conta, ver os dados e atualizá-los. <br/>
 <h2>R2:</h2>
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (25%), Karys (25%), Matheus (25%) e Nataly(25%) <br/>
-
+Fizemos um CRUD de profissional na qual cada profissional pode editar seus dados, deletar sua conta, ver os dados e atualizá-los. <br/>
 
 <h2>R3:</h2>
 
@@ -66,16 +65,18 @@ Divisão na implementação da funcionalidade: Anna (25%), Karys (25%), Matheus 
 
 <h2>R7:</h2>
 
-() Implementado (x) Parcialmente implementado ( ) Não implementado <br/>
+(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (25%), Karys (25%), Matheus (25%) e Nataly(25%) <br/> 
 
 <h2>R8:</h2>
 
-() Implementado ( ) Parcialmente implementado (x) Não implementado <br/>
+() Implementado (X) Parcialmente implementado () Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (25%), Karys (25%), Matheus (25%) e Nataly(25%) <br/> 
 
 <h2>R9:</h2>
 
-() Implementado ( ) Parcialmente implementado (X) Não implementado <br/>
+() Implementado (X) Parcialmente implementado () Não implementado <br/>
+
+Divisão na implementação da funcionalidade: Anna (25%), Karys (25%), Matheus (25%) e Nataly(25%) <br/>
