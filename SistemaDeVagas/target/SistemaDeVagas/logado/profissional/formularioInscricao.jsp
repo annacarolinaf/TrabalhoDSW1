@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%String contextPath = request.getContextPath().replace("/", "");%>
 
 <table border="1">
     <caption>Inscreva-se</caption> 
-    <form action="${pageContext.request.contextPath}/profissional/inscricao" method="post">
+    <form action="${pageContext.request.contextPath}/profissional/inscricao" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="${profissional.usuario.id}"/>
         <input type="hidden" name="id_vaga" value="${vaga.id_vaga}"/>
         <tr>
@@ -54,6 +55,12 @@
             <td>
                 <input type="text" id="telefone" name="telefone" size="45" 
                        value="${profissional.telefone != null ? profissional.telefone : ''}" />
+            </td>
+        </tr>
+        <tr>
+            <td><label for="Currículo">Currículo</label></td>
+            <td>
+                <input type="file" name="uploadFile" />
             </td>
         </tr>
         <tr>

@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.dao.EmpresaDAO;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.dao.VagaDAO;
+import br.ufscar.dc.dsw.dao.InscricaoDAO;
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.util.Erro;
 
@@ -52,6 +54,12 @@ public class EmpresaController extends HttpServlet {
 						break;
 					case "/insereVaga":
 						cadastraVaga(request, response);
+						break;
+					case "/listarInscritos":
+						listaInscritos(request, response);
+						break;
+					case "/alterarResultado":
+						alteraResultado(request, response);
 						break;
 					case "/edicao":
 						apresentaFormEdicao(request, response);
@@ -110,7 +118,40 @@ public class EmpresaController extends HttpServlet {
 		response.sendRedirect(request.getContextPath() + "/empresa");
 	}
 
-	private void listaVagas(HttpServletRequest request, HttpServletResponse response, Usuario usuario)
+	private void listaInscritos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Usuario usuario = new UsuarioDAO().getbyID(id);
+		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
+
+		List<Inscricao> listaInscricoes = new InscricaoDAO().getAllEmpresa(empresa);
+		request.setAttribute("listaInscricoes", listaInscricoes);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/listaInscricoes.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void alteraResultado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		Long id = Long.parseLong(request.getParameter("id"));
+		//pegando os valores passados
+		String cpf = request.getParameter("cpf");
+		int rst = Integer.parseInt(request.getParameter("rst"));
+		Long id_vaga = Long.parseLong(request.getParameter("id_vaga"));
+
+
+		System.out.println("cpf: " + cpf + "RESULTADO: " + rst + "ID_VAGA: " + id_vaga);
+
+		Inscricao inscricao = new InscricaoDAO().getbyIDVagaIDCpf(cpf, id_vaga);
+		inscricao.setResultado(rst);
+
+		InscricaoDAO dao_inscricao = new InscricaoDAO();
+		dao_inscricao.update(inscricao);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/empresa/listarInscritos"+"?id="+id);
+		dispatcher.forward(request, response);
+	}
+
+	private void listaVagas(HttpServletRequest request, HttpServletResponse response, Usuario usuario) 
 			throws ServletException, IOException {
 		List<Vaga> listaVagas = new VagaDAO().getAllVagasEmpresa(usuario);
 		request.setAttribute("listaVagas", listaVagas);

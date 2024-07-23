@@ -21,6 +21,7 @@
                             <th>Salário</th>
                             <th>Data limite</th>
                             <th>Status</th>
+                            <th>Ação</th>
                         </tr>
                         <c:forEach var="vaga" items="${requestScope.listaVagas}">
                             <tr>
@@ -29,6 +30,7 @@
                                 <td>${vaga.salario}</td>
                                 <td>${vaga.data_limite}</td>
                                 <td>${vaga.status_vaga}</td>
+                                <td><a href="${pageContext.request.contextPath}/empresa/listarInscritos?id=${sessionScope.usuarioLogado.id}">Visualizar inscritos</a></td>
                             </tr>
                         </c:forEach>
                     </table>

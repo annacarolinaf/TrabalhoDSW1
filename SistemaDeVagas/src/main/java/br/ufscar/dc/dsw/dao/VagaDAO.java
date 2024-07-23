@@ -1,5 +1,8 @@
 package br.ufscar.dc.dsw.dao;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +15,8 @@ import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.Vaga;
 
+
+
 public class VagaDAO extends GenericDAO {
 
     public void insert(Vaga vaga) {
@@ -21,7 +26,6 @@ public class VagaDAO extends GenericDAO {
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-
             statement.setFloat(1, vaga.getSalario()); //salario
             statement.setString(2, vaga.getDescricao()); //descricao
             statement.setString(3, vaga.getData_limite()); //data_limite
@@ -54,6 +58,33 @@ public class VagaDAO extends GenericDAO {
                 String empresa_id = resultSet.getString("empresa_id");
                 String status_vaga = resultSet.getString("status_vaga");
 
+                //String data_limite = "2024-07-22";
+        
+                // Formato da data
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                
+                try {
+                    // Converter a string para LocalDate
+                    LocalDate inputDate = LocalDate.parse(data_limite, formatter);
+                    
+                    // Obter a data atual
+                    LocalDate currentDate = LocalDate.now();
+                    
+                    // Comparar as datas
+                    if (inputDate.isBefore(currentDate)) {
+                        //System.out.println("A data fornecida é antes da data atual.");
+                        status_vaga = "ENCERRADA";
+                    } else if (inputDate.isAfter(currentDate)) {
+                        //System.out.println("A data fornecida é depois da data atual.");
+                        status_vaga = "ABERTA";
+                    } else {
+                        //System.out.println("A data fornecida é igual à data atual.");
+                        status_vaga = "ENCERRADA";
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato de data inválido: " + e.getMessage());
+                }
+
                 Empresa empresa = new EmpresaDAO().get(empresa_id);
 
                 Vaga vaga = new Vaga(id_vaga, salario, descricao_vaga, data_limite, empresa, status_vaga);
@@ -69,6 +100,7 @@ public class VagaDAO extends GenericDAO {
         }
         return listaVagas;
     }
+
 
     public void delete(Vaga vaga) {
         String sql = "DELETE FROM Vaga where id_vaga = ?";
@@ -163,6 +195,24 @@ public class VagaDAO extends GenericDAO {
                 String data_limite = resultSet.getString("data_limite");
                 String empresa_id = resultSet.getString("empresa_id");
                 String status_vaga = resultSet.getString("status_vaga");
+
+                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                
+                try {
+                    LocalDate inputDate = LocalDate.parse(data_limite, formatter);
+                    
+                    LocalDate currentDate = LocalDate.now();
+                
+                    if (inputDate.isBefore(currentDate)) {
+                        status_vaga = "ENCERRADA";
+                    } else if (inputDate.isAfter(currentDate)) {
+                        status_vaga = "ABERTA";
+                    } else {
+                        status_vaga = "ENCERRADA";
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato de data inválido: " + e.getMessage());
+                }
 
                 Empresa empresa = new EmpresaDAO().get(empresa_id);
                 

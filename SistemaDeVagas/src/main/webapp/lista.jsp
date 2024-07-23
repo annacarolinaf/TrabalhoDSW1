@@ -36,17 +36,17 @@
                             <th>Ação</th>
                         </tr>
                         <c:forEach var="vaga" items="${requestScope.listaVagas}">
-                            <tr>
-                                <td>${vaga.empresa.usuario.nome}</td>
-                                <td>${vaga.descricao}</td>
-                                <td>${vaga.salario}</td>
-                                <td>${vaga.data_limite}</td>
-                                <td>${vaga.empresa.cidade}</td>
-                                <td>${vaga.status_vaga}</td>
-
-                                <td><a href="login.jsp">Inscreva-se</a></td>
-                                &nbsp;&nbsp;&nbsp;&nbsp; </td>
-                            </tr>
+                            <c:if test="${vaga.status_vaga == 'ABERTA'}">
+                                <tr>
+                                    <td>${vaga.empresa.usuario.nome}</td>
+                                    <td>${vaga.descricao}</td>
+                                    <td>${vaga.salario}</td>
+                                    <td>${vaga.data_limite}</td>
+                                    <td>${vaga.empresa.cidade}</td>
+                                    <td>${vaga.status_vaga}</td>
+                                    <td><a href="login.jsp">Inscreva-se</a></td>
+                                </tr>
+                            </c:if>
                         </c:forEach>
                     </table>
                     <form method="post" action="showAll">
