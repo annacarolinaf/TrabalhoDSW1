@@ -30,7 +30,7 @@
                                 <td>${vaga.salario}</td>
                                 <td>${vaga.data_limite}</td>
                                 <td>${vaga.status_vaga}</td>
-                                <td><a href="${pageContext.request.contextPath}/empresa/listarInscritos?id=${sessionScope.usuarioLogado.id}">Visualizar inscritos</a></td>
+                                <td><a href="${pageContext.request.contextPath}/empresa/listarInscritos?id=${sessionScope.usuarioLogado.id}&id_vaga=${vaga.id_vaga}">Visualizar inscritos</a></td>
                             </tr>
                         </c:forEach>
                     </table>

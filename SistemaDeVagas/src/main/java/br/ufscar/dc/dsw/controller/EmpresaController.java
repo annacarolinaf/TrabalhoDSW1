@@ -121,10 +121,11 @@ public class EmpresaController extends HttpServlet {
 	private void listaInscritos(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
+		Long id_vaga = Long.parseLong(request.getParameter("id_vaga"));
 		Usuario usuario = new UsuarioDAO().getbyID(id);
 		Empresa empresa = new EmpresaDAO().getByIdUsuario(usuario);
 
-		List<Inscricao> listaInscricoes = new InscricaoDAO().getAllEmpresa(empresa);
+		List<Inscricao> listaInscricoes = new InscricaoDAO().getAllInscritosnaVaga(id_vaga, empresa);
 		request.setAttribute("listaInscricoes", listaInscricoes);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/empresa/listaInscricoes.jsp");
 		dispatcher.forward(request, response);

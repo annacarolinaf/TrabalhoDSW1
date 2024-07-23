@@ -139,6 +139,44 @@ public class InscricaoDAO extends GenericDAO {
         return listaInscricao;
     }
 
+    public List<Inscricao> getAllInscritosnaVaga(Long id_vaga, Empresa empresa) {
+
+        List<Inscricao> listaInscricao = new ArrayList<>();
+
+        String sql = "SELECT * FROM Inscricao i, Vaga v, Empresa e WHERE e.cnpj = ? and e.cnpj = v.empresa_id and v.id_vaga = i.vaga_id AND v.id_vaga = ?";
+
+        
+        Vaga vaga = new VagaDAO().get(id_vaga);
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, empresa.getCnpj());
+            statement.setLong(2, vaga.getId_vaga());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Long vaga_id = resultSet.getLong("vaga_id");
+
+                String cpf_id = resultSet.getString("cpf_id");
+                Profissional profissional = new ProfissionalDAO().get(cpf_id);
+
+                Integer resultado = resultSet.getInt("resultado");
+                String qualificacao = resultSet.getString("qualificacao");
+
+                Inscricao inscricao = new Inscricao(profissional, vaga, resultado, qualificacao);
+
+                listaInscricao.add(inscricao);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaInscricao;
+    }
+
     public void insert(Inscricao inscricao) {
         String sql = "INSERT INTO Inscricao (cpf_id, vaga_id, resultado, qualificacao) VALUES (?, ?, 2, ?)";
         try {
