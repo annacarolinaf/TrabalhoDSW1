@@ -21,6 +21,23 @@ Modelo-Visão-Controlador<br /><br />
 <li>Servlet, JSP,  JSTL & JDBC (Lado Servidor)</li>
 <li>Javascript & CSS (Lado Cliente)</li><br />
 
+<h2> Banco de dados </h2>
+Foi criada a database "Sistema" que possui <br />
+
+<h2>Usuários criados</h2>
+<h3>Admin</h2>
+<li>login: admin</li>
+<li>senha: admin </li>
+<h3>Empresa</h2>
+<li>login: empresa</li>
+<li>senha: empresa </li>
+<h3>Profissional</h2>
+<li>login: profissional</li>
+<li>senha: profissional </li>
+
+Dentre outros presentes no banco de dados.
+<br />
+
 <h2>R1:</h2>
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
