@@ -1,4 +1,4 @@
-# TrabalhoDSW1
+# Trabalho1DSW1
 Repositório dedicado para o trabalho 1 da disciplina de Desenvolvimento de Software para Web 1
 
 <h2>Alunos </h2> 
