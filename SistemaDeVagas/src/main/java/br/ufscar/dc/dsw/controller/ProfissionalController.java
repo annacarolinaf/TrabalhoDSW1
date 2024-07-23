@@ -1,9 +1,5 @@
 package br.ufscar.dc.dsw.controller;
 
-import java.io.IOException;
-import java.util.List;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -14,25 +10,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import javax.xml.ws.Response;
-
-import br.ufscar.dc.dsw.dao.ProfissionalDAO;
-import br.ufscar.dc.dsw.dao.UsuarioDAO;
-import br.ufscar.dc.dsw.dao.VagaDAO;
-import br.ufscar.dc.dsw.dao.InscricaoDAO;
-
-import br.ufscar.dc.dsw.domain.Inscricao;
-import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.domain.Vaga;
-import br.ufscar.dc.dsw.util.Erro;
-
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import static br.ufscar.dc.dsw.Constants.*;
+import static br.ufscar.dc.dsw.Constants.MAX_FILE_SIZE;
+import static br.ufscar.dc.dsw.Constants.MAX_REQUEST_SIZE;
+import static br.ufscar.dc.dsw.Constants.MEMORY_THRESHOLD;
+import static br.ufscar.dc.dsw.Constants.UPLOAD_DIRECTORY;
+import br.ufscar.dc.dsw.dao.InscricaoDAO;
+import br.ufscar.dc.dsw.dao.ProfissionalDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.dao.VagaDAO;
+import br.ufscar.dc.dsw.domain.Inscricao;
+import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(urlPatterns = {"/profissional/*"})
 public class ProfissionalController extends HttpServlet {
@@ -80,6 +75,9 @@ public class ProfissionalController extends HttpServlet {
 						break;
 					case "/inscricao":
 						inscricao(request, response);
+						break;
+					case "/upandoArquivo":
+						uploadFile(request, response);
 						break;
 					case "/apresentaVagasInscritas":
 						apresentaVagasInscritas(request, response);
@@ -213,9 +211,30 @@ public class ProfissionalController extends HttpServlet {
 		Profissional profissional = new ProfissionalDAO().getByIdUsuario(usuario);
 		Vaga vaga = new VagaDAO().get(id_vaga);
 
+		// Verifica se já existe uma inscrição para este profissional e vaga
+		Inscricao inscricaoExistente = new InscricaoDAO().getbyIDVagaIDCpf(cpf, id_vaga);
 
-		//upload de arquivo
-		if (ServletFileUpload.isMultipartContent(request)) {
+		if (inscricaoExistente != null) {
+			// Inscrição já existe, redireciona para uma página de erro ou exibe mensagem
+			response.sendRedirect(request.getContextPath() + "/profissional");
+		} else {
+			// Inscrição não existe, prossegue com a inserção
+			Inscricao inscricao = new Inscricao(profissional, vaga, 0, "Sem");
+
+			new InscricaoDAO().insert(inscricao);
+
+			request.setAttribute("id_inscricao", inscricao.getId_inscricao());
+		}
+
+		request.setAttribute("profissional", profissional);
+		response.sendRedirect(request.getContextPath() + "/profissional/inscricaoForm?"+ "id=" +usuario.getId()
+		 + "&id_vaga=" +vaga.getId_vaga());
+	}
+
+	private void uploadFile(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		
+			if (ServletFileUpload.isMultipartContent(request)) {
 
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			factory.setSizeThreshold(MEMORY_THRESHOLD);
@@ -229,7 +248,7 @@ public class ProfissionalController extends HttpServlet {
 			if (!uploadDir.exists()) {
 				uploadDir.mkdir();
 			}
-			
+
 			try {
 				List<FileItem> formItems = upload.parseRequest(request);
 
@@ -240,31 +259,19 @@ public class ProfissionalController extends HttpServlet {
 							String filePath = uploadPath + File.separator + fileName;
 							File storeFile = new File(filePath);
 							item.write(storeFile);
-							request.getSession().setAttribute("message", "File " + fileName + " Inscrição e upload realizada com sucesso!");
+							Inscricao inscricao = new InscricaoDAO().getbyID(Long.parseLong(request.getParameter("id_inscricao")));
+							inscricao.setQualificacao(fileName);
 						}
 					}
 				}
+
 			} catch (Exception ex) {
 				request.getSession().setAttribute("message", "There was an error: " + ex.getMessage());
 			}
-			response.sendRedirect(request.getContextPath());
-		}
-
-
-		// Verifica se já existe uma inscrição para este profissional e vaga
-		Inscricao inscricaoExistente = new InscricaoDAO().getbyIDVagaIDCpf(cpf, id_vaga);
-
-		if (inscricaoExistente != null) {
-			// Inscrição já existe, redireciona para uma página de erro ou exibe mensagem
-			response.sendRedirect(request.getContextPath() + "/profissional");
-		} else {
-			// Inscrição não existe, prossegue com a inserção
-			Inscricao inscricao = new Inscricao(profissional, vaga, 0, "Sem");
-
-			new InscricaoDAO().insert(inscricao);
 
 			response.sendRedirect(request.getContextPath() + "/profissional");
 		}
 	}
 
+	
 }

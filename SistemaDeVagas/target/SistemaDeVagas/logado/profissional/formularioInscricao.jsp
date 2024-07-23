@@ -58,13 +58,19 @@
             </td>
         </tr>
         <tr>
-            <td><label for="Currículo">Currículo</label></td>
-            <td>
-                <input type="file" name="uploadFile" />
-            </td>
+            <td colspan="2" align="center"><input type="submit" value="Prosseguir" /></td>
         </tr>
-        <tr>
-            <td colspan="2" align="center"><input type="submit" value="Salva" /></td>
-        </tr>
+    </form>
+    <form action="upandoArquivo" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td><input type="hidden" name="id_inscricao" id="id_inscricao"></td>
+                <td><label for="Currículo">Currículo</label></td>
+                <td>
+                    <input type="file" name="uploadFile" />
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Finalizar">
     </form>
 </table>

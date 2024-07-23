@@ -140,7 +140,7 @@ public class InscricaoDAO extends GenericDAO {
     }
 
     public void insert(Inscricao inscricao) {
-        String sql = "INSERT INTO Inscricao (cpf_id, vaga_id, resultado, qualificacao) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Inscricao (cpf_id, vaga_id, resultado, qualificacao) VALUES (?, ?, 2, ?)";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -148,8 +148,7 @@ public class InscricaoDAO extends GenericDAO {
             statement = conn.prepareStatement(sql);
             statement.setString(1, inscricao.getProfissional().getCpf());
             statement.setLong(2, inscricao.getVaga().getId_vaga());
-            statement.setInt(3, inscricao.getResultado());
-            statement.setString(4, inscricao.getQualificacao());
+            statement.setString(3, inscricao.getQualificacao());
             statement.executeUpdate();
             statement.close();
             conn.close();
