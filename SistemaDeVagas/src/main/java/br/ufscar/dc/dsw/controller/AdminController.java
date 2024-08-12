@@ -17,6 +17,7 @@ import br.ufscar.dc.dsw.util.Erro;
 @WebServlet(urlPatterns = "/admin/*")
 public class AdminController extends HttpServlet {
 
+	/* comentário */
 	private static final long serialVersionUID = 1L;
 
 	private UsuarioDAO dao;
