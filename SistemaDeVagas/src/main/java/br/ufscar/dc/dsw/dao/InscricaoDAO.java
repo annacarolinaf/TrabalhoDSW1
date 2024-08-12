@@ -14,6 +14,8 @@ import br.ufscar.dc.dsw.domain.Vaga;
 
 public class InscricaoDAO extends GenericDAO {
 
+
+    //oioioi
     public Inscricao getbyID(Long id_inscricao) {
         Inscricao inscricao = null;
         String sql = "SELECT * from Inscricao WHERE id_inscricao = ?";
