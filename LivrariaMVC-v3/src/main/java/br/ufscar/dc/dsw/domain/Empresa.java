@@ -11,6 +11,8 @@ import jakarta.validation.constraints.Size;
 
 import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 
+// Bugs
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Empresa")
