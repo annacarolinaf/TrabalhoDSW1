@@ -4,15 +4,15 @@ import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Empresa;
 
-public interface IEditoraService {
+public interface IEmpresaService {
 
 	Empresa buscarPorId(Long id);
 
 	List<Empresa> buscarTodos();
 
-	void salvar(Empresa editora);
+	void salvar(Empresa Empresa);
 
 	void excluir(Long id);
 	
-	boolean editoraTemLivros(Long id);
+	boolean EmpresaTemVagas(Long id);
 }

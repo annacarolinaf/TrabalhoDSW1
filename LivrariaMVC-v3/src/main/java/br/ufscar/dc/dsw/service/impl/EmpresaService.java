@@ -6,19 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.dc.dsw.dao.IEditoraDAO;
+import br.ufscar.dc.dsw.dao.IEmpresaDAO;
 import br.ufscar.dc.dsw.domain.Empresa;
-import br.ufscar.dc.dsw.service.spec.IEditoraService;
+import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 
 @Service
 @Transactional(readOnly = false)
-public class EditoraService implements IEditoraService {
+public class EmpresaService implements IEmpresaService {
 
 	@Autowired
-	IEditoraDAO dao;
+	IEmpresaDAO dao;
 	
-	public void salvar(Empresa editora) {
-		dao.save(editora);
+	public void salvar(Empresa Empresa) {
+		dao.save(Empresa);
 	}
 
 	public void excluir(Long id) {
@@ -36,7 +36,7 @@ public class EditoraService implements IEditoraService {
 	}
 	
 	@Transactional(readOnly = true)
-	public boolean editoraTemLivros(Long id) {
-		return !dao.findById(id.longValue()).getProfissionais().isEmpty(); 
+	public boolean EmpresaTemVagas(Long id) {
+		return !dao.findById(id.longValue()).getVagas().isEmpty(); 
 	}
 }

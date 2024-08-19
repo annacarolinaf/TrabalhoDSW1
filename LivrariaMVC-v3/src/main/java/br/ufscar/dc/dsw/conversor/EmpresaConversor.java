@@ -5,13 +5,13 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import br.ufscar.dc.dsw.domain.Empresa;
-import br.ufscar.dc.dsw.service.spec.IEditoraService;
+import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 
 @Component
-public class EditoraConversor implements Converter<String, Empresa>{
+public class EmpresaConversor implements Converter<String, Empresa>{
 
 	@Autowired
-	private IEditoraService service;
+	private IEmpresaService service;
 	
 	@Override
 	public Empresa convert(String text) {

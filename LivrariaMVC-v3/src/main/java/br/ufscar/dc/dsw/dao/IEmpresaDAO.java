@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import br.ufscar.dc.dsw.domain.Empresa;
 
 @SuppressWarnings("unchecked")
-public interface IEditoraDAO extends CrudRepository<Empresa, Long>{
+public interface IEmpresaDAO extends CrudRepository<Empresa, Long>{
 
 	Empresa findById(long id);
 	
@@ -15,7 +15,7 @@ public interface IEditoraDAO extends CrudRepository<Empresa, Long>{
 
 	List<Empresa> findAll();
 	
-	Empresa save(Empresa editora);
+	Empresa save(Empresa Empresa);
 
 	void deleteById(Long id);
 }
