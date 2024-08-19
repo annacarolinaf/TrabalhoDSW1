@@ -1,7 +1,5 @@
 package br.ufscar.dc.dsw.controller;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.service.spec.IEditoraService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/editoras")
@@ -23,7 +22,7 @@ public class EditoraController {
 	private IEditoraService service;
 	
 	@GetMapping("/cadastrar")
-	public String cadastrar(Editora editora) {
+	public String cadastrar(Empresa editora) {
 		return "editora/cadastro";
 	}
 	
@@ -34,7 +33,7 @@ public class EditoraController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Editora editora, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Empresa editora, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
 			return "editora/cadastro";
@@ -52,7 +51,7 @@ public class EditoraController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Editora editora, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Empresa editora, BindingResult result, RedirectAttributes attr) {
 		
 		// Apenas rejeita se o problema não for com o CNPJ (CNPJ campo read-only) 
 		
