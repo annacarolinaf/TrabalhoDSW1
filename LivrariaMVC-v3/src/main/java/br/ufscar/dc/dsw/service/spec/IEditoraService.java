@@ -2,15 +2,15 @@ package br.ufscar.dc.dsw.service.spec;
 
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Empresa;
 
 public interface IEditoraService {
 
-	Editora buscarPorId(Long id);
+	Empresa buscarPorId(Long id);
 
-	List<Editora> buscarTodos();
+	List<Empresa> buscarTodos();
 
-	void salvar(Editora editora);
+	void salvar(Empresa editora);
 
 	void excluir(Long id);
 	

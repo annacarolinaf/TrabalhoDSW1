@@ -1,8 +1,6 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.math.BigDecimal;
-
-import org.hibernate.mapping.List;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,10 +49,8 @@ public class Profissional extends AbstractEntity<Long> {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
-	@NotNull(message = "{NotNull.profissional.inscricao}")
-	@ManyToOne
-	@JoinColumn(name = "inscricao_id")
-	private Inscricao inscricao; 
+	@OneToMany(mappedBy = "profissional")
+	private List<Inscricao> inscricoes;
 
 	public String getCpf() {
 		return cpf;
@@ -100,15 +96,15 @@ public class Profissional extends AbstractEntity<Long> {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario ususario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public Inscricao getInscricao() {
-		return inscricao;
+	public List<Inscricao> getInscricoes() {
+		return inscricoes;
 	}
 
-	public void setInscricao(Inscricao inscricao) {
-		this.inscricao = inscricao;
+	public void setInscricoes(List<Inscricao> inscricoes) {
+		this.inscricoes = inscricoes;
 	}
 }

@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import br.ufscar.dc.dsw.dao.IEditoraDAO;
 import br.ufscar.dc.dsw.dao.IProfissionalDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Livro;
 import br.ufscar.dc.dsw.domain.Usuario;
 
@@ -53,17 +53,17 @@ public class LivrariaMvcApplication {
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
 			
-			Editora e1 = new Editora();
+			Empresa e1 = new Empresa();
 			e1.setCNPJ("55.789.390/0008-99");
 			e1.setNome("Companhia das Letras");
 			editoraDAO.save(e1);
 			
-			Editora e2 = new Editora();
+			Empresa e2 = new Empresa();
 			e2.setCNPJ("71.150.470/0001-40");
 			e2.setNome("Record");
 			editoraDAO.save(e2);
 			
-			Editora e3 = new Editora();
+			Empresa e3 = new Empresa();
 			e3.setCNPJ("32.106.536/0001-82");
 			e3.setNome("Objetiva");
 			editoraDAO.save(e3);

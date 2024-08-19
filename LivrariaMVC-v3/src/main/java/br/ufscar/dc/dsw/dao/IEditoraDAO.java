@@ -4,18 +4,18 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Empresa;
 
 @SuppressWarnings("unchecked")
-public interface IEditoraDAO extends CrudRepository<Editora, Long>{
+public interface IEditoraDAO extends CrudRepository<Empresa, Long>{
 
-	Editora findById(long id);
+	Empresa findById(long id);
 	
-	Editora findByCNPJ (String CNPJ);
+	Empresa findByCNPJ (String CNPJ);
 
-	List<Editora> findAll();
+	List<Empresa> findAll();
 	
-	Editora save(Editora editora);
+	Empresa save(Empresa editora);
 
 	void deleteById(Long id);
 }

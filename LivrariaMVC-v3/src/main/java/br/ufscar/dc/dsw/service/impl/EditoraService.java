@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IEditoraDAO;
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.service.spec.IEditoraService;
 
 @Service
@@ -17,7 +17,7 @@ public class EditoraService implements IEditoraService {
 	@Autowired
 	IEditoraDAO dao;
 	
-	public void salvar(Editora editora) {
+	public void salvar(Empresa editora) {
 		dao.save(editora);
 	}
 
@@ -26,12 +26,12 @@ public class EditoraService implements IEditoraService {
 	}
 
 	@Transactional(readOnly = true)
-	public Editora buscarPorId(Long id) {
+	public Empresa buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
 
 	@Transactional(readOnly = true)
-	public List<Editora> buscarTodos() {
+	public List<Empresa> buscarTodos() {
 		return dao.findAll();
 	}
 	

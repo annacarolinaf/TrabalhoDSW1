@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.service.spec.IEditoraService;
 
 @Component
-public class EditoraConversor implements Converter<String, Editora>{
+public class EditoraConversor implements Converter<String, Empresa>{
 
 	@Autowired
 	private IEditoraService service;
 	
 	@Override
-	public Editora convert(String text) {
+	public Empresa convert(String text) {
 		
 		if (text.isEmpty()) {
 		 return null;	
