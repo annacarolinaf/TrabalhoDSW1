@@ -30,14 +30,14 @@
 						<tr>
 							<th>#</th>
 							<th th:text="#{profissional.cpf.label}"></th>
-							<th th:text="#{profissional.usuario.nome.label}"></th>
+							<th th:text="#{usuario.name.label}"></th>
 							<th th:text="#{acao.label}"></th>
 						</tr>
 					</thead>
 					<tbody>						
 						<tr th:each="profissional : ${profissionais}">
 							<td th:text="${profissional.id}"></td>
-							<td th:text="${profissional.usuario.nome}"></td>
+							<td th:text="${profissional.usuario.cpf}"></td>
 							<td colspan="2">
 								<a class="btn btn-info btn-sm"
 									th:href="@{/profissionais/editar/{id} (id=${profissional.id}) }" role="button"> 
