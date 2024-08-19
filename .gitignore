@@ -3,3 +3,4 @@ application.properties
 *.class
 .vscode
 target
+LivrariaMVC-v3/src/main/resources/application.properties
