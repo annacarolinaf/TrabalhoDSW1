@@ -16,66 +16,66 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Editora;
-import br.ufscar.dc.dsw.domain.Livro;
+import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.service.spec.IEditoraService;
-import br.ufscar.dc.dsw.service.spec.ILivroService;
+import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 
 @Controller
-@RequestMapping("/livros")
-public class LivroController {
+@RequestMapping("/profissionais")
+public class ProfissionalController {
 
 	@Autowired
-	private ILivroService livroService;
+	private IProfissionalService profissionalService;
 
 	@Autowired
 	private IEditoraService editoraService;
 
 	@GetMapping("/cadastrar")
-	public String cadastrar(Livro livro) {
-		return "livro/cadastro";
+	public String cadastrar(Profissional profissional) {
+		return "profissional/cadastro";
 	}
 
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-		model.addAttribute("livros", livroService.buscarTodos());
-		return "livro/lista";
+		model.addAttribute("livros", profissionalService.buscarTodos());
+		return "profissional/lista";
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(@Valid Livro livro, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
-			return "livro/cadastro";
+			return "profissional/cadastro";
 		}
 
-		livroService.salvar(livro);
-		attr.addFlashAttribute("sucess", "livro.create.sucess");
-		return "redirect:/livros/listar";
+		profissionalService.salvar(profissional);
+		attr.addFlashAttribute("sucess", "profissional.create.sucess");
+		return "redirect:/profissionais/listar";
 	}
 
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("livro", livroService.buscarPorId(id));
-		return "livro/cadastro";
+		model.addAttribute("livro", profissionalService.buscarPorId(id));
+		return "profissional/cadastro";
 	}
 
 	@PostMapping("/editar")
-	public String editar(@Valid Livro livro, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
 			return "livro/cadastro";
 		}
 
-		livroService.salvar(livro);
-		attr.addFlashAttribute("sucess", "livro.edit.sucess");
-		return "redirect:/livros/listar";
+		profissionalService.salvar(profissional);
+		attr.addFlashAttribute("sucess", "profissional.edit.sucess");
+		return "redirect:/profissionais/listar";
 	}
 
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
-		livroService.excluir(id);
-		attr.addFlashAttribute("sucess", "livro.delete.sucess");
-		return "redirect:/livros/listar";
+		profissionalService.excluir(id);
+		attr.addFlashAttribute("sucess", "profissional.delete.sucess");
+		return "redirect:/profissionais/listar";
 	}
 
 	@ModelAttribute("editoras")
