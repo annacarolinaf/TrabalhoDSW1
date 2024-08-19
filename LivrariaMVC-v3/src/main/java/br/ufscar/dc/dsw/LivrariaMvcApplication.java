@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.dao.IEditoraDAO;
-import br.ufscar.dc.dsw.dao.ILivroDAO;
+import br.ufscar.dc.dsw.dao.IProfissionalDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Editora;
 import br.ufscar.dc.dsw.domain.Livro;
@@ -23,7 +23,7 @@ public class LivrariaMvcApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IEditoraDAO editoraDAO, ILivroDAO livroDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IEditoraDAO editoraDAO, IProfissionalDAO livroDAO) {
 		return (args) -> {
 			
 			Usuario u1 = new Usuario();
