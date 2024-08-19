@@ -1,7 +1,5 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -73,6 +71,16 @@ public class Inscricao extends AbstractEntity<Long> {
         this.resultado = resultado;
     }
 
+	public Vaga getVaga()
+    {
+        return this.vaga;
+    }
+
+    public void setVaga(Vaga vaga)
+    {
+        this.vaga = vaga;
+    }
+
 	public byte[] getQualificacao() {
 		return qualificacao;
 	}
@@ -80,4 +88,6 @@ public class Inscricao extends AbstractEntity<Long> {
 	public void setQualificacao(byte[] qualificacao) {
 		this.qualificacao = qualificacao;
 	}
+
+
 }

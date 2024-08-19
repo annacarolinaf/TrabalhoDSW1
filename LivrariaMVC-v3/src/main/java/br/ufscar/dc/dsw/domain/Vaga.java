@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +12,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import br.ufscar.dc.dsw.domain.Empresa;
-import br.ufscar.dc.dsw.domain.Inscricao;
 
 @SuppressWarnings("serial")
 @Entity
@@ -39,10 +37,8 @@ public class Vaga extends AbstractEntity<Long> {
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
-	@NotNull(message = "{NotNull.vaga.inscricao}")
-	@OneToMany
-	@JoinColumn(name = "inscricao_id")
-	private Inscricao inscricao;
+	@OneToMany(mappedBy = "vaga")
+	private List<Inscricao> inscricoes;
 
 	public String getDescricao() {
 		return descricao;
@@ -76,11 +72,11 @@ public class Vaga extends AbstractEntity<Long> {
 		this.empresa = empresa;
 	}
 
-	public Inscricao getInscricao() {
-		return inscricao;
+	public List<Inscricao> getInscricoes() {
+		return inscricoes;
 	}
 
-	public void setInscricao(Inscricao inscricao) {
-		this.inscricao = inscricao;
+	public void setInscricoes(List<Inscricao> inscricoes) {
+		this.inscricoes = inscricoes;
 	}
 }
