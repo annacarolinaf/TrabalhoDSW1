@@ -18,7 +18,7 @@ public class UniqueCPFValidator implements ConstraintValidator<UniqueCPF, String
 	@Override
 	public boolean isValid(String CPF, ConstraintValidatorContext context) {
 		if (dao != null) {
-			Profissional profissional = dao.findByCpf(CPF);
+			Profissional profissional = dao.findByCPF(CPF);
 			return profissional == null;
 		} else {
 			return true;

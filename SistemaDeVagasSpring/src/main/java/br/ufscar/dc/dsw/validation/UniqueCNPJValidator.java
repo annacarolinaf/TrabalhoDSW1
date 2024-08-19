@@ -6,20 +6,20 @@ import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ufscar.dc.dsw.dao.IEmpresaDAO;
-import br.ufscar.dc.dsw.domain.Empresa;
+import br.ufscar.dc.dsw.dao.IEditoraDAO;
+import br.ufscar.dc.dsw.domain.Editora;
 
 @Component
 public class UniqueCNPJValidator implements ConstraintValidator<UniqueCNPJ, String> {
 
 	@Autowired
-	private IEmpresaDAO dao;
+	private IEditoraDAO dao;
 
 	@Override
 	public boolean isValid(String CNPJ, ConstraintValidatorContext context) {
 		if (dao != null) {
-			Empresa Empresa = dao.findByCNPJ(CNPJ);
-			return Empresa == null;
+			Editora editora = dao.findByCNPJ(CNPJ);
+			return editora == null;
 		} else {
 			// Durante a execução da classe LivrariaMvcApplication
 			// não há injeção de dependência
