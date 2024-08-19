@@ -42,8 +42,8 @@
                             <td th:text="${empresa.id}"></td>
                             <td th:text="${empresa.CNPJ}"></td>
                             <td th:text="${empresa.nome}"></td>
-                            <td th:text="${empresa.descricao_empresa}"></td>
-                            <td th:text="${empresa.cidade_empresa}"></td>
+                            <td th:text="${empresa.descricao}"></td>
+                            <td th:text="${empresa.cidade}"></td>
                             <td colspan="2">
                                 <a class="btn btn-info btn-sm" th:href="@{/empresas/editar/{id} (id=${empresa.id}) }" role="button"> 
                                     <span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
