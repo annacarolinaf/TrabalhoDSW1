@@ -23,15 +23,10 @@ public class Profissional extends AbstractEntity<Long> {
 
 	@UniqueCPF (message = "{Unique.profissional.CPF}")
 	@NotBlank
-	@Size(min = 18, max = 18, message = "{Size.editora.CPF}")
+	@Size(min = 11, max = 11, message = "{Size.profissional.CPF}")
 	@Column(nullable = false, unique = true, length = 60)
 	private String cpf;
 
-	@NotBlank(message = "{NotBlank.profissional.nome}") 
-	@Size(max = 60)
-	@Column(nullable = false, length = 60)
-	private String nome;
-    
 	@NotNull(message = "{NotNull.profissional.telefone}")
 	@Column(nullable = false, length = 10)
 	private String telefone;
@@ -58,14 +53,6 @@ public class Profissional extends AbstractEntity<Long> {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getTelefone() {

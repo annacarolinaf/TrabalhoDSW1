@@ -35,7 +35,7 @@ public class LivrariaMvcApplication {
 			usuarioDAO.save(u1);
 			
 			Profissional p1 = new Profissional();
-			p1.setCpf("2523512414");
+			p1.setCpf("06240804550");
 			p1.setNasc("03032001");
 			p1.setSexo("fem");
 			p1.setTelefone("3333");
