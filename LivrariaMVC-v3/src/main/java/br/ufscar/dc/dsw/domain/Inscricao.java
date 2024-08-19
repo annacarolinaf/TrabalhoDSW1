@@ -22,11 +22,6 @@ public class Inscricao extends AbstractEntity<Long> {
     @Size(max = 10)
 	@Column(nullable = false, length = 19)
 	private String data_inscricao;
-    
-	@NotNull
-	@Column(columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
-	private BigDecimal valor;
-    
 
     //Cadastrando no banco a relação da relação com a vaga
     //A inscrição é feita para uma vaga só, porém uma vaga tem muitas incrições
@@ -34,7 +29,6 @@ public class Inscricao extends AbstractEntity<Long> {
 	@ManyToOne
 	@JoinColumn(name = "vaga_id")
 	private Vaga vaga;
-
 
     //O profissional pode ter muitas inscrições, mas a inscrição é de um profissional apenas 
 	@NotNull
@@ -61,15 +55,6 @@ public class Inscricao extends AbstractEntity<Long> {
 		this.data_inscricao = data_inscricao;
 	}
 
-	public Vaga getVaga() {
-		return vaga;
-	}
-
-	public void setVaga(Vaga vaga) {
-		this.vaga = vaga;
-		setValor(vaga.getPreco());
-	}
-
 	public Profissional getProfissional() {
 		return profissional;
 	}
@@ -87,7 +72,6 @@ public class Inscricao extends AbstractEntity<Long> {
     {
         this.resultado = resultado;
     }
-
 
 	public byte[] getQualificacao() {
 		return qualificacao;
