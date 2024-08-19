@@ -40,7 +40,7 @@ public class Inscricao extends AbstractEntity<Long> {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "usuario_id") //para o profissional
-	private Usuario usuario; //objeto para o profissional provavelmente é melhor
+	private Profissional profissional; //objeto para o profissional provavelmente é melhor
 
     //Resultado
     @NotNull
