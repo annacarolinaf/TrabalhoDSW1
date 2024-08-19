@@ -52,16 +52,16 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label th:text="#{livro.editora.label}" for="editora"></label> 
-						<select id="editora" class="form-control" th:field="*{editora}"
-							th:classappend="${#fields.hasErrors('editora')} ? is-invalid">
+						<label th:text="#{livro.empresa.label}" for="empresa"></label> 
+						<select id="empresa" class="form-control" th:field="*{empresa}"
+							th:classappend="${#fields.hasErrors('empresa')} ? is-invalid">
 							<option value="">Selecione</option>
-							<option th:each="editora : ${editoras}" th:value="${editora.id}"
-								th:text="${editora.nome}"></option>
+							<option th:each="empresa : ${empresas}" th:value="${empresa.id}"
+								th:text="${empresa.nome}"></option>
 						</select>
 
 						<div class="invalid-feedback">
-							<span th:errors="*{editora}"></span>
+							<span th:errors="*{empresa}"></span>
 						</div>
 					</div>
 

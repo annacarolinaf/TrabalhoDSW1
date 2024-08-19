@@ -36,7 +36,7 @@
 									<th>#</th>
 									<th th:text="#{livro.titulo.label}"></th>
 									<th th:text="#{livro.autor.label}"></th>
-									<th th:text="#{livro.editora.label}"></th>
+									<th th:text="#{livro.empresa.label}"></th>
 									<th th:text="#{livro.ano.label}"></th>
 									<th th:text="#{livro.preco.label}"></th>
 								</tr>
@@ -48,7 +48,7 @@
 									</td>
 									<td th:text="${livro.titulo}"></td>
 									<td th:text="${livro.autor}"></td>
-									<td th:text="${livro.editora.nome}"></td>
+									<td th:text="${livro.empresa.nome}"></td>
 									<td th:text="${livro.ano}"></td>
 									<td th:text="|R$ ${#numbers.formatDecimal(livro.preco,2,2,'COMMA')}|"></td>
 								</tr>

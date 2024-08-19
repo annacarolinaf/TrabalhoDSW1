@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Livro;
-import br.ufscar.dc.dsw.service.spec.IEditoraService;
+import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.ILivroService;
 
 @Controller
@@ -28,7 +28,7 @@ public class LivroController {
 	private ILivroService livroService;
 
 	@Autowired
-	private IEditoraService editoraService;
+	private IEmpresaService empresaService;
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Livro livro) {
@@ -78,8 +78,8 @@ public class LivroController {
 		return "redirect:/livros/listar";
 	}
 
-	@ModelAttribute("editoras")
-	public List<Editora> listaEditoras() {
-		return editoraService.buscarTodos();
+	@ModelAttribute("empresas")
+	public List<Empresa> listaEmpresas() {
+		return empresaService.buscarTodos();
 	}
 }
