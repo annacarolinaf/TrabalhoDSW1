@@ -14,5 +14,5 @@ public interface IEmpresaService {
 
 	void excluir(Long id);
 	
-	boolean EmpresaTemVagas(Long id);
+	boolean empresaTemVagas(Long id);
 }

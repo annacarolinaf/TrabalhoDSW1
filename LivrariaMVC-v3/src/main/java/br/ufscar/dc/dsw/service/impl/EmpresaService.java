@@ -36,7 +36,7 @@ public class EmpresaService implements IEmpresaService {
 	}
 	
 	@Transactional(readOnly = true)
-	public boolean EmpresaTemVagas(Long id) {
+	public boolean empresaTemVagas(Long id) {
 		return !dao.findById(id.longValue()).getVagas().isEmpty(); 
 	}
 }
