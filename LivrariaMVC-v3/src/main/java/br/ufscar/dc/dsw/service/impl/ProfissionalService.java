@@ -12,7 +12,7 @@ import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 
 @Service
 @Transactional(readOnly = false)
-public class LivroService implements IProfissionalService {
+public class ProfissionalService implements IProfissionalService {
 
 	@Autowired
 	IProfissionalDAO dao;
