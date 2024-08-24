@@ -30,20 +30,26 @@
 						<tr>
 							<th>#</th>
 							<th th:text="#{profissional.cpf.label}"></th>
-							<th th:text="#{usuario.name.label}"></th>
+							<th th:text="#{profissional.telefone.label}"></th>
+							<th th:text="#{profissional.sexo.label}"></th>
+							<th th:text="#{profissional.nasc.label}"></th>
 							<th th:text="#{acao.label}"></th>
 						</tr>
 					</thead>
 					<tbody>						
 						<tr th:each="profissional : ${profissionais}">
+							
 							<td th:text="${profissional.id}"></td>
-							<td th:text="${profissional.usuario.cpf}"></td>
+							<td th:text="${profissional.cpf}"></td>
+							<td th:text="${profissional.telefone}"></td>
+							<td th:text="${profissional.sexo}"></td>
+							<td th:text="${profissional.nasc}"></td>
 							<td colspan="2">
 								<a class="btn btn-info btn-sm"
 									th:href="@{/profissionais/editar/{id} (id=${profissional.id}) }" role="button"> 
 									<span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"></span>
 								</a>
-								<button th:id="${#strings.concat('btn_profissionais/excluir/',profissionais.id)}" 
+								<button th:id="${#strings.concat('btn_profissionais/excluir/', profissional.id)}" 
 									type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
 									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
 								</button>

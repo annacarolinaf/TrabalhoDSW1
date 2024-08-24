@@ -4,9 +4,13 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import br.ufscar.dc.dsw.validation.UniqueCNPJ;
@@ -25,7 +29,7 @@ public class Empresa extends AbstractEntity<Long> {
     private String CNPJ;
     
     @NotBlank
-    @Size(min = 10, max = 255)
+    @Size(min = 1, max = 255)
     @Column(nullable = false, length = 255)
     private String descricao;
     
@@ -34,16 +38,22 @@ public class Empresa extends AbstractEntity<Long> {
     @Column(nullable = false, length = 60)
     private String cidade;
 
+
+	@NotNull(message = "{NotNull.empresa.usuario}")
+	@OneToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
+
 	@OneToMany(mappedBy="empresa")
 	private List<Vaga> vagas;
 
     // Getters e Setters
 
-    public String getCNPJ() {
+    public String getCnpj() {
         return CNPJ;
     }
 
-    public void setCNPJ(String CNPJ) {
+    public void setCnpj(String CNPJ) {
         this.CNPJ = CNPJ;
     }
 
@@ -70,4 +80,12 @@ public class Empresa extends AbstractEntity<Long> {
     public void setVagas(List<Vaga> vagas) {
         this.vagas = vagas;
     }
+
+    public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

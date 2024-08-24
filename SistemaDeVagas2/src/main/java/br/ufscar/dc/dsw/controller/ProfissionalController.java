@@ -17,10 +17,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
+import br.ufscar.dc.dsw.service.spec.IUsuarioService;
+
 
 @Controller
 @RequestMapping("/profissionais")
 public class ProfissionalController {
+
+	@Autowired
+	private IUsuarioService usuarioService;
 
 	@Autowired
 	private IProfissionalService profissionalService;
@@ -32,7 +37,7 @@ public class ProfissionalController {
 
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-		model.addAttribute("livros", profissionalService.buscarTodos());
+		model.addAttribute("profissionais", profissionalService.buscarTodos());
 		return "profissional/lista";
 	}
 
@@ -43,6 +48,7 @@ public class ProfissionalController {
 			return "profissional/cadastro";
 		}
 
+		usuarioService.salvar(profissional.getUsuario());
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissional.create.sucess");
 		return "redirect:/profissionais/listar";
@@ -50,7 +56,7 @@ public class ProfissionalController {
 
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("livro", profissionalService.buscarPorId(id));
+		model.addAttribute("profissional", profissionalService.buscarPorId(id));
 		return "profissional/cadastro";
 	}
 
@@ -58,7 +64,7 @@ public class ProfissionalController {
 	public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
-			return "livro/cadastro";
+			return "profissional/cadastro";
 		}
 
 		profissionalService.salvar(profissional);

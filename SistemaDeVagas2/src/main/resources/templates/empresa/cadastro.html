@@ -10,11 +10,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span th:text="#{profissional.cadastrar.label}"></span></li>
+						<span th:text="#{empresa.cadastrar.label}"></span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/profissionais/listar}"
+				<a class="btn btn-primary btn-md" th:href="@{/empresas/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span th:text="#{profissional.listar.label}"></span>
+					aria-hidden="true"></span> <span th:text="#{empresa.listar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -24,8 +24,8 @@
 			<div th:replace="~{fragments/alert}"></div>
 
 			<form
-				th:action="${profissional.id == null} ? @{/profissionais/salvar} : @{/profissionais/editar}"
-				th:object="${profissional}" method="POST">
+				th:action="${empresa.id == null} ? @{/empresas/salvar} : @{/empresas/editar}"
+				th:object="${empresa}" method="POST">
 
 				<div class="form-group col-md-6">
 					<label th:text="#{usuario.name.label}" for="usuario.name"></label> 
@@ -42,63 +42,49 @@
 					<label th:text="#{usuario.email.label}" for="usuario.email"></label> 
 					<input type="text" class="form-control" id="usuario.email" placeholder=E-mail
 						autofocus="autofocus" th:field="*{usuario.email}"
-						th:readonly="${profissional.id != null}"
 						th:classappend="${#fields.hasErrors('usuario.email')} ? is-invalid" />
-						
+					
 					<div class="invalid-feedback">
 						<span th:errors="*{usuario.email}"></span>
 					</div>
 				</div>
 			
 				<div class="form-group col-md-6">
-					<label th:text="#{profissional.cpf.label}" for="cpf"></label> 
-					<input type="text" class="form-control" id="cpf" autofocus="autofocus"
-						th:field="*{cpf}" placeholder="___.___.___-__"
-						th:readonly="${profissional.id != null}"
-						data-mask="000.000.000-00" data-mask-reverse="true"
-						th:classappend="${#fields.hasErrors('cpf')} ? is-invalid" />
+					<label th:text="#{empresa.cnpj.label}" for="cnpj"></label> 
+					<input type="text" class="form-control" id="cnpj" autofocus="autofocus"
+						th:field="*{cnpj}" placeholder="__.___.___/____-__"
+						th:readonly="${empresa.id != null}"
+						data-mask="00.000.000/0000-00" data-mask-reverse="true"
+						th:classappend="${#fields.hasErrors('cnpj')} ? is-invalid" />
 						
 					<div class="invalid-feedback">
-						<span th:errors="*{cpf}"></span>
+						<span th:errors="*{cnpj}"></span>
 					</div>
 				</div>
 
 				<div class="form-group col-md-6">
-					<label th:text="#{profissional.telefone.label}" for="telefone"></label> 
-					<input type="text" class="form-control" id="telefone" placeholder="__ _____-____"
-						data-mask="00 00000-0000" data-mask-reverse="true"
-						autofocus="autofocus" th:field="*{telefone}"
-						th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" />
+					<label th:text="#{empresa.cidade.label}" for="cidade"></label> 
+					<input type="text" class="form-control" id="cidade" placeholder=Cidade
+						autofocus="autofocus" th:field="*{cidade}"
+						th:classappend="${#fields.hasErrors('cidade')} ? is-invalid" />
 					
 					<div class="invalid-feedback">
-						<span th:errors="*{telefone}"></span>
+						<span th:errors="*{cidade}"></span>
 					</div>
 				</div>
 
 				<div class="form-group col-md-6">
-					<label th:text="#{profissional.sexo.label}" for="sexo"></label> 
-					<input type="text" class="form-control" id="sexo" placeholder=Sexo
-						autofocus="autofocus" th:field="*{sexo}"
-						th:classappend="${#fields.hasErrors('sexo')} ? is-invalid" />
+					<label th:text="#{empresa.descricao.label}" for="descricao"></label> 
+					<input type="text" class="form-control" id="descricao" placeholder=Descrição
+						autofocus="autofocus" th:field="*{descricao}"
+						th:classappend="${#fields.hasErrors('descricao')} ? is-invalid" />
 					
 					<div class="invalid-feedback">
-						<span th:errors="*{sexo}"></span>
+						<span th:errors="*{descricao}"></span>
 					</div>
 				</div>
 
-				<div class="form-group col-md-6">
-					<label th:text="#{profissional.nasc.label}" for="nasc"></label> 
-					<input type="text" class="form-control" id="nasc" placeholder="__/__/____"
-						data-mask="00/00/0000" data-mask-reverse="true"
-						autofocus="autofocus" th:field="*{nasc}"
-						th:classappend="${#fields.hasErrors('nasc')} ? is-invalid" />
-					
-					<div class="invalid-feedback">
-						<span th:errors="*{nasc}"></span>
-					</div>
-				</div>
-
-				<div th:if="${profissional.id == null}" class="form-group col-md-6">
+				<div th:if="${empresa.id == null}" class="form-group col-md-6">
 					<label th:text="#{usuario.password.label}" for="usuario.password"></label> 
 					<input type="password" class="form-control" id="usuario.password"
 						th:placeholder="#{usuario.password.label}" autofocus="autofocus"
