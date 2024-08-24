@@ -39,7 +39,7 @@ public class Vaga extends AbstractEntity<Long> {
 
 	@OneToMany(mappedBy = "vaga")
 	private List<Inscricao> inscricoes;
-
+	
 	public String getDescricao() {
 		return descricao;
 	}

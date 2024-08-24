@@ -5,8 +5,9 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,16 +24,16 @@ public class Profissional extends AbstractEntity<Long> {
 
 	@UniqueCPF (message = "{Unique.profissional.CPF}")
 	@NotBlank
-	@Size(min = 11, max = 11, message = "{Size.profissional.CPF}")
-	@Column(nullable = false, unique = true, length = 60)
+	@Size(min = 14, max = 14, message = "{Size.profissional.CPF}")
+	@Column(nullable = false, unique = true, length = 20)
 	private String cpf;
 
 	@NotNull(message = "{NotNull.profissional.telefone}")
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 15)
 	private String telefone;
 
 	@NotNull(message = "{NotNull.profissional.sexo}")
-	@Column(nullable = false, length = 150)
+	@Column(nullable = false, length = 12)
 	private String sexo;
 
 	@NotNull(message = "{NotNull.profissional.nasc}")
@@ -40,7 +41,7 @@ public class Profissional extends AbstractEntity<Long> {
 	private String nasc;
 
 	@NotNull(message = "{NotNull.profissional.usuario}")
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 

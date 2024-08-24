@@ -14,57 +14,63 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
+import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 
 @Controller
 @RequestMapping("/empresas")
 public class EmpresaController {
-	
+
 	@Autowired
 	private IEmpresaService service;
-	
+
+	@Autowired
+	private IUsuarioService usuarioService;
+
 	@GetMapping("/cadastrar")
 	public String cadastrar(Empresa empresa) {
 		return "empresa/cadastro";
 	}
-	
+
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-		model.addAttribute("empresas",service.buscarTodos());
+		model.addAttribute("empresas", service.buscarTodos());
 		return "empresa/lista";
 	}
-	
+
 	@PostMapping("/salvar")
 	public String salvar(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
-		
+
 		if (result.hasErrors()) {
 			return "empresa/cadastro";
 		}
-		
+
+		usuarioService.salvar(empresa.getUsuario());
 		service.salvar(empresa);
-		attr.addFlashAttribute("sucess", "empresa.create.sucess");
+		attr.addFlashAttribute("sucempresa.getUsuario()ess", "empresa.create.sucess");
 		return "redirect:/empresas/listar";
 	}
-	
+
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("empresa", service.buscarPorId(id));
 		return "empresa/cadastro";
 	}
-	
+
 	@PostMapping("/editar")
 	public String editar(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
-		
-		// Apenas rejeita se o problema não for com o CNPJ (CNPJ campo read-only) 
-		
+
+		// Apenas rejeita se o problema não for com o CNPJ (CNPJ campo read-only)
+
 		if (result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") == null) {
-			return "empresa/cadastro";
+			return "empresa/lista";
 		}
 
+		usuarioService.salvar(empresa.getUsuario());
 		service.salvar(empresa);
 		attr.addFlashAttribute("sucess", "empresa.edit.sucess");
 		return "redirect:/empresas/listar";
 	}
-	
+
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 		if (service.empresaTemVagas(id)) {
