@@ -85,21 +85,21 @@ public class LivrariaMvcApplication {
 
 			Vaga v1 = new Vaga();
 			v1.setDescricao("Desenvolvedor Java Estágio");
-			v1.setDatalimite("10/11/2024"); 
+			v1.setDataLimite("10/11/2024"); 
 			v1.setRemuneracao(new BigDecimal("1500.00")); 
 			v1.setEmpresa(e1); 
 			vagaDAO.save(v1);
 
 			Vaga v2 = new Vaga();
 			v2.setDescricao("Desenvolvedor Python Estágio");
-			v2.setDatalimite("10/11/2024"); 
+			v2.setDataLimite("10/11/2024"); 
 			v2.setRemuneracao(new BigDecimal("1500.00")); 
 			v2.setEmpresa(e1); 
 			vagaDAO.save(v2);
 
 			Vaga v3 = new Vaga();
 			v3.setDescricao("Cientista de Dados");
-			v3.setDatalimite("10/12/2024"); 
+			v3.setDataLimite("10/12/2024"); 
 			v3.setRemuneracao(new BigDecimal("2000.00")); 
 			v3.setEmpresa(e2); 
 			vagaDAO.save(v3);
