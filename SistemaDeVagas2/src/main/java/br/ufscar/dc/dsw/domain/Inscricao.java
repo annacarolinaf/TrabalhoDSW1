@@ -34,8 +34,9 @@ public class Inscricao extends AbstractEntity<Long> {
 
     //Resultado
     @NotNull
-    @Column(nullable = false, length = 1)
-    private Integer resultado = 0;
+    @Column(nullable = false, length = 15)
+    private String resultado;
+
 
     //Arquivo
     // @Lob
@@ -59,12 +60,12 @@ public class Inscricao extends AbstractEntity<Long> {
 		this.profissional = profissional;
 	}
 
-    public Integer getResultado()
+    public String getResultado()
     {
         return this.resultado;
     }
 
-    public void setResultado(Integer resultado)
+    public void setResultado(String resultado)
     {
         this.resultado = resultado;
     }

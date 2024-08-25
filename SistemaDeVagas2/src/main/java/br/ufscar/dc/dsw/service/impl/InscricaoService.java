@@ -33,9 +33,8 @@ public class InscricaoService implements IInscricaoService {
 		return dao.findAllByProfissional(p);
 	}
 
-
 	@Transactional(readOnly = true)
-	public List<Inscricao> buscarTodosPorVaga(Vaga v) {
-		return dao.findAllByVaga(v);
+	public List<Inscricao> buscarTodosPorVaga(Long id) {
+		return dao.findAllByVaga(id);
 	}
 }

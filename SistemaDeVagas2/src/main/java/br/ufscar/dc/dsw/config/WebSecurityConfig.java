@@ -48,10 +48,11 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests((authz) -> authz
 						.requestMatchers("/error", "/login/**", "/js/**", "/home").permitAll()
 						.requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
-						.requestMatchers("/empresas/**").hasRole("EMPRESA")
+						.requestMatchers("/empresas/vagas/**", "/empresas/inscricoes/**",  "/empresas/resultado/**").hasRole("EMPRESA")
+						.requestMatchers("/empresas/**", "/profissionais/**", "/usuarios/**").hasRole("ADMIN")
 						.requestMatchers("/inscricoes/**").hasRole("PROFISSIONAL")
-						.requestMatchers("/empresas/**", "/livros/**", "/usuarios/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
+      
 				.formLogin((form) -> form
 						.loginPage("/login")
 						.successHandler(customAuthSuccessHandler()) 

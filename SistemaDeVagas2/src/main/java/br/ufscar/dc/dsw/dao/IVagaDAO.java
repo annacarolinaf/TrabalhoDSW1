@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.ufscar.dc.dsw.domain.Vaga;
 
+
 @SuppressWarnings("unchecked")
 public interface IVagaDAO extends CrudRepository<Vaga, Long> {
 
