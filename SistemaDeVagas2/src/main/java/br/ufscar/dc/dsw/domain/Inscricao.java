@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "Compra")
+@Table(name = "Inscricao")
 public class Inscricao extends AbstractEntity<Long> {
 
 	@NotBlank(message = "{NotBlank.inscricao.data_inscricao}")
@@ -37,13 +37,13 @@ public class Inscricao extends AbstractEntity<Long> {
     //Resultado
     @NotNull
     @Column(nullable = false, length = 1)
-    private Integer resultado;
+    private Integer resultado = 0;
 
     //Arquivo
-    @Lob
-    @Basic
-    @Column(length = 10485760) // MB
-    private byte[] qualificacao;
+    // @Lob
+    // @Basic
+    // @Column(length = 10485760) // MB
+    // private byte[] qualificacao;
 
 	public String getData_inscricao() {
 		return data_inscricao;
@@ -81,13 +81,13 @@ public class Inscricao extends AbstractEntity<Long> {
         this.vaga = vaga;
     }
 
-	public byte[] getQualificacao() {
-		return qualificacao;
-	}
+	// public byte[] getQualificacao() {
+	// 	return qualificacao;
+	// }
 
-	public void setQualificacao(byte[] qualificacao) {
-		this.qualificacao = qualificacao;
-	}
+	// public void setQualificacao(byte[] qualificacao) {
+	// 	this.qualificacao = qualificacao;
+	// }
 
 
 }
