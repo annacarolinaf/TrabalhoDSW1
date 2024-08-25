@@ -10,8 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import br.ufscar.dc.dsw.security.UsuarioDetailsServiceImpl;
 import br.ufscar.dc.dsw.security.CustomAuthenticationSuccessHandler;
+import br.ufscar.dc.dsw.security.UsuarioDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -49,7 +49,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/error", "/login/**", "/js/**", "/home").permitAll()
 						.requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
 						.requestMatchers("/empresas/**").hasRole("EMPRESA")
-						.requestMatchers("/profissionais/**").hasRole("PROFISSIONAL")
+						.requestMatchers("/inscricoes/**").hasRole("PROFISSIONAL")
 						.requestMatchers("/empresas/**", "/livros/**", "/usuarios/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
 				.formLogin((form) -> form

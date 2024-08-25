@@ -1,9 +1,6 @@
 package br.ufscar.dc.dsw;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Arrays;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,15 +11,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.dao.IEmpresaDAO;
+import br.ufscar.dc.dsw.dao.IInscricaoDAO;
 import br.ufscar.dc.dsw.dao.IProfissionalDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.dao.IVagaDAO;
-import br.ufscar.dc.dsw.dao.IInscricaoDAO;
 import br.ufscar.dc.dsw.domain.Empresa;
+import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.Vaga;
-import br.ufscar.dc.dsw.domain.Inscricao;
 
 @SpringBootApplication
 public class LivrariaMvcApplication {
@@ -75,7 +72,7 @@ public class LivrariaMvcApplication {
 			u3.setEmail("prof");
 			u3.setPassword(encoder.encode("prof"));
 			u3.setName("Profissional1");
-			u3.setRole("ROLE_USER");
+			u3.setRole("ROLE_PROFISSIONAL");
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
 			log.info("Salvando usuário - Profissional1");
@@ -118,6 +115,12 @@ public class LivrariaMvcApplication {
 			v3.setRemuneracao(new BigDecimal("2000.00")); 
 			v3.setEmpresa(e2); 
 			vagaDAO.save(v3);
+
+			Inscricao i1 = new Inscricao();
+			i1.setVaga(v3);
+			i1.setProfissional(p1);
+			i1.setData_inscricao("09/12/2024");
+			inscricaoDAO.save(i1);
 		};
 	}
 }
