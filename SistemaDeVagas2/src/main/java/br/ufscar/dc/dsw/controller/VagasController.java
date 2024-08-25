@@ -24,18 +24,18 @@ import br.ufscar.dc.dsw.service.spec.IVagaService;
 
 	
 @Controller
-@RequestMapping("/entrada")
+@RequestMapping("/home")
 public class VagasController {
     
     @Autowired
     private IVagaService service;
     
     @GetMapping
-    public String entrada(ModelMap model) {
+    public String home(ModelMap model) {
         // Adiciona a lista de vagas ao modelo
         model.addAttribute("vagas", service.buscarTodos());
         // Retorna a página de entrada
-        return "entrada"; // Nome do arquivo HTML sem a extensão
+        return "home"; // Nome do arquivo HTML sem a extensão
     }
 }
 

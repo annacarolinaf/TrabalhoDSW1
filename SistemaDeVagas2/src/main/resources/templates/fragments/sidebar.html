@@ -27,14 +27,14 @@
 			</li>
 		</ul>
 
-		<div sec:authorize="hasRole('ROLE_USER')">
+		<div sec:authorize="hasRole('ROLE_EMPRESA')">
 			<ul class="nav nav-pills">
 
 				<li class="nav-item"><span class="nav-link active" th:text="#{sidebar.titulo.compra}"></span></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/compras/cadastrar}"> <i class="oi oi-plus"></i>
+				<li class="nav-item"><a class="nav-link" th:href="@{/empresas/cadastrar}"> <i class="oi oi-plus"></i>
 						<span th:text="#{sidebar.link.cadastrar}"></span>
 					</a></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/compras/listar}"> <i class="oi oi-spreadsheet"></i>
+				<li class="nav-item"><a class="nav-link" th:href="@{/empresas/listar}"> <i class="oi oi-spreadsheet"></i>
 						<span th:text="#{sidebar.link.listar}"></span>
 					</a></li>
 			</ul>

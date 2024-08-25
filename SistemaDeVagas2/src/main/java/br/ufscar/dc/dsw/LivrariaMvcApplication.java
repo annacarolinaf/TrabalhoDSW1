@@ -41,9 +41,17 @@ public class LivrariaMvcApplication {
 			u2.setEmail("empresa");
 			u2.setPassword(encoder.encode("empresa"));
 			u2.setName("Empresa 1");
-			u2.setRole("ROLE_USER");
+			u2.setRole("ROLE_EMPRESA");
 			u2.setEnabled(true);
 			usuarioDAO.save(u2);
+
+			Usuario u3 = new Usuario();
+			u3.setEmail("profissional");
+			u3.setPassword(encoder.encode("profissional"));
+			u3.setName("Profissional 1");
+			u3.setRole("ROLE_PROFISSIONAL");
+			u3.setEnabled(true);
+			usuarioDAO.save(u3);
 
 			Empresa e1 = new Empresa();
 			e1.setCnpj("45.990.181/0001-89");
@@ -57,7 +65,7 @@ public class LivrariaMvcApplication {
 			p1.setNasc("03/03/2001");
 			p1.setSexo("Feminino");
 			p1.setTelefone("(11) 94528-4695");
-			p1.setUsuario(u1);
+			p1.setUsuario(u3);
 			profissionalDAO.save(p1);
 
 			Vaga v1 = new Vaga();
