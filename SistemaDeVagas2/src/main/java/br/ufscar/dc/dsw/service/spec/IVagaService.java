@@ -13,4 +13,6 @@ public interface IVagaService {
 	void salvar(Vaga vaga);
 
 	void excluir(Long id);	
+
+	List<Vaga> buscarVagasEmpresa(Long id);
 }

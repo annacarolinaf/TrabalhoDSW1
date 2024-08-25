@@ -16,7 +16,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <i class="oi oi-caret-right"></i>
-                        <span th:text="#{vaga.listar.label}"></span>
+                        <span th:text="#{vaga.empresa.label}"></span>
                     </li>
                 </ul>
             </div>
@@ -32,20 +32,18 @@
                         <tr>
                             <th>#</th>
                             <th th:text="#{vaga.descricao.label}"></th>
-                            <th th:text="#{vaga.empresa.label}"></th>
 							<th th:text="#{vaga.remuneracao.label}"></th>
-                            <th th:text="#{vaga.cidade.label}"></th>
                             <th th:text="#{vaga.datalimite.label}"></th>
+                            <th th:text="#{vaga.inscricoes.label}"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="vaga : ${vagas}">
                             <td th:text="${vaga.id}"></td>
                             <td th:text="${vaga.descricao}"></td>
-							<td th:text="${vaga.empresa.usuario.name}"></td>
                             <td th:text="${vaga.remuneracao}"></td>
-							<td th:text="${vaga.empresa.cidade}"></td>
 							<td th:text="${vaga.dataLimite}"></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

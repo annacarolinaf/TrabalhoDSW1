@@ -37,6 +37,8 @@ public class VagasController {
         // Retorna a página de entrada
         return "home"; // Nome do arquivo HTML sem a extensão
     }
+
+
 }
 
 	// @GetMapping("/cadastrar")
