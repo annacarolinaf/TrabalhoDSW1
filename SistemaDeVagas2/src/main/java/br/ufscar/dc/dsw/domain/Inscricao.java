@@ -1,11 +1,9 @@
 package br.ufscar.dc.dsw.domain;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,7 +29,7 @@ public class Inscricao extends AbstractEntity<Long> {
     //O profissional pode ter muitas inscrições, mas a inscrição é de um profissional apenas 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "usuario_id") //para o profissional
+	@JoinColumn(name = "profissional_id") //para o profissional
 	private Profissional profissional; //objeto para o profissional provavelmente é melhor
 
     //Resultado
@@ -39,11 +37,12 @@ public class Inscricao extends AbstractEntity<Long> {
     @Column(nullable = false, length = 15)
     private String resultado;
 
+
     //Arquivo
-    @Lob
-    @Basic
-    @Column(length = 10485760) // MB
-    private byte[] qualificacao;
+    // @Lob
+    // @Basic
+    // @Column(length = 10485760) // MB
+    // private byte[] qualificacao;
 
 	public String getData_inscricao() {
 		return data_inscricao;
@@ -81,13 +80,13 @@ public class Inscricao extends AbstractEntity<Long> {
         this.vaga = vaga;
     }
 
-	public byte[] getQualificacao() {
-		return qualificacao;
-	}
+	// public byte[] getQualificacao() {
+	// 	return qualificacao;
+	// }
 
-	public void setQualificacao(byte[] qualificacao) {
-		this.qualificacao = qualificacao;
-	}
+	// public void setQualificacao(byte[] qualificacao) {
+	// 	this.qualificacao = qualificacao;
+	// }
 
 
 }
