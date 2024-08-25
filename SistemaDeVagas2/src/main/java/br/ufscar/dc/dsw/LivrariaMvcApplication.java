@@ -47,13 +47,21 @@ public class LivrariaMvcApplication {
 			log.info("Salvando admin");
 
 			Usuario u2 = new Usuario();
-			u2.setEmail("empresa");
+			u2.setEmail("Amazon");
 			u2.setPassword(encoder.encode("empresa"));
-			u2.setName("Empresa 1");
+			u2.setName("Amazon");
 			u2.setRole("ROLE_EMPRESA");
 			u2.setEnabled(true);
 			usuarioDAO.save(u2);
 			log.info("Salvando usuário - Empresa1");
+
+			Usuario u4 = new Usuario();
+			u4.setEmail("visagio");
+			u4.setPassword(encoder.encode("empresa"));
+			u4.setName("Visagio");
+			u4.setRole("ROLE_EMPRESA");
+			u4.setEnabled(true);
+			usuarioDAO.save(u4);
 
 			Empresa e1 = new Empresa();
 			e1.setCnpj("45.990.181/0001-89");
@@ -72,6 +80,13 @@ public class LivrariaMvcApplication {
 			usuarioDAO.save(u3);
 			log.info("Salvando usuário - Profissional1");
 
+			Empresa e2 = new Empresa();
+			e2.setCnpj("13.741.181/0001-89");
+			e2.setCidade("Campinas");
+			e2.setDescricao("Empresa de Tecnologia");
+			e2.setUsuario(u4);
+			empresaDAO.save(e2);
+
 			Profissional p1 = new Profissional();
 			p1.setCpf("062.408.045-50");
 			p1.setNasc("03/03/2001");
@@ -83,29 +98,26 @@ public class LivrariaMvcApplication {
 			log.info("Salvando dados do Profissional1");
 
 			Vaga v1 = new Vaga();
-			v1.setDescricao("Vaga de Desenvolvedor");
-			v1.setDataLimite("21/04/2024");
-			v1.setRemuneracao(BigDecimal.valueOf(2000.0));
-			v1.setEmpresa(e1);
+      
+			v1.setDescricao("Desenvolvedor Java Estágio");
+			v1.setDatalimite("10/11/2024"); 
+			v1.setRemuneracao(new BigDecimal("1500.00")); 
+			v1.setEmpresa(e1); 
 			vagaDAO.save(v1);
-			log.info("Salvando dados da Vaga1");
 
-			Inscricao i1 = new Inscricao();
-			i1.setVaga(v1);
-			i1.setProfissional(p1);
-			i1.setData_inscricao("20/04/2024");
-			inscricaoDAO.save(i1);
-			log.info("Salvando dados da Inscricao1");
+			Vaga v2 = new Vaga();
+			v2.setDescricao("Desenvolvedor Python Estágio");
+			v2.setDatalimite("10/11/2024"); 
+			v2.setRemuneracao(new BigDecimal("1500.00")); 
+			v2.setEmpresa(e1); 
+			vagaDAO.save(v2);
 
-			List<Usuario> usuarios = usuarioDAO.findAll();
-			for (Usuario u : usuarios){
-				log.info(u.toString());
-			}
-
-			log.info(empresaDAO.findById(1L).toString());
-			log.info(profissionalDAO.findById(1L).toString());
-			log.info(vagaDAO.findById(1L).toString());
-			log.info(inscricaoDAO.findById(1L).toString());
+			Vaga v3 = new Vaga();
+			v3.setDescricao("Cientista de Dados");
+			v3.setDatalimite("10/12/2024"); 
+			v3.setRemuneracao(new BigDecimal("2000.00")); 
+			v3.setEmpresa(e2); 
+			vagaDAO.save(v3);
 		};
 	}
 }
