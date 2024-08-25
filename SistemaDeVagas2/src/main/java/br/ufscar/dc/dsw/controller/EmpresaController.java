@@ -2,7 +2,9 @@ package br.ufscar.dc.dsw.controller;
 
 import jakarta.validation.Valid;
 
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,14 +13,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Empresa;
+import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
+import br.ufscar.dc.dsw.service.spec.IInscricaoService;
 
 @Controller
 @RequestMapping("/empresas")
@@ -32,6 +37,9 @@ public class EmpresaController {
 
 	@Autowired
 	private IVagaService vagaService;
+
+	@Autowired
+	private IInscricaoService inscricaoService;
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Empresa empresa) {
@@ -52,7 +60,8 @@ public class EmpresaController {
 	}
 
 	private Long getEmpresa() {
-		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 
 		Usuario user = usuarioDetails.getUsuario();
 		Empresa empresa = service.buscarPorUserId(user.getId());
@@ -60,9 +69,15 @@ public class EmpresaController {
 		if (empresa == null) {
 			throw new RuntimeException("Empresa não encontrada para o usuário com ID: " + user.getId());
 		}
-	
 
 		return empresa.getId();
+	}
+
+	@GetMapping("/inscricoes/{id}")
+	public String listarIncricoes(@PathVariable("id") Long id, ModelMap model) {
+
+		model.addAttribute("inscricoes", inscricaoService.buscarTodosPorVaga(id));
+		return "empresa/listaInscricoes";
 	}
 
 	@PostMapping("/salvar")
@@ -82,6 +97,25 @@ public class EmpresaController {
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("empresa", service.buscarPorId(id));
 		return "empresa/cadastro";
+	}
+
+	@PostMapping("/resultado/{id}")
+	public String resultado(@PathVariable("id") Long id, @RequestParam("resul") String resul, RedirectAttributes attr) {
+		Inscricao inscricao = inscricaoService.buscarPorId(id);
+
+		if (resul.equals("Nao")) {
+			inscricao.setResultado("NÃO SELECIONADO");
+		} else {
+			inscricao.setResultado("ENTREVISTA");
+		}
+
+		inscricaoService.salvar(inscricao);
+
+		Long vagaId = inscricao.getVaga().getId();
+
+
+		attr.addFlashAttribute("success", "Inscrição analisada com sucesso.");
+		return "redirect:/empresas/inscricoes/" + vagaId;
 	}
 
 	@PostMapping("/editar")

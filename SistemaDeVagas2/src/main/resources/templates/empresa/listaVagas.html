@@ -43,7 +43,12 @@
                             <td th:text="${vaga.descricao}"></td>
                             <td th:text="${vaga.remuneracao}"></td>
 							<td th:text="${vaga.dataLimite}"></td>
-                            <td></td>
+                            <td colspan="2">
+								<a class="btn btn-info btn-sm" th:href="@{/empresas/inscricoes/{id} (id=${vaga.id}) }"
+									role="button"> 
+									<span class="oi oi-document" th:title="#{link.editar.label}" aria-hidden="true"> </span>
+								</a>
+							</td>
                         </tr>
                     </tbody>
                 </table>
