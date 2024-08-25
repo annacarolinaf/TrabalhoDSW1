@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.service.spec.IVagaService;
+
 
 @Controller
 @RequestMapping("/empresas")
@@ -26,6 +28,9 @@ public class EmpresaController {
 	@Autowired
 	private IUsuarioService usuarioService;
 
+	@Autowired
+	private IVagaService vagaService;
+
 	@GetMapping("/cadastrar")
 	public String cadastrar(Empresa empresa) {
 		return "empresa/cadastro";
@@ -35,6 +40,12 @@ public class EmpresaController {
 	public String listar(ModelMap model) {
 		model.addAttribute("empresas", service.buscarTodos());
 		return "empresa/lista";
+	}
+
+	@GetMapping("/")
+	public String listarVagas(ModelMap model) {
+		//model.addAttribute("vagas", vagaService.buscarVagasEmpresa(empresa.getId()));
+		return "empresa/listaVagas";
 	}
 
 	@PostMapping("/salvar")
