@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
+import br.ufscar.dc.dsw.service.spec.IVagaService;
 
 @Controller
 @RequestMapping("/vagas")
-public class CompraController {
+public class VagasController {
 	
 	@Autowired
 	private IVagaService service;
@@ -44,9 +45,9 @@ public class CompraController {
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 					
-		model.addAttribute("vagas",service.findAll(this.getUsuario()));
+		model.addAttribute("vagas",service.buscarTodos());
 		
-		return "compra/lista";
+		return "vagas/lista";
 	}
 	
 	// @PostMapping("/salvar")
