@@ -15,4 +15,7 @@ public interface IEmpresaService {
 	void excluir(Long id);
 	
 	boolean empresaTemVagas(Long id);
+
+	Empresa buscarPorUserId(Long id);
 }
+

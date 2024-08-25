@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IEmpresaDAO;
 import br.ufscar.dc.dsw.domain.Empresa;
+import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 
 @Service
@@ -38,5 +39,10 @@ public class EmpresaService implements IEmpresaService {
 	@Transactional(readOnly = true)
 	public boolean empresaTemVagas(Long id) {
 		return !dao.findById(id.longValue()).getVagas().isEmpty(); 
+	}
+
+	@Transactional(readOnly = true)
+	public Empresa buscarPorUserId(Long id){
+		return dao.findByUserId(id.longValue());
 	}
 }
