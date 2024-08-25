@@ -12,7 +12,7 @@ public interface IVagaDAO extends CrudRepository<Vaga, Long>{
 
 	Vaga findById(long id);
 
-	List<Vaga> findAll(Vaga vaga);
+	List<Vaga> findAll();
 	
 	Vaga save(Vaga vaga);
 
