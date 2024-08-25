@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.security.UsuarioDetails;
+import br.ufscar.dc.dsw.service.spec.IInscricaoService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
@@ -18,8 +22,8 @@ import jakarta.validation.Valid;
 
 
 @Controller
-@RequestMapping("/profissionais")
-public class ProfissionalController {
+@RequestMapping("/inscricoes")
+public class InscricaoController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
@@ -30,15 +34,37 @@ public class ProfissionalController {
 	@Autowired
 	private IVagaService vagaService;
 
-	@GetMapping("/cadastrar")
+	@Autowired
+	private IInscricaoService inscricaoService;
+
+	@GetMapping("/cadastrar/[]")
 	public String cadastrar(Profissional profissional) {
 		return "profissional/cadastro";
 	}
 
+	@GetMapping("/")
+	public String listarVagas(ModelMap model) {
+		model.addAttribute("vagas", vagaService.buscarTodos());
+		return "inscricao/listaVagas";
+	}
+
 	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("profissionais", profissionalService.buscarTodos());
-		return "profissional/lista";
+	public String listarInscricoes(ModelMap model) {
+		model.addAttribute("inscricoes", inscricaoService.buscarTodosPorProfissional(profissionalService.buscarPorId(getProfissional())));
+		return "inscricao/lista";
+	}
+
+	private Long getProfissional() {
+		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		Usuario user = usuarioDetails.getUsuario();
+		Profissional profissional = profissionalService.buscarPorUserId(user.getId());
+
+		if (profissional == null) {
+			throw new RuntimeException("Profissional não encontrada para o usuário com ID: " + user.getId());
+		}
+
+		return profissional.getId();
 	}
 
 	@PostMapping("/salvar")

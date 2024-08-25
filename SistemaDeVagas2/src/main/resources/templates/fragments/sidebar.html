@@ -25,7 +25,7 @@
 			<ul class="nav nav-pills">
 
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/empresas/}">
+					<a class="nav-link" th:href="@{/empresas/vagas}">
 						<i class="oi oi-home"></i>
 						<span th:text="#{sidebar.link.home}"></span>
 					</a>
@@ -34,6 +34,24 @@
 				<li class="nav-item"><span class="nav-link active" th:text="#{sidebar.empresa.nome}"></span></li>
 				<li class="nav-item"><a class="nav-link" th:href="@{/empresas/cadastrar}"> <i class="oi oi-plus"></i>
 						<span th:text="#{sidebar.empresa.cadastrarVaga}"></span>
+					</a></li>
+			</ul>
+		</div>
+
+		<div sec:authorize="hasRole('ROLE_PROFISSIONAL')">
+			<ul class="nav nav-pills">
+
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/inscricoes/}">
+						<i class="oi oi-home"></i>
+						<span th:text="#{sidebar.link.home}"></span>
+					</a>
+				</li>
+
+				<li class="nav-item"><span class="nav-link active" th:text="#{sidebar.inscricoes.nome}"></span></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/inscricoes/listar}"> <i
+					class="oi oi-spreadsheet"></i>
+						<span th:text="#{sidebar.inscricoes.listarInscricao}"></span>
 					</a></li>
 			</ul>
 		</div>
@@ -75,9 +93,6 @@
 		<div sec:authorize="hasRole('ROLE_ADMIN')">
 			<ul class="nav nav-pills">
 				<li class="nav-item"><span class="nav-link active" th:text="#{sidebar.titulo.usuario}"></span></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/usuarios/cadastrar}"> <i class="oi oi-plus"></i>
-						<span th:text="#{sidebar.link.cadastrar}"></span>
-					</a></li>
 				<li class="nav-item"><a class="nav-link" th:href="@{/usuarios/listar}"> <i
 							class="oi oi-spreadsheet"></i>
 						<span th:text="#{sidebar.link.listar}"></span>

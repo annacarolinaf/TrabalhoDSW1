@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IProfissionalDAO;
+import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 
@@ -33,5 +34,10 @@ public class ProfissionalService implements IProfissionalService {
 	@Transactional(readOnly = true)
 	public List<Profissional> buscarTodos() {
 		return dao.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	public Profissional buscarPorUserId(Long id){
+		return dao.findByUserId(id.longValue());
 	}
 }

@@ -1,11 +1,9 @@
 package br.ufscar.dc.dsw.domain;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,13 +29,14 @@ public class Inscricao extends AbstractEntity<Long> {
     //O profissional pode ter muitas inscrições, mas a inscrição é de um profissional apenas 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "usuario_id") //para o profissional
+	@JoinColumn(name = "profissional_id") //para o profissional
 	private Profissional profissional; //objeto para o profissional provavelmente é melhor
 
     //Resultado
     @NotNull
-    @Column(nullable = false, length = 1)
-    private Integer resultado = 0;
+    @Column(nullable = false, length = 15)
+    private String resultado;
+
 
     //Arquivo
     // @Lob
@@ -61,12 +60,12 @@ public class Inscricao extends AbstractEntity<Long> {
 		this.profissional = profissional;
 	}
 
-    public Integer getResultado()
+    public String getResultado()
     {
         return this.resultado;
     }
 
-    public void setResultado(Integer resultado)
+    public void setResultado(String resultado)
     {
         this.resultado = resultado;
     }

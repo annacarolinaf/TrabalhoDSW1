@@ -33,8 +33,8 @@
                             <th>#</th>
                             <th th:text="#{vaga.descricao.label}"></th>
 							<th th:text="#{vaga.remuneracao.label}"></th>
-                            <th th:text="#{vaga.datalimite.label}"></th>
-                            <th th:text="#{vaga.inscricoes.label}"></th>
+                            <th th:text="#{vaga.cidade.label}"></th>
+                            <th th:text="#{vaga.datalimite.label}"></th><th th:text="#{vaga.acao}"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,13 +42,15 @@
                             <td th:text="${vaga.id}"></td>
                             <td th:text="${vaga.descricao}"></td>
                             <td th:text="${vaga.remuneracao}"></td>
+                            <td th:text="${vaga.empresa.cidade}"></td>
 							<td th:text="${vaga.dataLimite}"></td>
                             <td colspan="2">
-								<a class="btn btn-info btn-sm" th:href="@{/empresas/inscricoes/{id} (id=${vaga.id}) }"
-									role="button"> 
-									<span class="oi oi-document" th:title="#{link.editar.label}" aria-hidden="true"> </span>
-								</a>
-							</td>
+                                <a class="btn btn-info btn-sm"
+                                   th:href="@{/inscricoes/cadastrar/{id} (id=${vaga.id}) }" 
+                                   role="button"> 
+                                    <span th:text="#{link.inscricoes.cadastrar.label}" aria-hidden="true">Inscreva-se</span>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
