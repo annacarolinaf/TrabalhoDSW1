@@ -26,7 +26,7 @@ public class Vaga extends AbstractEntity<Long> {
 	@NotBlank(message = "{NotBlank.vaga.dataLimite}")
 	@Size(max = 60)
 	@Column(nullable = false, length = 60)
-	private String dataLimite;
+	private String Datalimite;
 
 	@NotNull(message = "{NotNull.vaga.remunaracao}")
 	@Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
@@ -48,12 +48,12 @@ public class Vaga extends AbstractEntity<Long> {
 		this.descricao = descricao;
 	}
 
-	public String getLimite() {
-		return dataLimite;
+	public String getDatalimite() {
+		return Datalimite;
 	}
 
-	public void setLimite(String dataLimite) {
-		this.dataLimite = dataLimite;
+	public void setDatalimite(String Datalimite) {
+		this.Datalimite = Datalimite;
 	}
 
 	public BigDecimal getRemuneracao() {
