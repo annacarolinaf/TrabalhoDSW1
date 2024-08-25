@@ -44,7 +44,7 @@ public class EmpresaController {
 		return "empresa/lista";
 	}
 
-	@GetMapping("/")
+	@GetMapping("/vagas")
 	public String listarVagas(ModelMap model) {
 
 		model.addAttribute("vagas", vagaService.buscarVagasEmpresa(getEmpresa()));

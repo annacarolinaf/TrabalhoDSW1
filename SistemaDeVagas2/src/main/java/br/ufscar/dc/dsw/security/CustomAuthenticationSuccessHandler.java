@@ -23,7 +23,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		
 		for (GrantedAuthority authority : authorities) {
 			if (authority.getAuthority().equals("ROLE_EMPRESA")) {
-				response.sendRedirect("/empresas/");
+				response.sendRedirect("/empresas/vagas");
 				return;
 			} else if (authority.getAuthority().equals("ROLE_PROFISSIONAL")) {
 				response.sendRedirect("/profissionais/");
