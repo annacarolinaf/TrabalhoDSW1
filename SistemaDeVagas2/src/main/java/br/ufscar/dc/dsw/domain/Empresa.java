@@ -1,0 +1,91 @@
+package br.ufscar.dc.dsw.domain;
+
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import br.ufscar.dc.dsw.validation.UniqueCNPJ;
+
+// Bugs
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "Empresa")
+public class Empresa extends AbstractEntity<Long> {
+
+    @UniqueCNPJ(message = "{Unique.e.CNPJ}")
+    @NotBlank
+    @Size(min = 18, max = 18, message = "{Size.empresa.CNPJ}")
+    @Column(nullable = false, unique = true, length = 18)
+    private String CNPJ;
+    
+    @NotBlank
+    @Size(min = 1, max = 255)
+    @Column(nullable = false, length = 255)
+    private String descricao;
+    
+    @NotBlank
+    @Size(min = 3, max = 60)
+    @Column(nullable = false, length = 60)
+    private String cidade;
+
+
+	@NotNull(message = "{NotNull.empresa.usuario}")
+	@OneToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
+
+	@OneToMany(mappedBy="empresa")
+	private List<Vaga> vagas;
+
+    // Getters e Setters
+
+    public String getCnpj() {
+        return CNPJ;
+    }
+
+    public void setCnpj(String CNPJ) {
+        this.CNPJ = CNPJ;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public List<Vaga> getVagas() {
+        return vagas;
+    }
+
+    public void setVagas(List<Vaga> vagas) {
+        this.vagas = vagas;
+    }
+
+    public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+}
