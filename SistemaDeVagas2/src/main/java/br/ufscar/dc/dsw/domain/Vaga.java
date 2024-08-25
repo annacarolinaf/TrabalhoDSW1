@@ -48,11 +48,11 @@ public class Vaga extends AbstractEntity<Long> {
 		this.descricao = descricao;
 	}
 
-	public String getLimite() {
+	public String getDataLimite() {
 		return dataLimite;
 	}
 
-	public void setLimite(String dataLimite) {
+	public void setDataLimite(String dataLimite) {
 		this.dataLimite = dataLimite;
 	}
 
