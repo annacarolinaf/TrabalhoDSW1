@@ -21,14 +21,24 @@ import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
 
+
+	
 @Controller
-@RequestMapping("/vagas")
+@RequestMapping("/home")
 public class VagasController {
-	
-	@Autowired
-	private IVagaService service;
-	
-	
+    
+    @Autowired
+    private IVagaService service;
+    
+    @GetMapping
+    public String home(ModelMap model) {
+        // Adiciona a lista de vagas ao modelo
+        model.addAttribute("vagas", service.buscarTodos());
+        // Retorna a página de entrada
+        return "home"; // Nome do arquivo HTML sem a extensão
+    }
+}
+
 	// @GetMapping("/cadastrar")
 	// public String cadastrar(Compra compra) {
 	// 	String data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -41,14 +51,6 @@ public class VagasController {
 	// 	UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	// 	return usuarioDetails.getUsuario();
 	// }
-	
-	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-					
-		model.addAttribute("vagas",service.buscarTodos());
-		
-		return "vagas/lista";
-	}
 	
 	// @PostMapping("/salvar")
 	// public String salvar(@Valid Compra compra, BindingResult result, RedirectAttributes attr) {
@@ -66,4 +68,3 @@ public class VagasController {
 	// public List<Livro> listaLivros() {
 	// 	return livroService.buscarTodos();
 	// }
-}

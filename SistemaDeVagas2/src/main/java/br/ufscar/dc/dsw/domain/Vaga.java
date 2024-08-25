@@ -26,7 +26,7 @@ public class Vaga extends AbstractEntity<Long> {
 	@NotBlank(message = "{NotBlank.vaga.dataLimite}")
 	@Size(max = 60)
 	@Column(nullable = false, length = 60)
-	private String dataLimite;
+	private String Datalimite;
 
 	@NotNull(message = "{NotNull.vaga.remunaracao}")
 	@Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")

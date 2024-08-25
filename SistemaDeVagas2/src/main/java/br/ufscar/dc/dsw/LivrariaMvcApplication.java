@@ -50,7 +50,7 @@ public class LivrariaMvcApplication {
 			u2.setEmail("empresa");
 			u2.setPassword(encoder.encode("empresa"));
 			u2.setName("Empresa 1");
-			u2.setRole("ROLE_USER");
+			u2.setRole("ROLE_EMPRESA");
 			u2.setEnabled(true);
 			usuarioDAO.save(u2);
 			log.info("Salvando usuário - Empresa1");
@@ -77,6 +77,7 @@ public class LivrariaMvcApplication {
 			p1.setNasc("03/03/2001");
 			p1.setSexo("Feminino");
 			p1.setTelefone("(11) 94528-4695");
+			p1.setUsuario(u3);
 			p1.setUsuario(u3);
 			profissionalDAO.save(p1);
 			log.info("Salvando dados do Profissional1");
