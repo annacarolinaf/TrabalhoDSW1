@@ -152,7 +152,7 @@ public class LivrariaMvcApplication {
             i1.setVaga(v1);
             i1.setProfissional(p1);
             i1.setResultado("ABERTO"); 
-            i1.setQualificacao("Exemplo de qualificação".getBytes()); // Exemplo de arquivo em bytes
+            //i1.setQualificacao("Exemplo de qualificação".getBytes()); // Exemplo de arquivo em bytes
 			inscricaoDAO.save(i1);
 
 		};
