@@ -14,12 +14,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufscar.dc.dsw.dao.IVagaDAO;
 import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
+import br.ufscar.dc.dsw.service.impl.VagaService;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
+import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 
 
 	
@@ -29,7 +34,7 @@ public class VagasController {
     
     @Autowired
     private IVagaService service;
-    
+
     @GetMapping
     public String home(ModelMap model) {
         // Adiciona a lista de vagas ao modelo
@@ -39,7 +44,16 @@ public class VagasController {
     }
 
 
+	@PostMapping("/buscar")
+	public String listarVagasPorCidade(@RequestParam("cidade") String cidade, ModelMap model) {
+		System.out.println("vagasFiltradas");
+		List<Vaga> vagasFiltradas = service.buscarVagasCidade(cidade);
+		model.addAttribute("vagas", vagasFiltradas);
+		return "home"; // A página onde você deseja exibir as vagas filtradas
+	}
+
 }
+
 
 	// @GetMapping("/cadastrar")
 	// public String cadastrar(Compra compra) {

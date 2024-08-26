@@ -15,4 +15,6 @@ public interface IVagaService {
 	void excluir(Long id);	
 
 	List<Vaga> buscarVagasEmpresa(Long id);
+
+	List<Vaga> buscarVagasCidade(String cidade);
 }

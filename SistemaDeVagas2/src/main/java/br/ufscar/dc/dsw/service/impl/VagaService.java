@@ -41,4 +41,9 @@ public class VagaService implements IVagaService {
 		return dao.findAllByEmpresaId(id);
 	}
 
+	@Transactional(readOnly = true)
+	public List<Vaga> buscarVagasCidade(String cidade){
+		return dao.findAllByCidade(cidade);
+	}
+
 }

@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IInscricaoService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
@@ -80,6 +82,15 @@ public class InscricaoController {
 		model.addAttribute("vagas", vagaService.buscarTodos());
 		return "inscricao/listaVagas";
 	}
+
+	@PostMapping("/buscar")
+	public String listarVagasPorCidade(@RequestParam("cidade") String cidade, ModelMap model) {
+		System.out.println("vagasFiltradas");
+		List<Vaga> vagasFiltradas = vagaService.buscarVagasCidade(cidade);
+		model.addAttribute("vagas", vagasFiltradas);
+		return "inscricao/listaVagas"; 
+	}
+
 
 	@GetMapping("/listar")
 	public String listarInscricoes(ModelMap model) {
