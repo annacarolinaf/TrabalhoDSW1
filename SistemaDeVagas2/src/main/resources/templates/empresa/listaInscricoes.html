@@ -50,11 +50,12 @@
                                 <form method="POST"
                                     th:action="@{/empresas/resultado/{id} (id=${inscricao.id}) }">
                                     <select id="resul" name="resul" class="form-control">
-                                        <option value="Nao">Não Selecionado</option>
-                                        <option value="Entrevista">Entrevista</option>
+                                        <option value="Nao" th:text="#{inscricao.status.nao.label}"></option>
+                                        <option value="Entrevista" th:text="#{inscricao.status.sim.label}"></option>
+                                        <option value="Analise" th:text="#{inscricao.status.analise.label}"></option>
                                     </select>
                                     <button type="submit" th:text="#{button.salvar.label}"
-                                        class="btn btn-primary btn-sm"></button>
+                                        class="btn btn-info btn-sm"></button>
                                 </form>
                             </td>
                         </tr>

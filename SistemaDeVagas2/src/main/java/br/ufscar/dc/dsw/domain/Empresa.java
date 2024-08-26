@@ -22,7 +22,7 @@ import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 @Table(name = "Empresa")
 public class Empresa extends AbstractEntity<Long> {
 
-    @UniqueCNPJ(message = "{Unique.e.CNPJ}")
+    @UniqueCNPJ(message = "{Unique.empresa.CNPJ}")
     @NotBlank
     @Size(min = 18, max = 18, message = "{Size.empresa.CNPJ}")
     @Column(nullable = false, unique = true, length = 18)

@@ -84,9 +84,10 @@
 					</div>
 				</div>
 
-				<div th:if="${empresa.id == null}" class="form-group col-md-6">
+				<div class="form-group col-md-6">
 					<label th:text="#{usuario.password.label}" for="usuario.password"></label> 
 					<input type="password" class="form-control" id="usuario.password"
+						th:readonly="${empresa.id != null}"
 						th:placeholder="#{usuario.password.label}" autofocus="autofocus"
 						th:field="*{usuario.password}"
 						th:classappend="${#fields.hasErrors('usuario.password')} ? is-invalid" />

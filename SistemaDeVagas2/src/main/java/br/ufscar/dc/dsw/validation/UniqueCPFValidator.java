@@ -21,6 +21,8 @@ public class UniqueCPFValidator implements ConstraintValidator<UniqueCPF, String
 			Profissional profissional = dao.findByCpf(CPF);
 			return profissional == null;
 		} else {
+			// Durante a execução da classe LivrariaMvcApplication
+			// não há injeção de dependência
 			return true;
 		}
 
