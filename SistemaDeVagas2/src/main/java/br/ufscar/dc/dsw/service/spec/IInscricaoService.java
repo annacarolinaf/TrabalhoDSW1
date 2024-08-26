@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.domain.Vaga;
 
 public interface IInscricaoService {
 

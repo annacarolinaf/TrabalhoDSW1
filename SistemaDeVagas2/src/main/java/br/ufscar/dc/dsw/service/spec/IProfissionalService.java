@@ -15,4 +15,6 @@ public interface IProfissionalService {
 	void excluir(Long id);
 	
 	Profissional buscarPorUserId(Long id);
+
+	boolean profissionalTemInscricao(Long id);
 }

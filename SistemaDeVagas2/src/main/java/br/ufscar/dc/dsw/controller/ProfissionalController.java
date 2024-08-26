@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
@@ -88,10 +87,14 @@ public class ProfissionalController {
 	}
 
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
-		profissionalService.excluir(id);
-		attr.addFlashAttribute("sucess", "profissional.delete.sucess");
-		return "redirect:/profissionais/listar";
+	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+		if (profissionalService.profissionalTemInscricao(id)) {
+			model.addAttribute("fail", "profissional.delete.fail");
+		} else {
+			profissionalService.excluir(id);
+			model.addAttribute("sucess", "profissional.delete.sucess");
+		}
+		return listar(model);
 	}
 
 	//@ModelAttribute("editoras")

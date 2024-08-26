@@ -11,7 +11,6 @@ import br.ufscar.dc.dsw.dao.IProfissionalDAO;
 import br.ufscar.dc.dsw.dao.IVagaDAO;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.service.spec.IInscricaoService;
 
 @Service
