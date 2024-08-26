@@ -12,13 +12,13 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
 import br.ufscar.dc.dsw.validation.UniqueCPF;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Profissional")
 public class Profissional extends AbstractEntity<Long> {
+
 
 	//O sistema deve possuir um cadastro de profissionais, com os seguintes dados: e-mail, senha, CPF, nome, telefone, sexo e data de nascimento
 
@@ -28,15 +28,15 @@ public class Profissional extends AbstractEntity<Long> {
 	@Column(nullable = false, unique = true, length = 20)
 	private String cpf;
 
-	@NotNull(message = "{NotNull.profissional.telefone}")
+	@NotBlank(message = "{NotBlank.profissional.telefone}")
 	@Column(nullable = false, length = 15)
 	private String telefone;
 
-	@NotNull(message = "{NotNull.profissional.sexo}")
+	@NotBlank(message = "{NotBlank.profissional.sexo}")
 	@Column(nullable = false, length = 12)
 	private String sexo;
 
-	@NotNull(message = "{NotNull.profissional.nasc}")
+	@NotBlank(message = "{NotBlank.profissional.nasc}")
 	@Column(nullable = false, length = 10)
 	private String nasc;
 
