@@ -35,6 +35,7 @@
 							<th class="bg-warning" th:text="#{empresa.nome.label}"></th>
 							<th class="bg-warning" th:text="#{vaga.remuneracao.label}"></th>
 							<th class="bg-warning" th:text="#{empresa.cidade.label}"></th>
+							<th style="text-align: center">Currículo</th>
 							<th class="bg-warning" th:text="#{inscricao.status.label}"></th>
 						</tr>
 					</thead>
@@ -46,6 +47,13 @@
 							<td th:text="${inscricao.vaga.empresa.usuario.name}"></td>
 							<td th:text="${inscricao.vaga.empresa.cidade}"></td>
 							<td th:text="${inscricao.vaga.remuneracao}"></td>
+							<td style="text-align: center">
+								<span th:if="${inscricao.qualificacao}">
+									<a th:href="@{/inscricoes/download/{id} (id=${inscricao.id})}" class="btn btn-primary">
+										Baixar Currículo
+									</a>
+								</span>
+							</td>
 							<td th:text="${inscricao.resultado}"></td>
 						</tr>
 					</tbody>

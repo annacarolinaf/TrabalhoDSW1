@@ -22,15 +22,12 @@
 
 			<div th:replace="~{fragments/alert}"></div>
 
-			<form th:action="@{/inscricoes/salvar}" th:object="${inscricao}"
-				method="POST">
+			<form th:action="@{/inscricoes/cadastrar/{id_vaga}(id_vaga=${id_vaga})}" method="POST" enctype="multipart/form-data">
 
-				<div th:replace="~{fragments/validacao::validacao}"></div>
-
-				<input type="text" th:field="*{resultado}" id="resultado">
-				<input type="text" th:field="*{profissional.usuario.name}" id="cpf_profissional">
-				<input type="text" th:field="*{vaga.descricao}" id="nome_vaga">
-				<input type="text" th:field="*{data_inscricao}" id="data_inscricao">
+				<div class="form-group col-md-6">
+					<label for="curriculo">Currículo</label>
+					<input type="file" name="file" accept="application/pdf" />	
+				</div>
 
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>
