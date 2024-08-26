@@ -93,41 +93,51 @@ public class EmpresaController {
 		return "redirect:/empresas/listar";
 	}
 
-	@GetMapping("/editar/{id}")
-	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("empresa", service.buscarPorId(id));
-		return "empresa/cadastro";
-	}
-
 	@PostMapping("/resultado/{id}")
 	public String resultado(@PathVariable("id") Long id, @RequestParam("resul") String resul, RedirectAttributes attr) {
 		Inscricao inscricao = inscricaoService.buscarPorId(id);
 
 		if (resul.equals("Nao")) {
 			inscricao.setResultado("NÃO SELECIONADO");
-		} else {
+		} else if (resul.equals("Entrevista")) {
 			inscricao.setResultado("ENTREVISTA");
+		} else {
+			inscricao.setResultado("ANÁLISE");
 		}
 
 		inscricaoService.salvar(inscricao);
 
 		Long vagaId = inscricao.getVaga().getId();
 
-
 		attr.addFlashAttribute("success", "Inscrição analisada com sucesso.");
 		return "redirect:/empresas/inscricoes/" + vagaId;
 	}
 
+	@GetMapping("/editar/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
+		model.addAttribute("empresa", service.buscarPorId(id));
+		return "empresa/cadastro";
+	}
+
+
 	@PostMapping("/editar")
 	public String editar(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
 
-		// Apenas rejeita se o problema não for com o CNPJ (CNPJ campo read-only)
-
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") == null) {
-			return "empresa/lista";
+		if (result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") == null) { //CNPJ ou cnpj?
+			return "empresa/cadastro";
 		}
 
-		usuarioService.salvar(empresa.getUsuario());
+		// Buscar a empresa existente para obter os dados atuais
+		Empresa empresaExistente = service.buscarPorId(empresa.getId());
+		Usuario usuarioExistente = empresaExistente.getUsuario();
+
+		Usuario usuario = empresa.getUsuario();
+
+		usuario.setPassword(usuarioExistente.getPassword());
+		usuario.setId(usuarioExistente.getId()); 
+
+		// Salvar as alterações
+		usuarioService.salvar(usuario);
 		service.salvar(empresa);
 		attr.addFlashAttribute("sucess", "empresa.edit.sucess");
 		return "redirect:/empresas/listar";

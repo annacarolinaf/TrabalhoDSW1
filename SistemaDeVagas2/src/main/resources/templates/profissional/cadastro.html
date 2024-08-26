@@ -42,7 +42,6 @@
 					<label th:text="#{usuario.email.label}" for="usuario.email"></label> 
 					<input type="text" class="form-control" id="usuario.email" placeholder=E-mail
 						autofocus="autofocus" th:field="*{usuario.email}"
-						th:readonly="${profissional.id != null}"
 						th:classappend="${#fields.hasErrors('usuario.email')} ? is-invalid" />
 						
 					<div class="invalid-feedback">
@@ -65,8 +64,8 @@
 
 				<div class="form-group col-md-6">
 					<label th:text="#{profissional.telefone.label}" for="telefone"></label> 
-					<input type="text" class="form-control" id="telefone" placeholder="__ _____-____"
-						data-mask="00 00000-0000" data-mask-reverse="true"
+					<input type="text" class="form-control" id="telefone" placeholder="(__) _____-____"
+						data-mask="(00) 00000-0000" data-mask-reverse="true"
 						autofocus="autofocus" th:field="*{telefone}"
 						th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" />
 					
@@ -98,9 +97,10 @@
 					</div>
 				</div>
 
-				<div th:if="${profissional.id == null}" class="form-group col-md-6">
+				<div class="form-group col-md-6">
 					<label th:text="#{usuario.password.label}" for="usuario.password"></label> 
 					<input type="password" class="form-control" id="usuario.password"
+						th:readonly="${profissional.id != null}"
 						th:placeholder="#{usuario.password.label}" autofocus="autofocus"
 						th:field="*{usuario.password}"
 						th:classappend="${#fields.hasErrors('usuario.password')} ? is-invalid" />
@@ -114,7 +114,9 @@
 					<label th:text="#{usuario.role.label}" for="usuario.role"></label> 
 					<input type="text" class="form-control" id="usuario.role" placeholder=Papel
 						autofocus="autofocus" th:field="*{usuario.role}"
-						th:classappend="${#fields.hasErrors('usuario.role')} ? is-invalid" />
+						th:classappend="${#fields.hasErrors('usuario.role')} ? is-invalid" 
+						th:readonly="${profissional.id != null}"
+						/>
 					
 					<div class="invalid-feedback">
 						<span th:errors="*{usuario.role}"></span>

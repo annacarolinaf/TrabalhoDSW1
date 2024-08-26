@@ -29,6 +29,7 @@
 					<thead>
 						<tr>
 							<th>#</th>
+							<th th:text="#{usuario.name.label}"></th>
 							<th th:text="#{profissional.cpf.label}"></th>
 							<th th:text="#{profissional.telefone.label}"></th>
 							<th th:text="#{profissional.sexo.label}"></th>
@@ -40,6 +41,7 @@
 						<tr th:each="profissional : ${profissionais}">
 							
 							<td th:text="${profissional.id}"></td>
+							<td th:text="${profissional.usuario.name}"></td>
 							<td th:text="${profissional.cpf}"></td>
 							<td th:text="${profissional.telefone}"></td>
 							<td th:text="${profissional.sexo}"></td>
