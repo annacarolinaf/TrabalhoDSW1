@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Vaga;
 
 public interface IInscricaoService {
 
@@ -12,6 +13,8 @@ public interface IInscricaoService {
 	List<Inscricao> buscarTodosPorProfissional(Profissional p);
 
     List<Inscricao> buscarTodosPorVaga(Long id);
-	
+
 	void salvar(Inscricao inscricao);
+
+	void excluir(Long id);
 }

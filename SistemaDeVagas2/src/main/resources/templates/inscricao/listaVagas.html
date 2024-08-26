@@ -23,7 +23,10 @@
         </nav>
 
         <div class="container" id="listagem">
-
+            <form th:action="@{/inscricoes/buscar}" method="post">
+                <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade" required>
+                <button type="submit" class="btn btn-primary btn-sm">Pesquisar</button>
+            </form>
             <div th:replace="~{fragments/alert}"></div>
 
             <div class="table-responsive">
@@ -46,7 +49,7 @@
 							<td th:text="${vaga.dataLimite}"></td>
                             <td colspan="2">
                                 <a class="btn btn-info btn-sm"
-                                   th:href="@{/inscricoes/cadastrar/{id} (id=${vaga.id}) }" 
+                                   th:href="@{/inscricoes/inscrever/{id} (id=${vaga.id}) }" 
                                    role="button"> 
                                     <span th:text="#{link.inscricoes.cadastrar.label}" aria-hidden="true">Inscreva-se</span>
                                 </a>

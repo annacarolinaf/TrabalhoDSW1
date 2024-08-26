@@ -44,7 +44,13 @@
                             <td th:text="${inscricao.id}"></td>
                             <td th:text="${inscricao.profissional.usuario.name}"></td>
                             <td th:text="${inscricao.profissional.usuario.email}"></td>
-                            <td th:text="${inscricao.qualificacao}"></td>
+							<td style="text-align: justify">
+								<span th:if="${inscricao.qualificacao}">
+									<a th:href="@{/inscricoes/download/{id} (id=${inscricao.id})}" class="btn btn-info">
+										Baixar Currículo
+									</a>
+								</span>
+							</td>
                             <td th:text="${inscricao.resultado}"></td>
                             <td>
                                 <form method="POST"
