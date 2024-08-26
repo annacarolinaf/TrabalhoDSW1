@@ -23,7 +23,10 @@
         </nav>
 
         <div class="container" id="listagem">
-
+            <form th:action="@{/inscricoes/buscar}" method="post">
+                <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade" required>
+                <button type="submit" class="btn btn-primary btn-sm">Pesquisar</button>
+            </form>
             <div th:replace="~{fragments/alert}"></div>
 
             <div class="table-responsive">
