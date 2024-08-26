@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
@@ -73,6 +74,41 @@ public class EmpresaController {
 		return empresa.getId();
 	}
 
+	@GetMapping("/cadastrarVaga")
+	public String cadastrarVaga(ModelMap model) {
+        
+		Vaga vaga = new Vaga();
+		Empresa empresa = service.buscarPorId(getEmpresa());
+		vaga.setEmpresa(empresa);
+
+		System.out.println("ID da empresa na vaga: " + vaga.getEmpresa());
+
+		model.addAttribute("vaga", vaga);
+
+		return "empresa/cadastroVaga";
+	
+	}
+
+	@PostMapping("/salvarVaga")
+	public String salvarVaga(@Valid Vaga vaga, BindingResult result, RedirectAttributes attr) {
+
+
+		Empresa empresa = service.buscarPorId(getEmpresa());
+		vaga.setEmpresa(empresa);
+		System.out.println("ID da empresa na vaga SALVAR VAGA: " + vaga.getEmpresa());
+
+		// if (result.hasErrors()) {
+		// 
+		// 	System.out.println("Erros de validação: " + result.getAllErrors() );
+		// 	return "empresa/cadastroVaga";
+		// }
+	
+		vagaService.salvar(vaga);
+		attr.addFlashAttribute("sucess", "vaga.create.sucess");
+		return "redirect:/empresas/vagas";
+	}
+
+
 	@GetMapping("/inscricoes/{id}")
 	public String listarIncricoes(@PathVariable("id") Long id, ModelMap model) {
 
@@ -89,7 +125,7 @@ public class EmpresaController {
 
 		usuarioService.salvar(empresa.getUsuario());
 		service.salvar(empresa);
-		attr.addFlashAttribute("sucempresa.getUsuario()ess", "empresa.create.sucess");
+		attr.addFlashAttribute("sucess", "empresa.create.sucess");
 		return "redirect:/empresas/listar";
 	}
 
