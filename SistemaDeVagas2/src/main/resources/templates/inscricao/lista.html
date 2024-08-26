@@ -47,9 +47,9 @@
 							<td th:text="${inscricao.vaga.empresa.usuario.name}"></td>
 							<td th:text="${inscricao.vaga.empresa.cidade}"></td>
 							<td th:text="${inscricao.vaga.remuneracao}"></td>
-							<td style="text-align: center">
+							<td style="text-align: justify">
 								<span th:if="${inscricao.qualificacao}">
-									<a th:href="@{/inscricoes/download/{id} (id=${inscricao.id})}" class="btn btn-primary">
+									<a th:href="@{/inscricoes/download/{id} (id=${inscricao.id})}" class="btn btn-info">
 										Baixar Currículo
 									</a>
 								</span>
