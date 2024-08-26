@@ -9,11 +9,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span th:text="#{compra.cadastrar.label}"></span></li>
+						<span th:text="#{inscricao.cadastrar.label}"></span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/compras/listar}"
+				<a class="btn btn-primary btn-md" th:href="@{/inscricao/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span th:text="#{compra.listar.label}"></span>
+					aria-hidden="true"></span> <span th:text="#{inscricao.listar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -22,47 +22,15 @@
 
 			<div th:replace="~{fragments/alert}"></div>
 
-			<form th:action="@{/compras/salvar}" th:object="${compra}"
+			<form th:action="@{/inscricoes/salvar}" th:object="${inscricao}"
 				method="POST">
 
 				<div th:replace="~{fragments/validacao::validacao}"></div>
 
-				<div class="form-row">
-					<div class="form-group col-md-12">
-						
-						<table class="table table-striped table-hover table-sm">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th th:text="#{livro.titulo.label}"></th>
-									<th th:text="#{livro.autor.label}"></th>
-									<th th:text="#{livro.editora.label}"></th>
-									<th th:text="#{livro.ano.label}"></th>
-									<th th:text="#{livro.preco.label}"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="livro : ${livros}">
-									<td>
-										<input type="radio" th:id="${livro.id}" name="livro" th:value="${livro.id}" th:field="*{livro}" required>
-									</td>
-									<td th:text="${livro.titulo}"></td>
-									<td th:text="${livro.autor}"></td>
-									<td th:text="${livro.editora.nome}"></td>
-									<td th:text="${livro.ano}"></td>
-									<td th:text="|R$ ${#numbers.formatDecimal(livro.preco,2,2,'COMMA')}|"></td>
-								</tr>
-							</tbody>
-						</table>
-
-						<div class="invalid-feedback">
-							<span th:errors="*{livro}"></span>
-						</div>
-					</div>
-				</div>
-				
-				<input type="hidden" th:field="*{usuario}" id="usuario">
-				<input type="hidden" th:field="*{data}" id="data">
+				<input type="text" th:field="*{resultado}" id="resultado">
+				<input type="text" th:field="*{profissional.usuario.name}" id="cpf_profissional">
+				<input type="text" th:field="*{vaga.descricao}" id="nome_vaga">
+				<input type="text" th:field="*{data_inscricao}" id="data_inscricao">
 
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>

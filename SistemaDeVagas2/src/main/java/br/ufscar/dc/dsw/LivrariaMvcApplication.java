@@ -14,15 +14,12 @@ import br.ufscar.dc.dsw.dao.IEmpresaDAO;
 import br.ufscar.dc.dsw.dao.IInscricaoDAO;
 import br.ufscar.dc.dsw.dao.IProfissionalDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
-import br.ufscar.dc.dsw.dao.IInscricaoDAO;
-
 import br.ufscar.dc.dsw.dao.IVagaDAO;
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.Vaga;
-import br.ufscar.dc.dsw.domain.Inscricao;
 
 
 @SpringBootApplication
@@ -155,16 +152,9 @@ public class LivrariaMvcApplication {
             i1.setVaga(v1);
             i1.setProfissional(p1);
             i1.setResultado("ABERTO"); 
-            i1.setQualificacao("Exemplo de qualificação".getBytes()); // Exemplo de arquivo em bytes
+            //i1.setQualificacao("Exemplo de qualificação".getBytes()); // Exemplo de arquivo em bytes
 			inscricaoDAO.save(i1);
 
-
-			Inscricao i2 = new Inscricao();
-            i2.setData_inscricao("09/12/2024");
-            i2.setVaga(v1);
-            i2.setProfissional(p2);
-            i2.setQualificacao("Exemplo de qualificação".getBytes()); // Exemplo de arquivo em bytes
-			inscricaoDAO.save(i2);
 		};
 	}
 }
