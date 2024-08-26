@@ -35,7 +35,7 @@ public class Inscricao extends AbstractEntity<Long> {
     //Resultado
     @NotNull
     @Column(nullable = false, length = 15)
-    private String resultado;
+    private String resultado = "ABERTO";
 
 
     //Arquivo

@@ -1,5 +1,8 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
@@ -37,9 +41,22 @@ public class InscricaoController {
 	@Autowired
 	private IInscricaoService inscricaoService;
 
-	@GetMapping("/cadastrar/[]")
-	public String cadastrar(Profissional profissional) {
-		return "profissional/cadastro";
+	@GetMapping("/inscrever/{id_vaga}")
+	public String uparCurriculo(@PathVariable("id_vaga") Long id_vaga, ModelMap model)
+	{
+		model.addAttribute("id_vaga", id_vaga);
+		return "inscricao/cadastro";
+	}	
+
+	@GetMapping("/cadastrar/{id_vaga}")
+	public String cadastrar(@PathVariable("id_vaga") Long id_vaga, Inscricao inscricao) {
+		LocalDate hoje = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		inscricao.setData_inscricao(hoje.format(formatter));
+		inscricao.setVaga(vagaService.buscarPorId(id_vaga));
+		inscricao.setProfissional(this.getProfissional());
+		inscricaoService.salvar(inscricao);
+		return "redirect:/inscricoes/listar";
 	}
 
 	@GetMapping("/")
@@ -50,34 +67,19 @@ public class InscricaoController {
 
 	@GetMapping("/listar")
 	public String listarInscricoes(ModelMap model) {
-		model.addAttribute("inscricoes", inscricaoService.buscarTodosPorProfissional(profissionalService.buscarPorId(getProfissional())));
+		model.addAttribute("inscricoes", inscricaoService.buscarTodosPorProfissional(this.getProfissional()));
 		return "inscricao/lista";
 	}
 
-	private Long getProfissional() {
+	private Profissional getProfissional() {
 		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		Usuario user = usuarioDetails.getUsuario();
 		Profissional profissional = profissionalService.buscarPorUserId(user.getId());
+		
+		profissional.setUsuario(user);
 
-		if (profissional == null) {
-			throw new RuntimeException("Profissional não encontrada para o usuário com ID: " + user.getId());
-		}
-
-		return profissional.getId();
-	}
-
-	@PostMapping("/salvar")
-	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
-
-		if (result.hasErrors()) {
-			return "profissional/cadastro";
-		}
-
-		usuarioService.salvar(profissional.getUsuario());
-		profissionalService.salvar(profissional);
-		attr.addFlashAttribute("sucess", "profissional.create.sucess");
-		return "redirect:/profissionais/listar";
+		return profissional;
 	}
 
 	@GetMapping("/editar/{id}")
@@ -100,13 +102,8 @@ public class InscricaoController {
 
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
-		profissionalService.excluir(id);
-		attr.addFlashAttribute("sucess", "profissional.delete.sucess");
-		return "redirect:/profissionais/listar";
+		inscricaoService.excluir(id);
+		attr.addFlashAttribute("sucess", "inscricao.delete.sucess");
+		return "redirect:/inscricoes/listar";
 	}
-
-	//@ModelAttribute("editoras")
-	//public List<Editora> listaEditoras() {
-	//	return editoraService.buscarTodos();
-	//}
 }

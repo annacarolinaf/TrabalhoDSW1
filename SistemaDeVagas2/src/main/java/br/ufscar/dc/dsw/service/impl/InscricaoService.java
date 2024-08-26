@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IInscricaoDAO;
+import br.ufscar.dc.dsw.dao.IProfissionalDAO;
+import br.ufscar.dc.dsw.dao.IVagaDAO;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Vaga;
@@ -18,9 +20,21 @@ public class InscricaoService implements IInscricaoService {
 
 	@Autowired
 	IInscricaoDAO dao;
+
+	@Autowired
+	IProfissionalDAO daoProfissional;
 	
+	@Autowired
+	IVagaDAO daoVaga;
+	
+
+
 	public void salvar(Inscricao inscricao) {
 		dao.save(inscricao);
+	}
+
+	public void excluir(Long id) {
+		dao.deleteById(id);
 	}
 
 	@Transactional(readOnly = true)
@@ -37,4 +51,5 @@ public class InscricaoService implements IInscricaoService {
 	public List<Inscricao> buscarTodosPorVaga(Long id) {
 		return dao.findAllByVaga(id);
 	}
+
 }
