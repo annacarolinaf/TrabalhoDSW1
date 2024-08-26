@@ -28,7 +28,7 @@ public class Vaga extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 60)
 	private String dataLimite;
 
-	@NotNull(message = "{NotNull.vaga.remunaracao}")
+	@NotNull(message = "{NotNull.vaga.remuneracao}")
 	@Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
 	private BigDecimal remuneracao;
     
