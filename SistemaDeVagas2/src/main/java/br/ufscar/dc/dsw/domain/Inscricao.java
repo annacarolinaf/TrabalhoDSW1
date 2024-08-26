@@ -1,8 +1,12 @@
 package br.ufscar.dc.dsw.domain;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -35,14 +39,15 @@ public class Inscricao extends AbstractEntity<Long> {
     //Resultado
     @NotNull
     @Column(nullable = false, length = 15)
-    private String resultado;
+    private String resultado = "ABERTO";
 
 
     //Arquivo
-    // @Lob
-    // @Basic
-    // @Column(length = 10485760) // MB
-    // private byte[] qualificacao;
+    @Lob
+    @Basic
+    @Column(length = 10485760) // MB
+    private byte[] qualificacao;
+
 
 	public String getData_inscricao() {
 		return data_inscricao;
@@ -80,13 +85,13 @@ public class Inscricao extends AbstractEntity<Long> {
         this.vaga = vaga;
     }
 
-	// public byte[] getQualificacao() {
-	// 	return qualificacao;
-	// }
+	public byte[] getQualificacao() {
+		return qualificacao;
+	}
 
-	// public void setQualificacao(byte[] qualificacao) {
-	// 	this.qualificacao = qualificacao;
-	// }
+	public void setQualificacao(byte[] qualificacao) {
+		this.qualificacao = qualificacao;
+	}
 
 
 }

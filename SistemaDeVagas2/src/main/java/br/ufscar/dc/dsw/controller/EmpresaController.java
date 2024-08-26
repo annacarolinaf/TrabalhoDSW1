@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
@@ -73,6 +74,41 @@ public class EmpresaController {
 		return empresa.getId();
 	}
 
+	@GetMapping("/cadastrarVaga")
+	public String cadastrarVaga(ModelMap model) {
+        
+		Vaga vaga = new Vaga();
+		Empresa empresa = service.buscarPorId(getEmpresa());
+		vaga.setEmpresa(empresa);
+
+		System.out.println("ID da empresa na vaga: " + vaga.getEmpresa());
+
+		model.addAttribute("vaga", vaga);
+
+		return "empresa/cadastroVaga";
+	
+	}
+
+	@PostMapping("/salvarVaga")
+	public String salvarVaga(@Valid Vaga vaga, BindingResult result, RedirectAttributes attr) {
+
+
+		Empresa empresa = service.buscarPorId(getEmpresa());
+		vaga.setEmpresa(empresa);
+		System.out.println("ID da empresa na vaga SALVAR VAGA: " + vaga.getEmpresa());
+
+		// if (result.hasErrors()) {
+		// 
+		// 	System.out.println("Erros de validação: " + result.getAllErrors() );
+		// 	return "empresa/cadastroVaga";
+		// }
+	
+		vagaService.salvar(vaga);
+		attr.addFlashAttribute("sucess", "vaga.create.sucess");
+		return "redirect:/empresas/vagas";
+	}
+
+
 	@GetMapping("/inscricoes/{id}")
 	public String listarIncricoes(@PathVariable("id") Long id, ModelMap model) {
 
@@ -89,14 +125,8 @@ public class EmpresaController {
 
 		usuarioService.salvar(empresa.getUsuario());
 		service.salvar(empresa);
-		attr.addFlashAttribute("sucempresa.getUsuario()ess", "empresa.create.sucess");
+		attr.addFlashAttribute("sucess", "empresa.create.sucess");
 		return "redirect:/empresas/listar";
-	}
-
-	@GetMapping("/editar/{id}")
-	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("empresa", service.buscarPorId(id));
-		return "empresa/cadastro";
 	}
 
 	@PostMapping("/resultado/{id}")
@@ -105,29 +135,45 @@ public class EmpresaController {
 
 		if (resul.equals("Nao")) {
 			inscricao.setResultado("NÃO SELECIONADO");
-		} else {
+		} else if (resul.equals("Entrevista")) {
 			inscricao.setResultado("ENTREVISTA");
+		} else {
+			inscricao.setResultado("ANÁLISE");
 		}
 
 		inscricaoService.salvar(inscricao);
 
 		Long vagaId = inscricao.getVaga().getId();
 
-
 		attr.addFlashAttribute("success", "Inscrição analisada com sucesso.");
 		return "redirect:/empresas/inscricoes/" + vagaId;
 	}
 
+	@GetMapping("/editar/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
+		model.addAttribute("empresa", service.buscarPorId(id));
+		return "empresa/cadastro";
+	}
+
+
 	@PostMapping("/editar")
 	public String editar(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
 
-		// Apenas rejeita se o problema não for com o CNPJ (CNPJ campo read-only)
-
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") == null) {
-			return "empresa/lista";
+		if (result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") == null) { //CNPJ ou cnpj?
+			return "empresa/cadastro";
 		}
 
-		usuarioService.salvar(empresa.getUsuario());
+		// Buscar a empresa existente para obter os dados atuais
+		Empresa empresaExistente = service.buscarPorId(empresa.getId());
+		Usuario usuarioExistente = empresaExistente.getUsuario();
+
+		Usuario usuario = empresa.getUsuario();
+
+		usuario.setPassword(usuarioExistente.getPassword());
+		usuario.setId(usuarioExistente.getId()); 
+
+		// Salvar as alterações
+		usuarioService.salvar(usuario);
 		service.salvar(empresa);
 		attr.addFlashAttribute("sucess", "empresa.edit.sucess");
 		return "redirect:/empresas/listar";

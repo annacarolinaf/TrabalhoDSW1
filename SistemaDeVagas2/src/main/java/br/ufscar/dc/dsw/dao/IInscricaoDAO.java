@@ -16,6 +16,8 @@ public interface IInscricaoDAO extends CrudRepository<Inscricao, Long>{
 
 	List<Inscricao> findAllByProfissional(Profissional p);
 
+	void deleteById(Long id);
+
 	@Query("SELECT i FROM Inscricao i WHERE i.vaga.id = :vagaId")
 	List<Inscricao> findAllByVaga(@Param("vagaId") long vagaId);
 		
