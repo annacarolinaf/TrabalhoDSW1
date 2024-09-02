@@ -46,22 +46,22 @@ public class LivrariaMvcApplication {
 			usuarioDAO.save(u1);
 
 
-			Usuario u3 = new Usuario();
+			/* Usuario u3 = new Usuario();
 			u3.setEmail("profissional");
 			u3.setPassword(encoder.encode("profissional"));
 			u3.setName("Profissional");
 			u3.setRole("ROLE_PROFISSIONAL");
 			u3.setEnabled(true);
-			usuarioDAO.save(u3);
+			usuarioDAO.save(u3); */
 
 
-			Usuario u5 = new Usuario();
+			/* Usuario u5 = new Usuario();
 			u5.setEmail("marcos");
 			u5.setPassword(encoder.encode("profissional"));
 			u5.setName("Marcos");
 			u5.setRole("ROLE_PROFISSIONAL");
 			u5.setEnabled(true);
-			usuarioDAO.save(u5);
+			usuarioDAO.save(u5);*/
 
 			Empresa e1 = new Empresa();
 			e1.setCNPJ("45.990.181/0001-89");
@@ -102,8 +102,11 @@ public class LivrariaMvcApplication {
 			p1.setNasc("03/03/2001");
 			p1.setSexo("Feminino");
 			p1.setTelefone("(11) 94528-4695");
-			p1.setUsuario(u3);
-			p1.setUsuario(u3);
+			p1.setEmail("profissional");
+			p1.setPassword(encoder.encode("profissional"));
+			p1.setName("Profissional");
+			p1.setRole("ROLE_PROFISSIONAL");
+			p1.setEnabled(true);
 			profissionalDAO.save(p1);
 
 			Profissional p2 = new Profissional();
@@ -111,8 +114,11 @@ public class LivrariaMvcApplication {
 			p2.setNasc("20/07/1998");
 			p2.setSexo("Masculino");
 			p2.setTelefone("(11) 94528-4695");
-			p2.setUsuario(u5);
-			p2.setUsuario(u5);
+			p2.setEmail("marcos");
+			p2.setPassword(encoder.encode("profissional"));
+			p2.setName("Marcos");
+			p2.setRole("ROLE_PROFISSIONAL");
+			p2.setEnabled(true);
 			profissionalDAO.save(p2);
 
 

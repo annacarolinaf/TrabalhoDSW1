@@ -16,7 +16,6 @@ public interface IEmpresaService {
 	
 	boolean empresaTemVagas(Long id);
 
-
 	List<Empresa> buscarPorCidade(String nome);
 }
 

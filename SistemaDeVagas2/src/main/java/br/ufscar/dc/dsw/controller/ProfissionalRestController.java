@@ -57,7 +57,7 @@ public class ProfissionalRestController {
 
         Long usuarioId = ((Number) json.get("usuario_id")).longValue();
         Usuario usuario = usuarioService.buscarPorId(usuarioId);
-        profissional.setUsuario(usuario);
+        // profissional.setUsuario(usuario);
     }
 
     @GetMapping(path = "/profissionais")
