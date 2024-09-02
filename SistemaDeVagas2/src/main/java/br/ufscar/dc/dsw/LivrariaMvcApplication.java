@@ -37,8 +37,34 @@ public class LivrariaMvcApplication {
 
 		return (args) -> {
 
+			Usuario u1 = new Usuario();
+			u1.setEmail("admin");
+			u1.setPassword(encoder.encode("admin"));
+			u1.setName("Administrador");
+			u1.setRole("ROLE_ADMIN");
+			u1.setEnabled(true);
+			usuarioDAO.save(u1);
+
+
+			/* Usuario u3 = new Usuario();
+			u3.setEmail("profissional");
+			u3.setPassword(encoder.encode("profissional"));
+			u3.setName("Profissional");
+			u3.setRole("ROLE_PROFISSIONAL");
+			u3.setEnabled(true);
+			usuarioDAO.save(u3); */
+
+
+			/* Usuario u5 = new Usuario();
+			u5.setEmail("marcos");
+			u5.setPassword(encoder.encode("profissional"));
+			u5.setName("Marcos");
+			u5.setRole("ROLE_PROFISSIONAL");
+			u5.setEnabled(true);
+			usuarioDAO.save(u5);*/
+
 			Empresa e1 = new Empresa();
-			e1.setCnpj("45.990.181/0001-89");
+			e1.setCNPJ("45.990.181/0001-89");
 			e1.setCidade("São Paulo");
 			e1.setDescricao("Empresa de Tecnologia");
 			e1.setEmail("amazon");
@@ -50,7 +76,7 @@ public class LivrariaMvcApplication {
 			log.info("Salvando dados da Empresa1");
 
 			Empresa e2 = new Empresa();
-			e2.setCnpj("13.741.181/0001-89");
+			e2.setCNPJ("13.741.181/0001-89");
 			e2.setCidade("Campinas");
 			e2.setDescricao("Empresa de Tecnologia");
 			e2.setEmail("visagio");
@@ -61,7 +87,7 @@ public class LivrariaMvcApplication {
 			empresaDAO.save(e2);
 
 			Empresa e3 = new Empresa();
-			e3.setCnpj("20.212.181/2512-89");
+			e3.setCNPJ("20.212.181/2512-89");
 			e3.setCidade("Belo Horizonte");
 			e3.setDescricao("Empresa de Tecnologia");
 			e3.setEmail("google");

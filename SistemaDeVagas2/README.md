@@ -29,7 +29,7 @@ Modelo-Visão-Controlador<br /><br />
 <li>login: marcos</li>
 <li>senha: profissional </li>
 <h3>2</h3>
-<li>login: beatriz</li>
+<li>login: profissional</li>
 <li>senha: profissional </li>
 <br />
 
@@ -49,14 +49,14 @@ Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e N
 
 <h2>R3:</h2>
 
-() Implementado (X) Parcialmente implementado ( ) Não implementado <br/>
+(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
 
 
 <h2>R4:</h2>
 
-() Implementado () Parcialmente implementado ( ) Não implementado <br/>
+(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
 
@@ -64,7 +64,7 @@ Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e N
 
 <h2>R5:</h2>
 
-() Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
+(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
 
@@ -79,7 +79,7 @@ Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e N
 
 <h2>R7:</h2>
 
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
+(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
 Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
 

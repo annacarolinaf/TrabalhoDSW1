@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +16,7 @@ import jakarta.validation.constraints.Size;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Empresa")
+@JsonIgnoreProperties (value = {"vagas"})
 public class Empresa extends Usuario {
 
     @UniqueCNPJ(message = "{Unique.empresa.CNPJ}")
@@ -39,11 +41,11 @@ public class Empresa extends Usuario {
 
     // Getters e Setters
 
-    public String getCnpj() {
+    public String getCNPJ() {
         return CNPJ;
     }
 
-    public void setCnpj(String CNPJ) {
+    public void setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
     }
 
