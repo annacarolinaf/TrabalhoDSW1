@@ -45,13 +45,6 @@ public class LivrariaMvcApplication {
 			u1.setEnabled(true);
 			usuarioDAO.save(u1);
 
-			Usuario u2 = new Usuario();
-			u2.setEmail("amazon");
-			u2.setPassword(encoder.encode("empresa"));
-			u2.setName("Amazon");
-			u2.setRole("ROLE_EMPRESA");
-			u2.setEnabled(true);
-			usuarioDAO.save(u2);
 
 			Usuario u3 = new Usuario();
 			u3.setEmail("profissional");
@@ -61,13 +54,6 @@ public class LivrariaMvcApplication {
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
 
-			Usuario u4 = new Usuario();
-			u4.setEmail("visagio");
-			u4.setPassword(encoder.encode("empresa"));
-			u4.setName("Visagio");
-			u4.setRole("ROLE_EMPRESA");
-			u4.setEnabled(true);
-			usuarioDAO.save(u4);
 
 			Usuario u5 = new Usuario();
 			u5.setEmail("marcos");
@@ -77,34 +63,38 @@ public class LivrariaMvcApplication {
 			u5.setEnabled(true);
 			usuarioDAO.save(u5);
 
-			Usuario u6 = new Usuario();
-			u6.setEmail("google");
-			u6.setPassword(encoder.encode("empresa"));
-			u6.setName("Google");
-			u6.setRole("ROLE_EMPRESA");
-			u6.setEnabled(true);
-			usuarioDAO.save(u6);
-
 			Empresa e1 = new Empresa();
-			e1.setCnpj("45.990.181/0001-89");
+			e1.setCNPJ("45.990.181/0001-89");
 			e1.setCidade("São Paulo");
 			e1.setDescricao("Empresa de Tecnologia");
-			e1.setUsuario(u2);
+			e1.setEmail("amazon");
+			e1.setPassword(encoder.encode("empresa"));
+			e1.setName("Amazon");
+			e1.setRole("ROLE_EMPRESA");
+			e1.setEnabled(true);
 			empresaDAO.save(e1);
 			log.info("Salvando dados da Empresa1");
 
 			Empresa e2 = new Empresa();
-			e2.setCnpj("13.741.181/0001-89");
+			e2.setCNPJ("13.741.181/0001-89");
 			e2.setCidade("Campinas");
 			e2.setDescricao("Empresa de Tecnologia");
-			e2.setUsuario(u4);
+			e2.setEmail("visagio");
+			e2.setPassword(encoder.encode("empresa"));
+			e2.setName("Visagio");
+			e2.setRole("ROLE_EMPRESA");
+			e2.setEnabled(true);
 			empresaDAO.save(e2);
 
 			Empresa e3 = new Empresa();
-			e3.setCnpj("20.212.181/2512-89");
+			e3.setCNPJ("20.212.181/2512-89");
 			e3.setCidade("Belo Horizonte");
 			e3.setDescricao("Empresa de Tecnologia");
-			e3.setUsuario(u6);
+			e3.setEmail("google");
+			e3.setPassword(encoder.encode("empresa"));
+			e3.setName("Google");
+			e3.setRole("ROLE_EMPRESA");
+			e3.setEnabled(true);
 			empresaDAO.save(e3);
 
 			Profissional p1 = new Profissional();
