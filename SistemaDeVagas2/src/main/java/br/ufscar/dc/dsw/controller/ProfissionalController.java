@@ -49,7 +49,7 @@ public class ProfissionalController {
 			return "profissional/cadastro";
 		}
 
-		usuarioService.salvar(profissional.getUsuario());
+		usuarioService.salvar(usuarioService.buscarPorId(profissional.getId()));
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissional.create.sucess");
 		return "redirect:/profissionais/listar";
@@ -73,9 +73,9 @@ public class ProfissionalController {
 		}
 
 		Profissional profissionalExistente = profissionalService.buscarPorId(profissional.getId());
-		Usuario usuarioExistente = profissionalExistente.getUsuario();
+		Usuario usuarioExistente = usuarioService.buscarPorId(profissionalExistente.getId());
 
-		Usuario usuario = profissional.getUsuario();
+		Usuario usuario = usuarioService.buscarPorId(profissional.getId());
 
 		usuario.setPassword(usuarioExistente.getPassword());
 		usuario.setId(usuarioExistente.getId()); 

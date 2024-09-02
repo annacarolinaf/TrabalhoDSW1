@@ -45,7 +45,7 @@
                         <tr th:each="vaga : ${vagas}">
                             <td th:text="${vaga.id}"></td>
                             <td th:text="${vaga.descricao}"></td>
-							<td th:text="${vaga.empresa.usuario.name}"></td>
+							<td th:text="${vaga.empresa.name}"></td>
                             <td th:text="${vaga.remuneracao}"></td>
 							<td th:text="${vaga.empresa.cidade}"></td>
 							<td th:text="${vaga.dataLimite}"></td>
