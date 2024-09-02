@@ -102,9 +102,7 @@ public class InscricaoController {
 		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		Usuario user = usuarioDetails.getUsuario();
-		Profissional profissional = profissionalService.buscarPorUserId(user.getId());
-		
-		profissional.setUsuario(user);
+		Profissional profissional = profissionalService.buscarPorId(user.getId());
 
 		return profissional;
 	}

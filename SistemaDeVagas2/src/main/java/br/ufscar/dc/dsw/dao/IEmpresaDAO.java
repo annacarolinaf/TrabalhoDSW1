@@ -22,7 +22,4 @@ public interface IEmpresaDAO extends CrudRepository<Empresa, Long>{
 
 	void deleteById(Long id);
 
-	@Query("SELECT u FROM Empresa u WHERE u.usuario.id = :usuarioId")
-    Empresa findByUserId(@Param("usuarioId") Long usuarioId);
-
 }

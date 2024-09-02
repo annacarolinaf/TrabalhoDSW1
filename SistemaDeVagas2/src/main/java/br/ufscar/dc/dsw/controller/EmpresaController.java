@@ -65,7 +65,7 @@ public class EmpresaController {
 				.getPrincipal();
 
 		Usuario user = usuarioDetails.getUsuario();
-		Empresa empresa = service.buscarPorUserId(user.getId());
+		Empresa empresa = service.buscarPorId(user.getId());
 
 		if (empresa == null) {
 			throw new RuntimeException("Empresa não encontrada para o usuário com ID: " + user.getId());
@@ -123,7 +123,7 @@ public class EmpresaController {
 			return "empresa/cadastro";
 		}
 
-		usuarioService.salvar(empresa.getUsuario());
+		usuarioService.salvar(usuarioService.buscarPorId(empresa.getId()));
 		service.salvar(empresa);
 		attr.addFlashAttribute("sucess", "empresa.create.sucess");
 		return "redirect:/empresas/listar";
@@ -165,9 +165,9 @@ public class EmpresaController {
 
 		// Buscar a empresa existente para obter os dados atuais
 		Empresa empresaExistente = service.buscarPorId(empresa.getId());
-		Usuario usuarioExistente = empresaExistente.getUsuario();
+		Usuario usuarioExistente = usuarioService.buscarPorId(empresaExistente.getId());
 
-		Usuario usuario = empresa.getUsuario();
+		Usuario usuario = usuarioService.buscarPorId(empresa.getId());
 
 		usuario.setPassword(usuarioExistente.getPassword());
 		usuario.setId(usuarioExistente.getId()); 
