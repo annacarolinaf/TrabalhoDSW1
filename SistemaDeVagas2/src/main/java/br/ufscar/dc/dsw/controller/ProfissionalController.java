@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -43,13 +44,13 @@ public class ProfissionalController {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Profissional profissional, BCryptPasswordEncoder encoder, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
 			return "profissional/cadastro";
 		}
 
-		usuarioService.salvar(usuarioService.buscarPorId(profissional.getId()));
+		profissional.setPassword(encoder.encode(profissional.getPassword()));
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissional.create.sucess");
 		return "redirect:/profissionais/listar";
