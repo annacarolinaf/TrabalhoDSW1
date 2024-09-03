@@ -1,10 +1,9 @@
 package br.ufscar.dc.dsw.controller;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,6 +21,7 @@ import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IInscricaoService;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/empresas")
@@ -54,10 +54,12 @@ public class EmpresaController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Empresa empresa, BCryptPasswordEncoder encoder, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			return "empresa/cadastro";
 		}
+
+		empresa.setPassword(encoder.encode(empresa.getPassword()));
 		service.salvar(empresa);
 		attr.addFlashAttribute("sucess", "empresa.create.sucess");
 		return "redirect:/empresas/listar";
