@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,15 +20,20 @@ import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
+import br.ufscar.dc.dsw.service.EmailService;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IInscricaoService;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
+import jakarta.mail.internet.InternetAddress;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/empresas")
 public class EmpresaController {
-	
+
+	@Autowired
+	EmailService emailService;
+
 	@Autowired
 	private IEmpresaService service;
 
@@ -123,21 +130,37 @@ public class EmpresaController {
 
 	@PostMapping("/resultado/{id}")
 	public String resultado(@PathVariable("id") Long id, @RequestParam("resul") String resul, RedirectAttributes attr) {
-		Inscricao inscricao = inscricaoService.buscarPorId(id);
+		
+		try{
+			Inscricao inscricao = inscricaoService.buscarPorId(id);
 
-		if (resul.equals("Nao")) {
-			inscricao.setResultado("NÃO SELECIONADO");
-		} else if (resul.equals("Entrevista")) {
-			inscricao.setResultado("ENTREVISTA");
-		} else {
-			inscricao.setResultado("ANÁLISE");
+			if (resul.equals("Nao")) {
+				inscricao.setResultado("NÃO SELECIONADO");
+			} else if (resul.equals("Entrevista")) {
+				inscricao.setResultado("ENTREVISTA");
+
+				InternetAddress from = new InternetAddress("msous@estudante.ufscar.br", "Fulano");
+				InternetAddress to = new InternetAddress(inscricao.getProfissional().getEmail(), "Beltrano");
+						
+				String subject1 = "Chamada para a entrevista";
+
+				String body1 = "Parabéns, " + inscricao.getProfissional().getName() +"!";
+
+				// Envio sem anexo
+				emailService.send(from, to, subject1, body1);
+
+			} else {
+				inscricao.setResultado("ANÁLISE");
+			}
+
+			inscricaoService.salvar(inscricao);
+
+			Long vagaId = inscricao.getVaga().getId();
+			attr.addFlashAttribute("success", "Inscrição analisada com sucesso.");
+			return "redirect:/empresas/inscricoes/" + vagaId;
+		} catch (UnsupportedEncodingException e){
+			return "empresa/listaInscricoes";
 		}
-
-		inscricaoService.salvar(inscricao);
-
-		Long vagaId = inscricao.getVaga().getId();
-		attr.addFlashAttribute("success", "Inscrição analisada com sucesso.");
-		return "redirect:/empresas/inscricoes/" + vagaId;
 	}
 
 	@GetMapping("/editar/{id}")
