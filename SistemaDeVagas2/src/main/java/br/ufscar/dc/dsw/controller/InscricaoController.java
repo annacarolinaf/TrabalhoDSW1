@@ -135,10 +135,13 @@ public class InscricaoController {
 	@GetMapping(value = "/download/{id}")
 	public void download(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Long id) {
 		Inscricao inscricao = inscricaoService.buscarPorId(id);
+		String nomeProfissional = inscricao.getProfissional().getName();
+		String descricaoVaga = inscricao.getVaga().getDescricao();
+
 
 		// set content type
 		response.setContentType("application/pdf");
-		response.setHeader("Content-Disposition", "attachment; filename=qualificacao_" + id + ".pdf");
+		response.setHeader("Content-Disposition", "attachment; filename=qualificacao_" + nomeProfissional + "_" + descricaoVaga + ".pdf");
 		
 		try {
 			// copies all bytes to an output stream

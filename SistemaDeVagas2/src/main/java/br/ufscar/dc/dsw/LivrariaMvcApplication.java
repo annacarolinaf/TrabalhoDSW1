@@ -102,7 +102,7 @@ public class LivrariaMvcApplication {
 			p1.setNasc("03/03/2001");
 			p1.setSexo("Feminino");
 			p1.setTelefone("(11) 94528-4695");
-			p1.setEmail("profissional");
+			p1.setEmail("matheus.d.sousall@gmail.com");
 			p1.setPassword(encoder.encode("profissional"));
 			p1.setName("Profissional");
 			p1.setRole("ROLE_PROFISSIONAL");
