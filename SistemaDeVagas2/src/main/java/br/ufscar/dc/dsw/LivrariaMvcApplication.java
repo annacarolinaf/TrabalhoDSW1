@@ -45,26 +45,8 @@ public class LivrariaMvcApplication {
 			u1.setEnabled(true);
 			usuarioDAO.save(u1);
 
-
-			/* Usuario u3 = new Usuario();
-			u3.setEmail("profissional");
-			u3.setPassword(encoder.encode("profissional"));
-			u3.setName("Profissional");
-			u3.setRole("ROLE_PROFISSIONAL");
-			u3.setEnabled(true);
-			usuarioDAO.save(u3); */
-
-
-			/* Usuario u5 = new Usuario();
-			u5.setEmail("marcos");
-			u5.setPassword(encoder.encode("profissional"));
-			u5.setName("Marcos");
-			u5.setRole("ROLE_PROFISSIONAL");
-			u5.setEnabled(true);
-			usuarioDAO.save(u5);*/
-
 			Empresa e1 = new Empresa();
-			e1.setCNPJ("45.990.181/0001-89");
+			e1.setCnpj("45.990.181/0001-89");
 			e1.setCidade("São Paulo");
 			e1.setDescricao("Empresa de Tecnologia");
 			e1.setEmail("amazon");
@@ -76,7 +58,7 @@ public class LivrariaMvcApplication {
 			log.info("Salvando dados da Empresa1");
 
 			Empresa e2 = new Empresa();
-			e2.setCNPJ("13.741.181/0001-89");
+			e2.setCnpj("13.741.181/0001-89");
 			e2.setCidade("Campinas");
 			e2.setDescricao("Empresa de Tecnologia");
 			e2.setEmail("visagio");
@@ -87,7 +69,7 @@ public class LivrariaMvcApplication {
 			empresaDAO.save(e2);
 
 			Empresa e3 = new Empresa();
-			e3.setCNPJ("20.212.181/2512-89");
+			e3.setCnpj("20.212.181/2512-89");
 			e3.setCidade("Belo Horizonte");
 			e3.setDescricao("Empresa de Tecnologia");
 			e3.setEmail("google");
@@ -98,25 +80,25 @@ public class LivrariaMvcApplication {
 			empresaDAO.save(e3);
 
 			Profissional p1 = new Profissional();
-			p1.setCpf("062.408.045-50");
-			p1.setNasc("03/03/2001");
-			p1.setSexo("Feminino");
+			p1.setCpf("837.424.045-50");
+			p1.setNasc("10/07/2002");
+			p1.setSexo("Masculino");
 			p1.setTelefone("(11) 94528-4695");
 			p1.setEmail("matheus.d.sousall@gmail.com");
 			p1.setPassword(encoder.encode("profissional"));
-			p1.setName("Profissional");
+			p1.setName("Matheus");
 			p1.setRole("ROLE_PROFISSIONAL");
 			p1.setEnabled(true);
 			profissionalDAO.save(p1);
 
 			Profissional p2 = new Profissional();
-			p2.setCpf("837.424.045-50");
-			p2.setNasc("20/07/1998");
-			p2.setSexo("Masculino");
+			p2.setCpf("062.408.045-50");
+			p2.setNasc("03/03/2001");
+			p2.setSexo("Feminino");
 			p2.setTelefone("(11) 94528-4695");
-			p2.setEmail("marcos");
+			p2.setEmail("annacarolinafarias@hotmail.com");
 			p2.setPassword(encoder.encode("profissional"));
-			p2.setName("Marcos");
+			p2.setName("Anna");
 			p2.setRole("ROLE_PROFISSIONAL");
 			p2.setEnabled(true);
 			profissionalDAO.save(p2);

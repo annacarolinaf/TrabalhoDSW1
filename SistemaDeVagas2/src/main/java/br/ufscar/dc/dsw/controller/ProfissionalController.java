@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
@@ -63,25 +64,16 @@ public class ProfissionalController {
 	}
 
 	@PostMapping("/editar")
-	public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Profissional profissional, BindingResult result, BCryptPasswordEncoder encoder, RedirectAttributes attr) {
 
-		// if (result.hasErrors()) {
-		// 	return "profissional/cadastro";
-		// }
-
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("cpf") == null) {
+		if (result.getFieldErrorCount() > 2) {
 			return "profissional/cadastro";
 		}
 
 		Profissional profissionalExistente = profissionalService.buscarPorId(profissional.getId());
-		Usuario usuarioExistente = usuarioService.buscarPorId(profissionalExistente.getId());
+		profissional.setPassword(encoder.encode(profissionalExistente.getPassword()));
+	
 
-		Usuario usuario = usuarioService.buscarPorId(profissional.getId());
-
-		usuario.setPassword(usuarioExistente.getPassword());
-		usuario.setId(usuarioExistente.getId()); 
-
-		usuarioService.salvar(usuario);
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissional.edit.sucess");
 		return "redirect:/profissionais/listar";
@@ -97,6 +89,7 @@ public class ProfissionalController {
 		}
 		return listar(model);
 	}
+
 
 	//@ModelAttribute("editoras")
 	//public List<Editora> listaEditoras() {

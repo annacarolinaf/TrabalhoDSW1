@@ -45,7 +45,7 @@
                         <label th:text="#{vaga.remuneracao.label}" for="vaga.remuneracao"></label>
                         <input type="text" class="form-control" id="vaga.remuneracao"
                             th:placeholder="#{vaga.remuneracao.label}" autofocus="autofocus" th:field="*{remuneracao}"
-                            th:classappend="${#fields.hasErrors('remuneracao')} ? is-invalid" data-mask="00.0000"
+                            th:classappend="${#fields.hasErrors('remuneracao')} ? is-invalid" data-mask="000000.00"
                             data-mask-reverse="true" />
 
                         <div class="invalid-feedback">

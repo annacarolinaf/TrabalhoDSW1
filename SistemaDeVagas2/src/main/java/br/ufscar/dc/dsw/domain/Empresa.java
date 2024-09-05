@@ -18,12 +18,12 @@ import jakarta.validation.constraints.Size;
 @Table(name = "Empresa")
 @JsonIgnoreProperties (value = {"vagas"})
 public class Empresa extends Usuario {
-
+    
     @UniqueCNPJ(message = "{Unique.empresa.CNPJ}")
     @NotBlank
     @Size(min = 18, max = 18, message = "{Size.empresa.CNPJ}")
     @Column(nullable = false, unique = true, length = 18)
-    private String CNPJ;
+    private String cnpj;
     
     @NotBlank
     @Size(min = 1, max = 255)
@@ -41,12 +41,12 @@ public class Empresa extends Usuario {
 
     // Getters e Setters
 
-    public String getCNPJ() {
-        return CNPJ;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getDescricao() {

@@ -19,11 +19,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.domain.Usuario;
+
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.EmailService;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IInscricaoService;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
+import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.validation.Valid;
 
@@ -39,6 +42,9 @@ public class EmpresaController {
 
 	@Autowired
 	private IVagaService vagaService;
+
+	@Autowired
+	private IUsuarioService usuarioService;
 
 	@Autowired
 	private IInscricaoService inscricaoService;
@@ -62,6 +68,7 @@ public class EmpresaController {
 	
 	@PostMapping("/salvar")
 	public String salvar(@Valid Empresa empresa, BCryptPasswordEncoder encoder, BindingResult result, RedirectAttributes attr) {
+
 		if (result.hasErrors()) {
 			return "empresa/cadastro";
 		}
@@ -70,27 +77,6 @@ public class EmpresaController {
 		service.salvar(empresa);
 		attr.addFlashAttribute("sucess", "empresa.create.sucess");
 		return "redirect:/empresas/listar";
-	}
-	
-	@PostMapping("/editar")
-	public String editar(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
-			return "empresa/cadastro";
-		}
-		service.salvar(empresa);
-		attr.addFlashAttribute("sucess", "empresa.edit.sucess");
-		return "redirect:/empresas/listar";
-	}
-	
-	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if (service.empresaTemVagas(id)) {
-			model.addAttribute("fail", "empresa.delete.fail");
-		} else {
-			service.excluir(id);
-			model.addAttribute("sucess", "empresa.delete.sucess");
-		}
-		return listar(model);
 	}
 
 	@GetMapping("/vagas")
@@ -111,11 +97,16 @@ public class EmpresaController {
 
 	@PostMapping("/salvarVaga")
 	public String salvarVaga(@Valid Vaga vaga, BindingResult result, RedirectAttributes attr) {
-		vaga.setEmpresa(getEmpresaLogada());
 
-		if (result.hasErrors()) {
-			return "empresa/cadastroVaga";
-		}
+		Empresa empresaLogada = getEmpresaLogada();
+		vaga.setEmpresa(empresaLogada);
+		System.out.println("ID da empresa na vaga SALVAR VAGA: " + vaga.getEmpresa());
+
+		// if (result.hasErrors()) {
+		// 
+		// 	System.out.println("Erros de validação: " + result.getAllErrors() );
+		// 	return "empresa/cadastroVaga";
+		// }
 	
 		vagaService.salvar(vaga);
 		attr.addFlashAttribute("sucess", "vaga.create.sucess");
@@ -144,7 +135,7 @@ public class EmpresaController {
 						
 				String subject1 = "Chamada para a entrevista";
 
-				String body1 = "Parabéns, " + inscricao.getProfissional().getName() +"!";
+				String body1 = "Parabéns, " + inscricao.getProfissional().getName() +", você foi seleciona para a entrevista!";
 
 				// Envio sem anexo
 				emailService.send(from, to, subject1, body1);
@@ -170,30 +161,32 @@ public class EmpresaController {
 	}
 
 
-	/* @PostMapping("/editar")
-	public String editar(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
+	@PostMapping("/editar")
+	public String editar(@Valid Empresa empresa, BindingResult result, BCryptPasswordEncoder encoder, RedirectAttributes attr) {
+		System.out.println("ID recebido para edição: " + empresa.getId());
+		System.out.println("Email recebido para edição: " + empresa.getEmail());
+		System.out.println("Senha recebido para edição: " + empresa.getPassword()); //por que a senha não é passada?
+		System.out.println("CNPJ recebido para edição: " + empresa.getCnpj());
 
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") == null) { //CNPJ ou cnpj?
+
+		if (result.getFieldErrorCount() > 2) {
 			return "empresa/cadastro";
 		}
 
 		// Buscar a empresa existente para obter os dados atuais
 		Empresa empresaExistente = service.buscarPorId(empresa.getId());
-		Usuario usuarioExistente = usuarioService.buscarPorId(empresaExistente.getId());
+		empresa.setPassword(encoder.encode(empresaExistente.getPassword()));
+		 
 
-		Usuario usuario = usuarioService.buscarPorId(empresa.getId());
-
-		usuario.setPassword(usuarioExistente.getPassword());
-		usuario.setId(usuarioExistente.getId()); 
+		System.out.println("Senha recebido para edição: " + empresa.getPassword());
 
 		// Salvar as alterações
-		usuarioService.salvar(usuario);
 		service.salvar(empresa);
 		attr.addFlashAttribute("sucess", "empresa.edit.sucess");
 		return "redirect:/empresas/listar";
-	} */
+	}
 
-	/* @GetMapping("/excluir/{id}")
+	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 		if (service.empresaTemVagas(id)) {
 			model.addAttribute("fail", "empresa.delete.fail");
@@ -202,5 +195,6 @@ public class EmpresaController {
 			model.addAttribute("sucess", "empresa.delete.sucess");
 		}
 		return listar(model);
-	}*/
+	}
+
 }

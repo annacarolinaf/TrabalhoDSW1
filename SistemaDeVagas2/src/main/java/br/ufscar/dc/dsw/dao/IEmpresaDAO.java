@@ -14,7 +14,7 @@ public interface IEmpresaDAO extends CrudRepository<Empresa, Long>{
 
 	Empresa findById(long id);
 	
-	Empresa findByCNPJ (String CNPJ);
+	Empresa findByCnpj (String CNPJ);
 
 	List<Empresa> findAll();
 	
