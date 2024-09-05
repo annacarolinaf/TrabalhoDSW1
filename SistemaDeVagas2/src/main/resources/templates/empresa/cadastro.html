@@ -28,24 +28,25 @@
 				th:object="${empresa}" method="POST">
 
 				<div class="form-group col-md-6">
-					<label th:text="#{usuario.name.label}" for="usuario.name"></label> 
-					<input type="text" class="form-control" id="usuario.nome" placeholder=Nome
-						autofocus="autofocus" th:field="*{usuario.name}"
-						th:classappend="${#fields.hasErrors('usuario.name')} ? is-invalid" />
+					<label th:text="#{usuario.name.label}" for="name"></label> 
+					<input type="text" class="form-control" id="nome" placeholder=Nome
+						autofocus="autofocus" th:field="*{name}"
+						th:classappend="${#fields.hasErrors('name')} ? is-invalid" />
 					
 					<div class="invalid-feedback">
-						<span th:errors="*{usuario.name}"></span>
+						<span th:errors="*{name}"></span>
 					</div>
 				</div>
 
 				<div class="form-group col-md-6">
-					<label th:text="#{usuario.email.label}" for="usuario.email"></label> 
-					<input type="text" class="form-control" id="usuario.email" placeholder=E-mail
-						autofocus="autofocus" th:field="*{usuario.email}"
-						th:classappend="${#fields.hasErrors('usuario.email')} ? is-invalid" />
+					<label th:text="#{usuario.email.label}" for="email"></label> 
+					<input type="text" class="form-control" id="email" placeholder=E-mail
+						autofocus="autofocus" th:field="*{email}"
+						th:readonly="${empresa.id != null}"
+						th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
 					
 					<div class="invalid-feedback">
-						<span th:errors="*{usuario.email}"></span>
+						<span th:errors="*{email}"></span>
 					</div>
 				</div>
 			
@@ -85,29 +86,19 @@
 				</div>
 
 				<div class="form-group col-md-6">
-					<label th:text="#{usuario.password.label}" for="usuario.password"></label> 
-					<input type="password" class="form-control" id="usuario.password"
-						th:readonly="${empresa.id != null}"
+					<label th:text="#{usuario.password.label}" for="password"></label> 
+					<input type="password" class="form-control" id="password"
 						th:placeholder="#{usuario.password.label}" autofocus="autofocus"
-						th:field="*{usuario.password}"
-						th:classappend="${#fields.hasErrors('usuario.password')} ? is-invalid" />
+						th:field="*{password}"
+						th:readonly="${empresa.id != null}"
+						th:classappend="${#fields.hasErrors('password')} ? is-invalid" />
 						
 					<div class="invalid-feedback">
-						<span th:errors="*{usuario.password}"></span>
+						<span th:errors="*{password}"></span>
 					</div>
 				</div>
 
-				<div class="form-group col-md-6">
-					<label th:text="#{usuario.role.label}" for="usuario.role"></label> 
-					<input type="text" class="form-control" id="usuario.role" placeholder=Papel
-						autofocus="autofocus" th:field="*{usuario.role}"
-						th:classappend="${#fields.hasErrors('usuario.role')} ? is-invalid" />
-					
-					<div class="invalid-feedback">
-						<span th:errors="*{usuario.role}"></span>
-					</div>
-				</div>
-
+				<input type="hidden" name="role" value="ROLE_EMPRESA">
 				<input type="hidden" id="id" th:field="*{id}" />
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>

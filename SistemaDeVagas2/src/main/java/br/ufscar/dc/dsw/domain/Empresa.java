@@ -2,31 +2,28 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 
 // Bugs
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Empresa")
-public class Empresa extends AbstractEntity<Long> {
-
+@JsonIgnoreProperties (value = {"vagas"})
+public class Empresa extends Usuario {
+    
     @UniqueCNPJ(message = "{Unique.empresa.CNPJ}")
     @NotBlank
     @Size(min = 18, max = 18, message = "{Size.empresa.CNPJ}")
     @Column(nullable = false, unique = true, length = 18)
-    private String CNPJ;
+    private String cnpj;
     
     @NotBlank
     @Size(min = 1, max = 255)
@@ -39,22 +36,17 @@ public class Empresa extends AbstractEntity<Long> {
     private String cidade;
 
 
-	@NotNull(message = "{NotNull.empresa.usuario}")
-	@OneToOne
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
-
 	@OneToMany(mappedBy="empresa")
 	private List<Vaga> vagas;
 
     // Getters e Setters
 
     public String getCnpj() {
-        return CNPJ;
+        return cnpj;
     }
 
-    public void setCnpj(String CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getDescricao() {
@@ -80,12 +72,4 @@ public class Empresa extends AbstractEntity<Long> {
     public void setVagas(List<Vaga> vagas) {
         this.vagas = vagas;
     }
-
-    public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 }

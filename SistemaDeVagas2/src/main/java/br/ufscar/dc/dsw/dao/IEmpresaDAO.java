@@ -14,7 +14,7 @@ public interface IEmpresaDAO extends CrudRepository<Empresa, Long>{
 
 	Empresa findById(long id);
 	
-	Empresa findByCNPJ (String CNPJ);
+	Empresa findByCnpj (String CNPJ);
 
 	List<Empresa> findAll();
 	
@@ -22,7 +22,10 @@ public interface IEmpresaDAO extends CrudRepository<Empresa, Long>{
 
 	void deleteById(Long id);
 
-	@Query("SELECT u FROM Empresa u WHERE u.usuario.id = :usuarioId")
-    Empresa findByUserId(@Param("usuarioId") Long usuarioId);
+	//@Query("SELECT u FROM Empresa u WHERE u.usuario.id = :usuarioId")
+    //Empresa findByUserId(@Param("usuarioId") Long usuarioId);
+
+	@Query("SELECT e FROM Empresa e WHERE e.cidade = :cidade")
+    List<Empresa> findByCidade(@Param("cidade") String cidade);
 
 }

@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
@@ -43,13 +45,13 @@ public class ProfissionalController {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Profissional profissional, BCryptPasswordEncoder encoder, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
 			return "profissional/cadastro";
 		}
 
-		usuarioService.salvar(profissional.getUsuario());
+		profissional.setPassword(encoder.encode(profissional.getPassword()));
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissional.create.sucess");
 		return "redirect:/profissionais/listar";
@@ -62,25 +64,16 @@ public class ProfissionalController {
 	}
 
 	@PostMapping("/editar")
-	public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Profissional profissional, BindingResult result, BCryptPasswordEncoder encoder, RedirectAttributes attr) {
 
-		// if (result.hasErrors()) {
-		// 	return "profissional/cadastro";
-		// }
-
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("cpf") == null) {
+		if (result.getFieldErrorCount() > 2) {
 			return "profissional/cadastro";
 		}
 
 		Profissional profissionalExistente = profissionalService.buscarPorId(profissional.getId());
-		Usuario usuarioExistente = profissionalExistente.getUsuario();
+		profissional.setPassword(encoder.encode(profissionalExistente.getPassword()));
+	
 
-		Usuario usuario = profissional.getUsuario();
-
-		usuario.setPassword(usuarioExistente.getPassword());
-		usuario.setId(usuarioExistente.getId()); 
-
-		usuarioService.salvar(usuario);
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissional.edit.sucess");
 		return "redirect:/profissionais/listar";
@@ -96,6 +89,7 @@ public class ProfissionalController {
 		}
 		return listar(model);
 	}
+
 
 	//@ModelAttribute("editoras")
 	//public List<Editora> listaEditoras() {

@@ -18,7 +18,7 @@ public class UniqueCNPJValidator implements ConstraintValidator<UniqueCNPJ, Stri
 	@Override
 	public boolean isValid(String CNPJ, ConstraintValidatorContext context) {
 		if (dao != null) {
-			Empresa Empresa = dao.findByCNPJ(CNPJ);
+			Empresa Empresa = dao.findByCnpj(CNPJ);
 			return Empresa == null;
 		} else {
 			// Durante a execução da classe LivrariaMvcApplication
