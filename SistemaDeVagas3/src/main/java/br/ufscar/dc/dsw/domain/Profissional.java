@@ -2,6 +2,8 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.ufscar.dc.dsw.validation.UniqueCPF;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +39,7 @@ public class Profissional extends Usuario {
 	private String nasc;
 
 	@OneToMany(mappedBy = "profissional")
+	@JsonIgnore
 	private List<Inscricao> inscricoes;
 
 	public String getCpf() {
