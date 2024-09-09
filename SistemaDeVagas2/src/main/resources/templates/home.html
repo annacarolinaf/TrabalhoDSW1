@@ -24,8 +24,8 @@
 
         <div class="container" id="listagem">
             <form th:action="@{/home/buscar}" method="post">
-                <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade" required>
-                <button type="submit" class="btn btn-primary btn-sm">Pesquisar</button>
+                <input type="text" name="cidade" id="cidade" th:placeholder="#{pesquisarCidade.label}" required>
+                <button type="submit" class="btn btn-primary btn-sm" th:text="#{pesquisar.label}">Pesquisar</button>
             </form>
             <div th:replace="~{fragments/alert}"></div>
 
