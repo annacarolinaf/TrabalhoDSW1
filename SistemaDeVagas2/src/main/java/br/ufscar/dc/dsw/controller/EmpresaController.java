@@ -130,12 +130,17 @@ public class EmpresaController {
 			} else if (resul.equals("Entrevista")) {
 				inscricao.setResultado("ENTREVISTA");
 
-				InternetAddress from = new InternetAddress("msous@estudante.ufscar.br", "Fulano");
-				InternetAddress to = new InternetAddress(inscricao.getProfissional().getEmail(), "Beltrano");
+				InternetAddress from = new InternetAddress("msous@estudante.ufscar.br", service.buscarPorId(id).getName()); //Remetente
+				InternetAddress to = new InternetAddress(inscricao.getProfissional().getEmail(), "Beltrano"); //Destinatário
 						
 				String subject1 = "Chamada para a entrevista";
 
-				String body1 = "Parabéns, " + inscricao.getProfissional().getName() +", você foi seleciona para a entrevista!";
+				String body1 = "Parabéns, " + inscricao.getProfissional().getName() +", você foi selecionado para a entrevista!\n O link para a vídeo chamada é:\n Para participar da videochamada, clique neste link: https://meet.google.com/buw-bpod-qbn\\n" + //
+										"\n" + //
+										"\t\t\t\tPara participar por telefone, disque +55 19 4560-9551 e digite este PIN: 343 321 949#\\n" + //
+										"\n" + //
+										"\t\t\t\tPara acessar mais números de telefone, clique neste link: https://tel.meet/buw-bpod-qbn?hs=5\\n" + //
+										"";
 
 				// Envio sem anexo
 				emailService.send(from, to, subject1, body1);
