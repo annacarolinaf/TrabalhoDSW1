@@ -1,4 +1,4 @@
-# AA2: Desenvolvimento de um sistema utilizando Spring MVC e JPA
+# AA3: Desenvolvimento de uma API
 
 <h2> Sistema </h2>
 Sistema para oferta de vagas de estágios/empregos (A)<br /><br />
@@ -33,64 +33,17 @@ Modelo-Visão-Controlador<br /><br />
 <li>senha: profissional </li>
 <br />
 
-<h2>R1:</h2>
+<h2>REST API -- CRUD 1
+ de profissionais</h2>
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (33%), Matheus (33%), Karys (33%), e Nataly (33%)<br/>
 
-
-<h2>R2:</h2>
-
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
-
-
-<h2>R3:</h2>
-
-(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
-
-
-<h2>R4:</h2>
-
-(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
-
-
-
-<h2>R5:</h2>
+<h2>REST API -- CRUD 1
+ de empresas</h2>
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (33%), Matheus (33%), Karys (33%), e Nataly (33%)<br/>
 
-
-
-<h2>R6:</h2>
-
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
-
-
-<h2>R7:</h2>
-
-(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
-
-<h2>R8:</h2>
-
-() Implementado (X) Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
-
-<h2>R9:</h2>
-
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
