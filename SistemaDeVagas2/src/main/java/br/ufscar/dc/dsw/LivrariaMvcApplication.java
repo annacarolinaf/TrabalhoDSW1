@@ -125,6 +125,13 @@ public class LivrariaMvcApplication {
 			v3.setEmpresa(e2); 
 			vagaDAO.save(v3);
 
+			Vaga v4 = new Vaga();
+			v4.setDescricao("Engenheiro de Dados");
+			v4.setDataLimite("08/09/2024"); 
+			v4.setRemuneracao(new BigDecimal("2000.00")); 
+			v4.setEmpresa(e2); 
+			vagaDAO.save(v4);
+
 			Inscricao i1 = new Inscricao();
             i1.setData_inscricao("09/12/2024");
             i1.setVaga(v1);

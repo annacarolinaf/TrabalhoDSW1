@@ -25,7 +25,7 @@ public interface IEmpresaDAO extends CrudRepository<Empresa, Long>{
 	//@Query("SELECT u FROM Empresa u WHERE u.usuario.id = :usuarioId")
     //Empresa findByUserId(@Param("usuarioId") Long usuarioId);
 
-	@Query("SELECT e FROM Empresa e WHERE e.cidade = :cidade")
+	@Query("SELECT e FROM Empresa e WHERE e.cidade LIKE %:cidade%")
     List<Empresa> findByCidade(@Param("cidade") String cidade);
 
 }

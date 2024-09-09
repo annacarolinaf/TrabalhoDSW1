@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,18 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
-import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 
 @RestController
 public class ProfissionalRestController {
 
     @Autowired
     private IProfissionalService profissionalService;
-
-    @Autowired
-    private IUsuarioService usuarioService;
 
     private boolean isJSONValid(String jsonInString) {
         try {
@@ -40,7 +36,7 @@ public class ProfissionalRestController {
         }
     }
 
-    private void parse(Profissional profissional, JSONObject json) {
+    private void parse(Profissional profissional, JSONObject json, BCryptPasswordEncoder encoder) {
         Object id = json.get("id");
         if (id != null) {
             if (id instanceof Integer) {
@@ -50,17 +46,19 @@ public class ProfissionalRestController {
             }
         }
 
+        profissional.setRole("ROLE_PROFISSIONAL");
+        profissional.setEmail((String) json.get("email"));
+        profissional.setPassword(encoder.encode(((String) json.get("password"))));
+        profissional.setName((String) json.get("name"));
         profissional.setCpf((String) json.get("cpf"));
         profissional.setTelefone((String) json.get("telefone"));
         profissional.setSexo((String) json.get("sexo"));
         profissional.setNasc((String) json.get("nasc"));
 
-        Long usuarioId = ((Number) json.get("usuario_id")).longValue();
-        Usuario usuario = usuarioService.buscarPorId(usuarioId);
-        // profissional.setUsuario(usuario);
     }
 
-    @GetMapping(path = "/profissionais")
+    // OK
+    @GetMapping(path = "/api/profissionais")
     public ResponseEntity<List<Profissional>> lista() {
         List<Profissional> lista = profissionalService.buscarTodos();
         if (lista.isEmpty()) {
@@ -69,7 +67,8 @@ public class ProfissionalRestController {
         return ResponseEntity.ok(lista);
     }
 
-    @GetMapping(path = "/profissionais/{id}")
+    // OK
+    @GetMapping(path = "/api/profissionais/{id}")
     public ResponseEntity<Profissional> lista(@PathVariable("id") long id) {
         Profissional profissional = profissionalService.buscarPorId(id);
         if (profissional == null) {
@@ -78,13 +77,14 @@ public class ProfissionalRestController {
         return ResponseEntity.ok(profissional);
     }
 
-    @PostMapping(path = "/profissionais")
+    //OK
+    @PostMapping(path = "/api/profissionais")
     @ResponseBody
-    public ResponseEntity<Profissional> cria(@RequestBody JSONObject json) {
+    public ResponseEntity<Profissional> cria(@RequestBody JSONObject json, BCryptPasswordEncoder encoder) {
         try {
             if (isJSONValid(json.toString())) {
                 Profissional profissional = new Profissional();
-                parse(profissional, json);
+                parse(profissional, json, encoder);
                 profissionalService.salvar(profissional);
                 return ResponseEntity.ok(profissional);
             } else {
@@ -96,15 +96,16 @@ public class ProfissionalRestController {
         }
     }
 
-    @PutMapping(path = "/profissionais/{id}")
-    public ResponseEntity<Profissional> atualiza(@PathVariable("id") long id, @RequestBody JSONObject json) {
+    //OK
+    @PutMapping(path = "/api/profissionais/{id}")
+    public ResponseEntity<Profissional> atualiza(@PathVariable("id") long id, @RequestBody JSONObject json, BCryptPasswordEncoder encoder) {
         try {
             if (isJSONValid(json.toString())) {
                 Profissional profissional = profissionalService.buscarPorId(id);
                 if (profissional == null) {
                     return ResponseEntity.notFound().build();
                 } else {
-                    parse(profissional, json);
+                    parse(profissional, json, encoder);
                     profissionalService.salvar(profissional);
                     return ResponseEntity.ok(profissional);
                 }
@@ -116,14 +117,20 @@ public class ProfissionalRestController {
         }
     }
 
-    @DeleteMapping(path = "/profissionais/{id}")
+    //OK
+    @DeleteMapping(path = "/api/profissionais/{id}")
     public ResponseEntity<Boolean> remove(@PathVariable("id") long id) {
         Profissional profissional = profissionalService.buscarPorId(id);
         if (profissional == null) {
             return ResponseEntity.notFound().build();
         } else {
-            profissionalService.excluir(id);
-            return new ResponseEntity<>(true, HttpStatus.OK);
+            if (profissionalService.profissionalTemInscricao(id)) {
+                return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+            } else {
+                profissionalService.excluir(id);
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }
         }
     }
+
 }

@@ -23,7 +23,7 @@ public interface IVagaDAO extends CrudRepository<Vaga, Long> {
 	@Query("SELECT v FROM Vaga v WHERE v.empresa.id = :empresaId")
 	List<Vaga> findAllByEmpresaId(@Param("empresaId") long empresaId);
 
-	@Query("SELECT v FROM Vaga v WHERE v.empresa.cidade = :cidade")
+	@Query("SELECT v FROM Vaga v WHERE v.empresa.cidade LIKE %:cidade%")
     List<Vaga> findAllByCidade(@Param("cidade") String cidade);
 
 }

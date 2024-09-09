@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -18,6 +20,7 @@ public class Usuario extends AbstractEntity<Long> {
     private String email;
     
 	@NotBlank
+	@JsonIgnore
     @Column(nullable = false, length = 64)
     private String password;
        
@@ -30,10 +33,12 @@ public class Usuario extends AbstractEntity<Long> {
     // private String CPF;
     
     @NotBlank
+	@JsonIgnore
     @Column(nullable = false, length = 20)
     private String role;
     
     @Column(nullable = false)
+	@JsonIgnore
     private boolean enabled;
 		
 	public String getEmail() {

@@ -56,7 +56,7 @@
                     <div class="form-group col-md-6">
                         <label th:text="#{vaga.datalimite.label}" for="vaga.dataLimite"></label>
                         <input type="text" class="form-control" id="vaga.dataLimite"
-                            th:placeholder="#{vaga.datalimite.label}" autofocus="autofocus" th:field="*{dataLimite}"
+                            placeholder="__/__/____" autofocus="autofocus" th:field="*{dataLimite}"
                             th:classappend="${#fields.hasErrors('dataLimite')} ? is-invalid" data-mask="00/00/0000"
                             data-mask-reverse="true" />
 
