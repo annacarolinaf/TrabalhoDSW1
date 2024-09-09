@@ -130,8 +130,8 @@ public class EmpresaController {
 			} else if (resul.equals("Entrevista")) {
 				inscricao.setResultado("ENTREVISTA");
 
-				InternetAddress from = new InternetAddress("msous@estudante.ufscar.br", service.buscarPorId(id).getName()); //Remetente
-				InternetAddress to = new InternetAddress(inscricao.getProfissional().getEmail(), "Beltrano"); //Destinatário
+				InternetAddress from = new InternetAddress("msous@estudante.ufscar.br", inscricao.getVaga().getEmpresa().getName()); //Remetente
+				InternetAddress to = new InternetAddress(inscricao.getProfissional().getEmail(), inscricao.getProfissional().getName()); //Destinatário
 						
 				String subject1 = "Chamada para a entrevista";
 
