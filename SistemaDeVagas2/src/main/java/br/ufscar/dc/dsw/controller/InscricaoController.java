@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,15 +80,44 @@ public class InscricaoController {
 	
 	@GetMapping("/")
 	public String listarVagas(ModelMap model) {
-		model.addAttribute("vagas", vagaService.buscarTodos());
+
+		List<Vaga> vagasAbertas = new ArrayList<>();
+		List<Vaga> allVagas = vagaService.buscarTodos();
+
+		for (Vaga vaga : allVagas) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        	// Converter a string para LocalDate
+        	LocalDate parsedDate = LocalDate.parse(vaga.getDataLimite(), formatter);
+        	// Data atual
+        	LocalDate currentDate = LocalDate.now();
+			if (!parsedDate.isBefore(currentDate)) {
+                vagasAbertas.add(vaga);
+            }
+		}
+
+        // Adiciona a lista de vagas ao modelo
+        model.addAttribute("vagas", vagasAbertas);
+
 		return "inscricao/listaVagas";
 	}
 
 	@PostMapping("/buscar")
 	public String listarVagasPorCidade(@RequestParam("cidade") String cidade, ModelMap model) {
-		System.out.println("vagasFiltradas");
 		List<Vaga> vagasFiltradas = vagaService.buscarVagasCidade(cidade);
-		model.addAttribute("vagas", vagasFiltradas);
+		List<Vaga> vagasAbertas = new ArrayList<>();
+
+		for (Vaga vaga : vagasFiltradas) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        	// Converter a string para LocalDate
+        	LocalDate parsedDate = LocalDate.parse(vaga.getDataLimite(), formatter);
+        	// Data atual
+        	LocalDate currentDate = LocalDate.now();
+			if (!parsedDate.isBefore(currentDate)) {
+                vagasAbertas.add(vaga);
+            }
+		}
+		
+		model.addAttribute("vagas", vagasAbertas);
 		return "inscricao/listaVagas"; 
 	}
 
