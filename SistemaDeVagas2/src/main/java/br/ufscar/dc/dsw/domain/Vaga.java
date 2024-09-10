@@ -79,4 +79,14 @@ public class Vaga extends AbstractEntity<Long> {
 	public void setInscricoes(List<Inscricao> inscricoes) {
 		this.inscricoes = inscricoes;
 	}
+
+	public boolean inscrito(Profissional profissional) {
+		System.out.println("Id =" + profissional.getId());
+		boolean ok = true;
+		for (Inscricao inscricao: this.inscricoes) {
+			ok = ok && inscricao.getProfissional().getId() != profissional.getId(); 
+		}
+		return ok;
+	}
+
 }

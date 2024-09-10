@@ -23,3 +23,4 @@ public interface IInscricaoDAO extends CrudRepository<Inscricao, Long>{
 		
 	Inscricao save(Inscricao inscricao);
 }
+

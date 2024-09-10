@@ -53,6 +53,7 @@ public class InscricaoController {
 	@GetMapping("/inscrever/{id_vaga}")
 	public String uparCurriculo(@PathVariable("id_vaga") Long id_vaga, ModelMap model)
 	{
+  
 		model.addAttribute("id_vaga", id_vaga);
 		return "inscricao/cadastro";
 	}	
@@ -97,6 +98,7 @@ public class InscricaoController {
 
         // Adiciona a lista de vagas ao modelo
         model.addAttribute("vagas", vagasAbertas);
+		model.addAttribute("profissional", this.getProfissional());
 
 		return "inscricao/listaVagas";
 	}
