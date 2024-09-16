@@ -26,10 +26,10 @@ Modelo-Visão-Controlador<br /><br />
 
 <h3>Profissional</h3>
 <h3>1</h3>
-<li>login: marcos</li>
+<li>login: matheus.d.sousall@gmail.com</li>
 <li>senha: profissional </li>
 <h3>2</h3>
-<li>login: profissional</li>
+<li>login: annacarolinafarias@hotmail.com</li>
 <li>senha: profissional </li>
 <br />
 
@@ -37,7 +37,7 @@ Modelo-Visão-Controlador<br /><br />
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
 
 
 <h2>R2:</h2>
@@ -51,14 +51,14 @@ Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e N
 
 (X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
 
 
 <h2>R4:</h2>
 
 (X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
 
 
 
@@ -66,7 +66,7 @@ Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e N
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
 
 
 
@@ -74,23 +74,23 @@ Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e N
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
 
 
 <h2>R7:</h2>
 
 (X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
 
 <h2>R8:</h2>
 
-() Implementado (X) Parcialmente implementado ( ) Não implementado <br/>
+(x) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
 
 <h2>R9:</h2>
 
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
